@@ -1,0 +1,13 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667c8a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3d5467;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#grad3)"/>
+  <text x="400" y="250" font-size="48" font-weight="bold" text-anchor="middle" fill="white" font-family="Playfair Display, serif">TaskFlow</text>
+  <text x="400" y="310" font-size="24" text-anchor="middle" fill="white" font-family="Poppins, sans-serif">Task Management</text>
+  <circle cx="120" cy="120" r="45" fill="rgba(255,138,61,0.3)"/>
+  <circle cx="720" cy="480" r="65" fill="rgba(255,138,61,0.3)"/>
+</svg>

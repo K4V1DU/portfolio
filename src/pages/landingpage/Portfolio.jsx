@@ -39,18 +39,33 @@ const PROJECTS = [
     name: "Boodima",
     tags: ["MERN", "Full-Stack", "2024"],
     desc: "A full-stack boarding rental platform connecting tenants with verified local listings — featuring real-time search, location filtering, listing management, and a fully responsive UI.",
+    details: "This platform revolutionizes how students and professionals find accommodation. Built with cutting-edge technology, it provides seamless browsing, secure payments, and verified landlords.",
     live: "#",
     repo: "#",
     stack: "MongoDB · Express · React · Node",
+    image: "/images/project1.jpg",
   },
   {
     emoji: "⚡",
     name: "DevLaunch",
     tags: ["SaaS", "API", "2025"],
     desc: "A developer productivity platform for bootstrapping and launching side projects fast — with project scaffolding, deployment hooks, and team collaboration built in.",
+    details: "Accelerate your development workflow with intelligent project templates, automated CI/CD pipelines, and real-time team collaboration features.",
     live: "#",
     repo: "#",
     stack: "MERN · REST · JWT",
+    image: "/images/project2.jpg",
+  },
+  {
+    emoji: "🎯",
+    name: "TaskFlow",
+    tags: ["React", "Full-Stack", "2025"],
+    desc: "An intelligent task management and collaboration tool designed for remote teams — with real-time updates, AI-powered task suggestions, and seamless integrations.",
+    details: "Streamline your team's productivity with smart task allocation, progress tracking, and automated workflows that adapt to your project needs.",
+    live: "#",
+    repo: "#",
+    stack: "React · Node.js · PostgreSQL",
+    image: "/images/project3.jpg",
   },
 ];
 
@@ -222,32 +237,34 @@ function Projects() {
     <section id="work" style={styles.projects}>
       <div style={styles.sectionEyebrow}>Selected Work</div>
       <h2 style={styles.sectionTitle}>Projects</h2>
-      <div style={styles.projectsGrid}>
-        {PROJECTS.map((p) => (
-          <div key={p.name} style={styles.projectCard}>
-            <div style={styles.cardTop}>
-              <span style={styles.cardEmoji}>{p.emoji}</span>
-              <div style={styles.cardTags}>
-                {p.tags.map((t) => (
-                  <span key={t} style={styles.cardTag}>
-                    {t}
-                  </span>
-                ))}
+      <div style={styles.projectsContainer} className="projects-container">
+        {PROJECTS.map((p, index) => {
+          const isEven = index % 2 === 0;
+          return (
+            <div key={p.name} style={{ ...styles.projectShowcase, flexDirection: isEven ? "row" : "row-reverse" }} className="project-showcase">
+              {/* Image Section */}
+              <div style={styles.projectImageContainer} className="project-image-container">
+                <img src={p.image} alt={p.name} style={styles.projectImage} className="project-image" />
+                <div style={styles.projectImageOverlay} className="project-image-overlay">
+                  <span style={styles.projectEmoji}>{p.emoji}</span>
+                </div>
+              </div>
+
+              {/* Content Section */}
+              <div style={styles.projectContentContainer} className="project-content-container">
+                <h3 style={styles.projectName}>{p.name}</h3>
+                <p style={styles.projectDesc}>{p.desc}</p>
+                <p style={styles.projectDetails}>{p.details}</p>
+                <div style={styles.projectFooter}>
+                  <a href={p.live} style={styles.btnMoreDetails}>
+                    More Details →
+                  </a>
+                  <span style={styles.projectStack}>{p.stack}</span>
+                </div>
               </div>
             </div>
-            <h3 style={styles.cardTitle}>{p.name}</h3>
-            <p style={styles.cardDesc}>{p.desc}</p>
-            <div style={styles.cardFooter}>
-              <a href={p.live} style={styles.cardLink}>
-                Live Demo →
-              </a>
-              <a href={p.repo} style={styles.cardLink}>
-                GitHub →
-              </a>
-              <span style={styles.cardStack}>{p.stack}</span>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
@@ -494,7 +511,7 @@ const styles = {
     fontWeight: 600,
   },
   heroHeadline: {
-    fontFamily: "'Playfair Display', Georgia, serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: "clamp(28px, 3.6vw, 56px)",
     fontWeight: 800,
     lineHeight: 1.08,
@@ -684,7 +701,7 @@ const styles = {
     marginBottom: 8,
   },
   sectionTitle: {
-    fontFamily: "'Playfair Display', serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: "clamp(26px, 3vw, 38px)",
     fontWeight: 800,
     color: DARK,
@@ -711,78 +728,124 @@ const styles = {
     background: CREAM,
     padding: "80px 64px",
   },
-  projectsGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: 20,
-    marginTop: 8,
-  },
-  projectCard: {
-    background: "#fff",
-    border: `1px solid ${BORDER}`,
-    borderRadius: 16,
-    overflow: "hidden",
+  projectsContainer: {
     display: "flex",
     flexDirection: "column",
-    transition: "transform 0.2s, box-shadow 0.2s",
-    cursor: "pointer",
+    gap: 80,
+    marginTop: 24,
   },
-  cardTop: {
+  projectShowcase: {
+    display: "flex",
+    alignItems: "stretch",
+    gap: 48,
+    borderRadius: 20,
+    overflow: "hidden",
+    transition: "transform 0.3s ease",
+  },
+  projectImageContainer: {
+    flex: "1 1 35%",
+    minWidth: 0,
+    position: "relative",
+    height: 420,
+    overflow: "hidden",
+    borderRadius: 16,
+  },
+  projectImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    objectPosition: "center",
+    transition: "transform 0.3s ease",
+  },
+  projectImageOverlay: {
+    position: "absolute",
+    inset: 0,
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
-    padding: "24px 24px 0",
-    marginBottom: 14,
+    justifyContent: "center",
+    background: "rgba(15,43,43,0.3)",
+    backdropFilter: "blur(2px)",
+    opacity: 0,
+    transition: "opacity 0.3s ease",
   },
-  cardEmoji: { fontSize: 28 },
-  cardTags: { display: "flex", gap: 6 },
-  cardTag: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 10,
-    padding: "3px 8px",
-    borderRadius: 5,
-    background: ACCENT_LIGHT,
-    border: `1px solid rgba(224,124,42,0.2)`,
-    color: ACCENT,
+  projectEmoji: {
+    fontSize: 64,
   },
-  cardTitle: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: 20,
-    fontWeight: 800,
-    color: DARK,
-    padding: "0 24px",
-    marginBottom: 10,
-    letterSpacing: -0.5,
-  },
-  cardDesc: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 13,
-    color: MUTED,
-    lineHeight: 1.65,
-    padding: "0 24px 20px",
-    flex: 1,
-  },
-  cardFooter: {
+  projectContentContainer: {
+    flex: "1 1 65%",
+    minWidth: 0,
     display: "flex",
-    alignItems: "center",
-    gap: 12,
-    padding: "14px 24px",
-    borderTop: `1px solid ${BORDER}`,
-    background: "#fafaf8",
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: "40px 48px",
+  },
+  projectTags: {
+    display: "flex",
+    gap: 8,
+    marginBottom: 16,
     flexWrap: "wrap",
   },
-  cardLink: {
+  projectTag: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 11,
+    padding: "6px 14px",
+    borderRadius: 6,
+    background: ACCENT_LIGHT,
+    border: `1px solid rgba(224,124,42,0.3)`,
+    color: ACCENT,
+    fontWeight: 600,
+  },
+  projectName: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "clamp(28px, 4vw, 42px)",
+    fontWeight: 800,
+    color: DARK,
+    marginBottom: 16,
+    letterSpacing: -1,
+  },
+  projectDesc: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 16,
+    color: MUTED,
+    lineHeight: 1.7,
+    marginBottom: 12,
+    overflowWrap: "break-word",
+  },
+  projectDetails: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 14,
+    color: MUTED,
+    lineHeight: 1.7,
+    marginBottom: 32,
+    opacity: 0.85,
+    overflowWrap: "break-word",
+  },
+  projectFooter: {
+    display: "flex",
+    alignItems: "center",
+    gap: 24,
+    flexWrap: "wrap",
+  },
+  btnMoreDetails: {
+    background: ACCENT,
+    color: "#fff",
+    padding: "14px 32px",
+    borderRadius: 10,
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 15,
+    fontWeight: 700,
+    textDecoration: "none",
+    transition: "transform 0.2s, box-shadow 0.2s, background 0.2s",
+    boxShadow: "0 12px 36px rgba(255,138,61,0.22)",
+    display: "inline-block",
+    border: "none",
+    cursor: "pointer",
+  },
+  projectStack: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 12,
-    fontWeight: 600,
-    color: ACCENT,
-    textDecoration: "none",
-  },
-  cardStack: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 10,
-    color: "#bbb8b0",
-    marginLeft: "auto",
+    color: MUTED,
+    fontWeight: 500,
   },
 
   /* Services */
@@ -806,7 +869,7 @@ const styles = {
   },
   serviceIcon: { fontSize: 26, marginBottom: 14 },
   serviceName: {
-    fontFamily: "'Playfair Display', serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: 16,
     fontWeight: 700,
     color: DARK,
@@ -882,7 +945,7 @@ function FontLoader() {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href =
-      "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap";
+      "https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Playfair+Display:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap";
     document.head.appendChild(link);
 
     /* Global reset + keyframes */
@@ -896,6 +959,42 @@ function FontLoader() {
         50% { opacity: 0.5; transform: scale(0.75); }
       }
       a:hover { opacity: 0.85; }
+      
+      /* Button hover effects */
+      a[style*="background: rgb(255, 138, 61)"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 48px rgba(255,138,61,0.32) !important;
+      }
+      
+      /* Project showcase hover effects */
+      .project-showcase:hover .project-image {
+        transform: scale(1.05);
+      }
+      
+      .project-showcase:hover .project-image-overlay {
+        opacity: 1;
+      }
+      
+      /* Mobile responsive */
+      @media (max-width: 768px) {
+        .project-showcase {
+          flex-direction: column !important;
+        }
+        
+        .project-image-container {
+          flex: 0 0 100% !important;
+          height: 300px !important;
+        }
+        
+        .project-content-container {
+          flex: 0 0 100% !important;
+          padding: 30px 0 !important;
+        }
+        
+        .projects-container {
+          gap: 60px !important;
+        }
+      }
     `;
     document.head.appendChild(style);
   }, []);
