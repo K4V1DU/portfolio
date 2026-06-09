@@ -215,17 +215,42 @@ function About() {
     <section id="about" style={styles.about}>
       <div style={styles.aboutInner}>
         <div style={styles.sectionEyebrow}>Who I Am</div>
-        <h2 style={styles.sectionTitle}>About Me</h2>
-        <p style={styles.aboutText}>
-          A software engineer with a deep focus on building cohesive, end-to-end web
-          applications. From schema design in MongoDB to deploying polished React
-          interfaces — I own the full picture, think in systems, and write code that
-          other engineers respect.
-        </p>
-        <p style={styles.aboutText}>
-          My approach is simple: understand the business goal first, then engineer the
-          cleanest possible path to it. No over-engineering, no shortcuts.
-        </p>
+        <div style={styles.headingPanel}>
+          <h2 style={styles.sectionTitle}>About Me</h2>
+          <h2 style={styles.sectionTitle}>My Skills</h2>
+        </div>
+        <div style={styles.aboutPanel}>
+          <div style={styles.aboutColumn}>
+            <h3 style={styles.aboutSubheading}>
+              Versatile full-stack software engineer delivering enterprise-grade web applications and polished digital experiences.
+            </h3>
+            <p style={styles.aboutText}>
+              I’m Kavidu Purnamal, a full-stack developer and student at SLIIT who bridges the gap between complex backend systems and clear frontend interfaces.
+            </p>
+            <p style={styles.aboutText}>
+              What sets me apart is my speed in picking up new technologies and my love for coding, whether I am architecting scalable web applications with Node.js or diving into game development. I absorb new concepts quickly, write clean code, and adapt fast to ensure software is built for peak performance.
+            </p>
+          </div>
+
+          <div style={styles.sectionDivider} aria-hidden="true" />
+
+          <div style={styles.skillsColumn}>
+            <div style={styles.skillsGrid}>
+              <img src="/images/icon1.png" alt="Skill icon 1" style={styles.skillIcon} />
+              <img src="/images/icon6.jpg" alt="Skill icon 2" style={styles.skillIcon} />
+              <img src="/images/icon3.jpg" alt="Skill icon 3" style={styles.skillIcon} />
+              <img src="/images/icon2.png" alt="Skill icon 4" style={styles.skillIcon} />
+              <img src="/images/icon12.jpg" alt="Skill icon 5" style={styles.skillIcon} />
+              <img src="/images/icon13.jpg" alt="Skill icon 6" style={styles.skillIcon} />
+              <img src="/images/icon9.jpg" alt="Skill icon 7" style={styles.skillIcon} />
+              <img src="/images/icon8.jpg" alt="Skill icon 8" style={styles.skillIcon} />
+              <img src="/images/icon7.jpg" alt="Skill icon 9" style={styles.skillIcon} />
+              <img src="/images/icon14.jpg" alt="Skill icon 10" style={styles.skillIcon} />
+              <img src="/images/icon15.jpg" alt="Skill icon 11" style={styles.skillIcon} />
+              <img src="/images/icon17.jpg" alt="Skill icon 12" style={styles.skillIcon} />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -694,7 +719,7 @@ const styles = {
   /* Section commons */
   sectionEyebrow: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 11,
+    fontSize: 15,
     color: ACCENT,
     letterSpacing: "2px",
     textTransform: "uppercase",
@@ -702,7 +727,7 @@ const styles = {
   },
   sectionTitle: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: "clamp(26px, 3vw, 38px)",
+    fontSize: "clamp(32px, 4vw, 48px)",
     fontWeight: 800,
     color: DARK,
     letterSpacing: -1,
@@ -713,14 +738,63 @@ const styles = {
   about: {
     background: "#fff",
     padding: "80px 64px",
+    width: "100%",
   },
-  aboutInner: { maxWidth: 640 },
+  aboutInner: { width: "100%", maxWidth: "none" },
+  aboutPanel: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1px 1fr",
+    gap: 32,
+    alignItems: "stretch",
+  },
+  headingPanel: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 32,
+    alignItems: "baseline",
+    marginBottom: 24,
+  },
+  skillsColumn: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 24,
+  },
+  skillsGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    gap: "28px 32px",
+  },
+  aboutSubheading: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: 22,
+    fontWeight: 700,
+    color: DARK,
+    lineHeight: 1.2,
+    marginBottom: 24,
+  },
+  sectionDivider: {
+    width: 1,
+    background: "rgba(15, 23, 42, 0.12)",
+    borderRadius: 1,
+    alignSelf: "stretch",
+  },
+  aboutColumn: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 16,
+  },
   aboutText: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 16,
     color: MUTED,
     lineHeight: 1.8,
-    marginBottom: 16,
+    marginBottom: 0,
+  },
+  skillIcon: {
+    width: 72,
+    height: 72,
+    display: "block",
+    objectFit: "contain",
   },
 
   /* Projects */
