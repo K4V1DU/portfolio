@@ -171,7 +171,7 @@ function Hero() {
             Book Free Discovery Call
           </a>
           <a href="#work" style={styles.btnGhost}>
-            View Client Projects
+            View My Projects
           </a>
         </div>
       </div>
