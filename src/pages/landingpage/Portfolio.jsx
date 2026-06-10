@@ -216,29 +216,60 @@ function Hero() {
 
       <div style={styles.heroLeft}>
         <p style={styles.greeting}>
-          Hello there, I'm{" "}
-          <span style={styles.accentName}>Kavidu Purnamal</span>
+          Hi, I'm <span style={styles.accentName}>Kavidu Purnamal</span>
         </p>
 
         <h1 style={styles.heroHeadline}>
-          Empowering brands with
+          Great software starts
           <br />
-          custom, high-converting
+          with a developer
           <br />
-          websites
+          who cares.
         </h1>
 
         <p style={styles.heroSub}>
-          that are appealing, brand-accurate, &amp; user-friendly.
+          Clean code, thoughtful design, and a passion for building things
+          right.
         </p>
 
-        <div style={styles.ctaRow}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 24,
+            flexWrap: "wrap",
+            marginTop: 18,
+            marginBottom: 40,
+          }}
+        >
           <a href="#contact" style={styles.btnPrimary}>
-            Book Free Discovery Call
+            Let's Talk
           </a>
-          <a href="#work" style={styles.btnGhost}>
-            View My Projects
-          </a>
+          <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+            {["Passionate", "Creative", "Reliable", "Adaptable"].map(
+              (s, index, arr) => (
+                <span key={s}>
+                  <span
+                    style={{
+                      fontFamily: "'Poppins', sans-serif",
+                      fontSize: 14,
+                      fontWeight: 400,
+                      color: MUTED,
+                    }}
+                  >
+                    {s}
+                  </span>
+                  {index < arr.length - 1 && (
+                    <span
+                      style={{ margin: "0 6px", color: MUTED, opacity: 0.5 }}
+                    >
+                      ·
+                    </span>
+                  )}
+                </span>
+              ),
+            )}
+          </div>
         </div>
       </div>
 
@@ -706,13 +737,15 @@ function AboutMe() {
             <span style={aboutMeStyles.accentText}>Built to deliver.</span>
           </h2>
           <p style={aboutMeStyles.lead}>
-  Hey, I'm Kavidu Purnamal, a passionate full-stack developer and SLIIT student
-who loves turning ideas into clean, intuitive web experiences.
-</p>
+            Hey, I'm Kavidu Purnamal, a passionate full-stack developer and
+            SLIIT student who loves turning ideas into clean, intuitive web
+            experiences.
+          </p>
           <p style={aboutMeStyles.body}>
-            With 3+ years deep in the MERN stack, I've built everything from dynamic web
-applications to developer productivity tools. What drives me isn't just shipping
-code. It's building things people enjoy using.
+            With 3+ years deep in the MERN stack, I've built everything from
+            dynamic web applications to developer productivity tools. What
+            drives me isn't just shipping code. It's building things people
+            enjoy using.
           </p>
           <p style={aboutMeStyles.body}>
             I absorb new technologies fast, write clean maintainable code, and
@@ -957,14 +990,14 @@ const styles = {
     textDecorationThickness: 3,
     textUnderlineOffset: 5,
   },
- heroSub: {
-  fontFamily: "'Poppins', sans-serif",
-  fontSize: 16,
-  color: MUTED,
-  lineHeight: 1.6,
-  marginBottom: 24,
-  maxWidth: 560,
-},
+  heroSub: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 16,
+    color: MUTED,
+    lineHeight: 1.6,
+    marginBottom: 24,
+    maxWidth: 560,
+  },
   stackRow: {
     display: "flex",
     alignItems: "center",
@@ -1029,10 +1062,11 @@ const styles = {
     zIndex: 1,
   },
   heroPhoto: {
-    width: "100%",
-    maxHeight: "100%",
-    objectFit: "contain",
-    objectPosition: "center",
+    width: "auto",
+    height: "100%",
+    maxHeight: "600px",
+    objectFit: "cover",
+    objectPosition: "top center",
     display: "block",
     position: "relative",
     boxShadow: "none",
@@ -1589,20 +1623,20 @@ const aboutMeStyles = {
     color: ACCENT,
   },
   lead: {
-  fontFamily: "'Poppins', sans-serif",
-  fontSize: 18,
-  color: MUTED,
-  lineHeight: 1.65,
-  fontWeight: 550,
-  letterSpacing: "-0.3px",
-},
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 18,
+    color: MUTED,
+    lineHeight: 1.65,
+    fontWeight: 550,
+    letterSpacing: "-0.3px",
+  },
   body: {
-  fontFamily: "'Poppins', sans-serif",
-  fontSize: 15,
-  color: MUTED,
-  lineHeight: 1.8,
-  textAlign: "justify",
-},
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 15,
+    color: MUTED,
+    lineHeight: 1.8,
+    textAlign: "justify",
+  },
   pillsRow: {
     display: "flex",
     flexWrap: "wrap",
