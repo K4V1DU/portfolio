@@ -404,20 +404,72 @@ function Projects() {
   );
 }
 
-/* ── Services ── */
 function Services() {
   return (
     <section id="services" style={styles.services}>
-      <div style={styles.sectionEyebrow}>What I Offer</div>
-      <h2 style={styles.sectionTitle}>Freelance Services</h2>
-      <div style={styles.servicesGrid}>
-        {SERVICES.map((s) => (
-          <div key={s.title} style={styles.serviceCard}>
-            <div style={styles.serviceIcon}>{s.icon}</div>
-            <h3 style={styles.serviceName}>{s.title}</h3>
-            <p style={styles.serviceDesc}>{s.desc}</p>
-          </div>
-        ))}
+      <div style={servicesLayoutStyles.wrapper}>
+
+        {/* LEFT — sticky */}
+        <div style={servicesLayoutStyles.leftCol}>
+          <div style={styles.sectionEyebrow}>What I Offer</div>
+          <h2 style={servicesLayoutStyles.title}>
+            Services built
+            <br />
+            for <span style={servicesLayoutStyles.accent}>real results.</span>
+          </h2>
+          <p style={servicesLayoutStyles.desc}>
+            From a single landing page to a full-scale SaaS platform — I cover
+            every layer of the stack. Each service is delivered with clean code,
+            clear communication, and a focus on what actually matters: shipping
+            something that works.
+          </p>
+          <a href="#contact" style={servicesLayoutStyles.cta}>
+            Start a Project →
+          </a>
+        </div>
+
+        {/* RIGHT — scrollable cards */}
+        <div style={servicesLayoutStyles.rightCol}>
+          {[
+            {
+              title: "Full-Stack Web Apps",
+              short: "End-to-end product development",
+              desc: "I handle everything from database schema design and REST API architecture to a fully deployed React frontend. You get a production-ready application built on the MERN stack, optimized for performance, scalability, and maintainability.",
+              tags: ["MongoDB", "Express", "React", "Node.js"],
+            },
+            {
+              title: "REST API Development",
+              short: "Clean, documented backend APIs",
+              desc: "Well-structured Node.js and Express APIs with proper authentication (JWT/OAuth), role-based access control, input validation, and error handling. Built to be consumed by any frontend or mobile app, with clear documentation included.",
+              tags: ["Node.js", "Express", "JWT", "REST"],
+            },
+            {
+              title: "UI / UX Engineering",
+              short: "Pixel-perfect, accessible interfaces",
+              desc: "Modular, reusable React components built from Figma designs or your own vision. I focus on responsive layouts, smooth interactions, and accessibility — so your product looks great and works for everyone, on every device.",
+              tags: ["React", "CSS", "Figma", "Responsive"],
+            },
+            {
+              title: "MVP & Rapid Prototyping",
+              short: "From idea to working product, fast",
+              desc: "Got a startup idea or side project? I help you validate it quickly with a focused, functional MVP. No bloat, no over-engineering — just the core features shipped fast so you can get real feedback from real users.",
+              tags: ["MERN", "Rapid Build", "Startup", "MVP"],
+            },
+          ].map((s) => (
+            <div key={s.title} style={servicesLayoutStyles.card}>
+              <h3 style={servicesLayoutStyles.cardTitle}>{s.title}</h3>
+              <p style={servicesLayoutStyles.cardShort}>{s.short}</p>
+              <div style={servicesLayoutStyles.cardDivider} />
+              <p style={servicesLayoutStyles.cardDesc}>{s.desc}</p>
+              <div style={servicesLayoutStyles.cardTags}>
+                {s.tags.map((t) => (
+                  <span key={t} style={servicesLayoutStyles.cardTag}>{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );
@@ -1416,6 +1468,7 @@ function FontLoader() {
   return null;
 }
 
+
 /* ── AboutMe styles ── */
 const aboutMeStyles = {
   section: {
@@ -1526,6 +1579,121 @@ const aboutMeStyles = {
     display: "block",
     position: "relative",
     zIndex: 1,
+  },
+};
+
+
+const servicesLayoutStyles = {
+  wrapper: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 64,
+    maxWidth: 1200,
+    margin: "0 auto",
+  },
+
+  /* LEFT — sticky */
+  leftCol: {
+    flex: "0 0 38%",
+    position: "sticky",
+    top: 100,
+    display: "flex",
+    flexDirection: "column",
+    gap: 24,
+  },
+  title: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "clamp(32px, 3.5vw, 46px)",
+    fontWeight: 900,
+    color: DARK,
+    letterSpacing: "-2px",
+    lineHeight: 1.08,
+  },
+  accent: {
+    color: ACCENT,
+  },
+  desc: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 15,
+    color: MUTED,
+    lineHeight: 1.8,
+    maxWidth: 380,
+  },
+  cta: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    background: ACCENT,
+    color: "#fff",
+    padding: "14px 28px",
+    borderRadius: 10,
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 14,
+    fontWeight: 700,
+    textDecoration: "none",
+    boxShadow: "0 10px 28px rgba(255,138,61,0.22)",
+    alignSelf: "flex-start",
+    marginTop: 8,
+  },
+
+  /* RIGHT — scrollable cards */
+  rightCol: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
+  },
+  card: {
+    background: "#fff",
+    border: `1px solid ${BORDER}`,
+    borderRadius: 20,
+    padding: "36px 40px",
+    display: "flex",
+    flexDirection: "column",
+    gap: 12,
+  },
+  cardTitle: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: 22,
+    fontWeight: 800,
+    color: DARK,
+    letterSpacing: "-0.5px",
+  },
+  cardShort: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 12,
+    fontWeight: 600,
+    color: ACCENT,
+    textTransform: "uppercase",
+    letterSpacing: "1.5px",
+  },
+  cardDivider: {
+    width: "100%",
+    height: 1,
+    background: BORDER,
+    margin: "4px 0",
+  },
+  cardDesc: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 14,
+    color: MUTED,
+    lineHeight: 1.8,
+  },
+  cardTags: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 8,
+    marginTop: 8,
+  },
+  cardTag: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 11,
+    fontWeight: 600,
+    color: DARK,
+    background: "#f5f5f5",
+    border: `1px solid ${BORDER}`,
+    borderRadius: 6,
+    padding: "5px 12px",
   },
 };
 
