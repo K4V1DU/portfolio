@@ -112,6 +112,7 @@ function StatCard({ value, suffix = "", label }) {
 /* ── Nav ── */
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [cvHovered, setCvHovered] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -144,6 +145,21 @@ function Nav() {
           </li>
         ))}
       </ul>
+
+      {/* Download CV Button */}
+      <a 
+        href="/cv.pdf" 
+        download 
+        style={{
+          ...styles.downloadBtn,
+          ...(cvHovered ? styles.downloadBtnHover : {})
+        }}
+        onMouseEnter={() => setCvHovered(true)}
+        onMouseLeave={() => setCvHovered(false)}
+      >
+        <span style={styles.downloadIcon}>⬇</span>
+        Download CV
+      </a>
 
       {/* mobile menu removed */}
     </nav>
@@ -245,8 +261,8 @@ function About() {
               <img src="/images/icon9.jpg" alt="Skill icon 7" style={styles.skillIcon} />
               <img src="/images/icon8.jpg" alt="Skill icon 8" style={styles.skillIcon} />
               <img src="/images/icon7.jpg" alt="Skill icon 9" style={styles.skillIcon} />
-              <img src="/images/icon14.jpg" alt="Skill icon 10" style={styles.skillIcon} />
-              <img src="/images/icon15.jpg" alt="Skill icon 11" style={styles.skillIcon} />
+              <img src="/images/icon15.jpg" alt="Skill icon 10" style={styles.skillIcon} />
+              <img src="/images/icon16.jpg" alt="Skill icon 11" style={styles.skillIcon} />
               <img src="/images/icon17.jpg" alt="Skill icon 12" style={styles.skillIcon} />
             </div>
           </div>
@@ -403,6 +419,32 @@ const styles = {
     fontFamily: "'Poppins', sans-serif",
     fontWeight: 500,
     transition: "color 0.2s",
+  },
+  downloadBtn: {
+    marginLeft: "auto",
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+    color: ACCENT,
+    background: "transparent",
+    padding: "12px 24px",
+    borderRadius: 12,
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 14,
+    fontWeight: 600,
+    textDecoration: "none",
+    border: `2px solid ${ACCENT}`,
+    transition: "background 0.2s, color 0.2s",
+    cursor: "pointer",
+  },
+  downloadBtnHover: {
+    color: "#fff",
+    background: ACCENT,
+  },
+  downloadIcon: {
+    fontSize: 18,
+    display: "flex",
+    alignItems: "center",
   },
   hamburger: {
     display: "flex",
