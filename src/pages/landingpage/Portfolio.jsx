@@ -92,9 +92,22 @@ const EDUCATION = [
 
 /* ── Contact info items ── */
 const CONTACT_INFO = [
-  { icon: "/images/icon20.jpg", text: "K4V1DU", href: "https://github.com/K4V1DU" },
-  { icon: "/images/icon20.jpg", text: "kavidu-purnamal", href: "https://linkedin.com/in/kavidu-purnamal" },
-  { icon: "/images/icon20.jpg", text: "+94 715 294 616", href: "tel:+94715294616" },
+  {
+    icon: "/images/icon23.jpg",
+    text: "kavidu-purnamal",
+    href: "https://linkedin.com/in/kavidu-purnamal",
+  },
+  {
+    icon: "/images/icon16.jpg",
+    text: "K4V1DU",
+    href: "https://github.com/K4V1DU",
+  },
+
+  {
+    icon: "/images/icon24.jpg",
+    text: "+94 715 294 616",
+    href: "tel:+94715294616",
+  },
 ];
 
 /* ── Animated counter hook ── */
@@ -404,7 +417,6 @@ function Services() {
   return (
     <section id="services" style={styles.services}>
       <div style={servicesLayoutStyles.wrapper}>
-
         {/* LEFT — sticky centered */}
         <div style={servicesLayoutStyles.leftCol}>
           <div style={styles.sectionEyebrow}>What I Offer</div>
@@ -422,18 +434,66 @@ function Services() {
 
           {/* ── Tech icons ── */}
           <div style={servicesLayoutStyles.iconsGrid}>
-            <img src="/images/icon1.png"  alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon6.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon3.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon2.png"  alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon12.jpg" alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon13.jpg" alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon9.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon8.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon7.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon15.jpg" alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon16.jpg" alt="skill" style={servicesLayoutStyles.icon} />
-            <img src="/images/icon17.jpg" alt="skill" style={servicesLayoutStyles.icon} />
+            <img
+              src="/images/icon1.png"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon6.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon3.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon2.png"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon12.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon13.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon9.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon8.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon7.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon15.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon16.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon17.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
           </div>
         </div>
 
@@ -473,7 +533,8 @@ function Services() {
               <div style={servicesLayoutStyles.cardTags}>
                 {s.tags.map((t, i) => (
                   <span key={t} style={servicesLayoutStyles.cardTag}>
-                    {t}{i < s.tags.length - 1 && (
+                    {t}
+                    {i < s.tags.length - 1 && (
                       <span style={{ margin: "0 6px", opacity: 0.5 }}>·</span>
                     )}
                   </span>
@@ -482,7 +543,6 @@ function Services() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
@@ -528,7 +588,6 @@ function Education() {
   );
 }
 
-
 function Contact() {
   const [emailHovered, setEmailHovered] = useState(false);
   const [linkedinHovered, setLinkedinHovered] = useState(false);
@@ -544,13 +603,9 @@ function Contact() {
 
         {/* ── Massive display headline ── */}
         <h2 style={styles.contactHeadline}>
-          Let's Build
+          Let's Build Something
           <br />
-          Something
-          <br />
-          Amazing
-          <br />
-          Together
+          Amazing Together
         </h2>
 
         {/* ── Subtitle ── */}
@@ -562,7 +617,7 @@ function Contact() {
         {/* ── CTA buttons ── */}
         <div style={styles.contactBtnsRow}>
           <a
-            href="mailto:you@email.com"
+            href="mailto:kavidupurnamal2001@gmail.com"
             style={{
               ...styles.contactBtnFilled,
               ...(emailHovered ? styles.contactBtnFilledHover : {}),
@@ -570,11 +625,20 @@ function Contact() {
             onMouseEnter={() => setEmailHovered(true)}
             onMouseLeave={() => setEmailHovered(false)}
           >
-            <span style={styles.contactBtnIcon}>✉️</span>
+            <img
+              src="/images/icon24.png"
+              alt=""
+              style={{
+                width: 20,
+                height: 20,
+                objectFit: "contain",
+                verticalAlign: "middle",
+              }}
+            />
             Send Email
           </a>
           <a
-            href="#"
+            href="https://linkedin.com/in/kavidu-purnamal"
             style={{
               ...styles.contactBtnOutline,
               ...(linkedinHovered ? styles.contactBtnOutlineHover : {}),
@@ -605,10 +669,6 @@ function Contact() {
   );
 }
 
-
-
-
-
 /* ── Footer ── */
 function Footer() {
   return (
@@ -626,53 +686,64 @@ function AboutMe() {
   return (
     <section id="about-me" style={aboutMeStyles.section}>
       <div style={aboutMeStyles.inner}>
+        {/* LEFT: photo — 35% */}
+        <div style={aboutMeStyles.imageCol}>
+          <div style={aboutMeStyles.imageWrap}>
+            <img
+              src="/images/photo9.png"
+              alt="Kavidu Purnamal"
+              style={aboutMeStyles.photo}
+            />
+          </div>
+        </div>
 
-  {/* LEFT: photo — 35% */}
-  <div style={aboutMeStyles.imageCol}>
-    <div style={aboutMeStyles.imageWrap}>
-      <img
-        src="/images/photo9.png"
-        alt="Kavidu Purnamal"
-        style={aboutMeStyles.photo}
-      />
-    </div>
-  </div>
-
-  {/* RIGHT: text content — 65% */}
-  <div style={aboutMeStyles.textCol}>
-    <div style={styles.sectionEyebrow}>Who I Am</div>
-    <h2 style={aboutMeStyles.heading}>
-      Fast to learn.
-      <br />
-      <span style={aboutMeStyles.accentText}>Built to deliver.</span>
-    </h2>
-    <p style={aboutMeStyles.lead}>
-      I'm <strong>Kavidu Purnamal</strong>, a full-stack developer and SLIIT student
-      who bridges complex backend systems with clean, intuitive frontends.
-    </p>
-    <p style={aboutMeStyles.body}>
-      With 3+ years deep in the MERN stack, I've built everything from boarding rental
-      platforms to developer productivity tools. What drives me isn't just shipping
-      code — it's building things people enjoy using.
-    </p>
-    <p style={aboutMeStyles.body}>
-      I absorb new technologies fast, write clean maintainable code, and care deeply
-      about performance and accessibility. Whether it's a startup MVP or a polished
-      SaaS product, I bring the same level of focus to every project.
-    </p>
-    <div style={aboutMeStyles.pillsRow}>
-      {["MongoDB", "Express.js", "React", "Node.js", "REST APIs", "UI/UX"].map((tag, index, arr) => (
-        <span key={tag}>
-          <span style={aboutMeStyles.pill}>{tag}</span>
-          {index < arr.length - 1 && (
-            <span style={{ ...aboutMeStyles.pill, padding: "0 6px" }}> · </span>
-          )}
-        </span>
-      ))}
-    </div>
-  </div>
-
-</div>
+        {/* RIGHT: text content — 65% */}
+        <div style={aboutMeStyles.textCol}>
+          <div style={styles.sectionEyebrow}>Who I Am</div>
+          <h2 style={aboutMeStyles.heading}>
+            Fast to learn.
+            <br />
+            <span style={aboutMeStyles.accentText}>Built to deliver.</span>
+          </h2>
+          <p style={aboutMeStyles.lead}>
+            I'm <strong>Kavidu Purnamal</strong>, a full-stack developer and
+            SLIIT student who bridges complex backend systems with clean,
+            intuitive frontends.
+          </p>
+          <p style={aboutMeStyles.body}>
+            With 3+ years deep in the MERN stack, I've built everything from
+            boarding rental platforms to developer productivity tools. What
+            drives me isn't just shipping code — it's building things people
+            enjoy using.
+          </p>
+          <p style={aboutMeStyles.body}>
+            I absorb new technologies fast, write clean maintainable code, and
+            care deeply about performance and accessibility. Whether it's a
+            startup MVP or a polished SaaS product, I bring the same level of
+            focus to every project.
+          </p>
+          <div style={aboutMeStyles.pillsRow}>
+            {[
+              "MongoDB",
+              "Express.js",
+              "React",
+              "Node.js",
+              "REST APIs",
+              "UI/UX",
+            ].map((tag, index, arr) => (
+              <span key={tag}>
+                <span style={aboutMeStyles.pill}>{tag}</span>
+                {index < arr.length - 1 && (
+                  <span style={{ ...aboutMeStyles.pill, padding: "0 6px" }}>
+                    {" "}
+                    ·{" "}
+                  </span>
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -1317,7 +1388,7 @@ const styles = {
   /* massive headline */
   contactHeadline: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: "clamp(56px, 9vw, 108px)",
+    fontSize: "clamp(36px, 5vw, 64px)",
     fontWeight: 900,
     color: DARK,
     letterSpacing: "-4px",
@@ -1407,12 +1478,12 @@ const styles = {
     transition: "color 0.2s",
   },
   contactInfoIcon: {
-  width: 20,
-  height: 20,
-  objectFit: "contain",
-  display: "inline-block",
-  verticalAlign: "middle",
-},
+    width: 20,
+    height: 20,
+    objectFit: "contain",
+    display: "inline-block",
+    verticalAlign: "middle",
+  },
 
   /* ── Footer ── */
   footer: {
@@ -1485,7 +1556,6 @@ function FontLoader() {
   return null;
 }
 
-
 /* ── AboutMe styles ── */
 const aboutMeStyles = {
   section: {
@@ -1540,13 +1610,13 @@ const aboutMeStyles = {
     gap: 0,
     marginTop: 4,
   },
- pill: {
-  fontFamily: "'Poppins', sans-serif",
-  fontSize: 14,
-  fontWeight: 400,
-  color: ACCENT,
-  whiteSpace: "nowrap",
-},
+  pill: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 14,
+    fontWeight: 400,
+    color: ACCENT,
+    whiteSpace: "nowrap",
+  },
   statsRow: {
     display: "flex",
     alignItems: "center",
@@ -1599,7 +1669,6 @@ const aboutMeStyles = {
   },
 };
 
-
 const servicesLayoutStyles = {
   wrapper: {
     display: "flex",
@@ -1610,14 +1679,14 @@ const servicesLayoutStyles = {
   },
 
   leftCol: {
-  flex: "0 0 52%",
-  position: "sticky",
-  top: "calc(50vh - 250px)",
-  display: "flex",
-  flexDirection: "column",
-  gap: 24,
-  alignSelf: "flex-start",
-},
+    flex: "0 0 52%",
+    position: "sticky",
+    top: "calc(50vh - 250px)",
+    display: "flex",
+    flexDirection: "column",
+    gap: 24,
+    alignSelf: "flex-start",
+  },
 
   title: {
     fontFamily: "'Inter', sans-serif",
@@ -1747,7 +1816,7 @@ export default function Portfolio() {
         <Hero />
         <Projects />
         <AboutMe />
-       
+
         <Services />
         <Contact />
       </main>
