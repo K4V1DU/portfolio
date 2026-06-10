@@ -211,7 +211,7 @@ function Hero() {
         FULL STACK DEV
       </div>
       <div style={styles.watermarkBottom} aria-hidden="true">
-        UI / UX
+        
       </div>
 
       <div style={styles.heroLeft}>
@@ -927,7 +927,7 @@ const styles = {
   },
   watermarkTop: {
     position: "absolute",
-    top: "6%",
+    top: "10%",
     left: "6%",
     fontFamily: "'Poppins', sans-serif",
     fontWeight: 900,
@@ -956,15 +956,15 @@ const styles = {
     zIndex: 0,
   },
   heroLeft: {
-    flex: "0 0 60%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    padding: "100px 64px 80px 96px",
-    position: "relative",
-    zIndex: 2,
-    maxWidth: 920,
-  },
+  flex: "0 0 60%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  padding: "140px 64px 80px 96px",
+  position: "relative",
+  zIndex: 2,
+  maxWidth: 920,
+},
   greeting: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 34,
@@ -1052,15 +1052,15 @@ const styles = {
   },
 
   heroRight: {
-    flex: "0 0 40%",
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100%",
-    overflow: "hidden",
-    zIndex: 1,
-  },
+  flex: "0 0 40%",
+  position: "relative",
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "center",
+  height: "100%",
+  overflow: "hidden",
+  zIndex: 1,
+},
   heroPhoto: {
     width: "auto",
     height: "100%",
@@ -1383,9 +1383,9 @@ const styles = {
      (matches screenshot layout · orange theme · white bg)
   ══════════════════════════════════════════ */
   contact: {
-    background: "#ffffff",
-    padding: "120px 64px 100px",
-  },
+  background: "#ffffff",
+  padding: "80px 64px 60px",
+},
   contactInner: {
     maxWidth: 860,
     margin: "0 auto",
