@@ -71,6 +71,13 @@ const PROJECTS = [
 
 const EDUCATION = [
   {
+    year: "2021",
+    title: "G.C.E. Advanced Level - Engineering Technology Stream",
+    institution: "Matara Central College",
+    desc: "Completed A/Ls in the Engineering Technology stream, building a strong foundation in technical and analytical thinking.",
+    certificate: "#",
+  },
+  {
     year: "NOV 2023 – PRESENT",
     title: "BSc (Hons) in Information Technology",
     institution: "Sri Lanka Institute of Information Technology (SLIIT)",
@@ -78,17 +85,10 @@ const EDUCATION = [
     certificate: "#",
   },
   {
-    year: "2023",
-    title: "Diploma in Graphic Design",
-    institution: "Sipway Campus",
-    desc: "Successfully completed professional training in branding, visual communication, and digital design.",
-    certificate: "#",
-  },
-  {
-    year: "2021",
-    title: "G.C.E. Advanced Level - Engineering Technology Stream",
-    institution: "Matara Central College",
-    desc: "Completed A/Ls in the Engineering Technology stream, building a strong foundation in technical and analytical thinking.",
+    year: "2026",
+    title: "MongoDB Atlas Administrator Path",
+    institution: "MongoDB University",
+    desc: "Completed the MongoDB Atlas Administrator learning path, covering cluster management, backups, replication, security, and cloud database operations.",
     certificate: "#",
   },
 ];
