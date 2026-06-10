@@ -92,9 +92,9 @@ const EDUCATION = [
 
 /* ── Contact info items ── */
 const CONTACT_INFO = [
-  { icon: "🐙", text: "KaveeNirmal", href: "https://github.com/KaveeNirmal" },
-  { icon: "💼", text: "kaveesha-nirmal", href: "https://linkedin.com/in/kaveesha-nirmal" },
-  { icon: "📞", text: "+94 766 703 913", href: "tel:+94766703913" },
+  { icon: "🐙", text: "K4V1DU", href: "https://github.com/K4V1DU" },
+  { icon: "💼", text: "kavidu-purnamal", href: "https://linkedin.com/in/kavidu-purnamal" },
+  { icon: "📞", text: "+94 715 294 616", href: "tel:+94715294616" },
 ];
 
 /* ── Animated counter hook ── */
