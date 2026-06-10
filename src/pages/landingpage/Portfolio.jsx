@@ -69,6 +69,30 @@ const PROJECTS = [
   },
 ];
 
+const EDUCATION = [
+  {
+    year: "NOV 2023 – PRESENT",
+    title: "BSc (Hons) in Information Technology",
+    institution: "Sri Lanka Institute of Information Technology (SLIIT)",
+    desc: "Currently pursuing a degree specializing in Information Technology, with a focus on Software Engineering, UI/UX Design, and Full-Stack Development.",
+    certificate: "#",
+  },
+  {
+    year: "2023",
+    title: "Diploma in Graphic Design",
+    institution: "Sipway Campus",
+    desc: "Successfully completed professional training in branding, visual communication, and digital design.",
+    certificate: "#",
+  },
+  {
+    year: "2021",
+    title: "G.C.E. Advanced Level - Engineering Technology Stream",
+    institution: "Matara Central College",
+    desc: "Completed A/Ls in the Engineering Technology stream, building a strong foundation in technical and analytical thinking.",
+    certificate: "#",
+  },
+];
+
 /* ── Animated counter hook ── */
 function useCounter(target, duration = 1800) {
   const [count, setCount] = useState(0);
@@ -325,6 +349,36 @@ function Services() {
             <p style={styles.serviceDesc}>{s.desc}</p>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── Education ── */
+function Education() {
+  return (
+    <section id="education" style={styles.education}>
+      <div style={styles.sectionEyebrow}>My Journey</div>
+      <h2 style={styles.sectionTitle}>Education</h2>
+      <div style={styles.timelineContainer}>
+        <div style={styles.timelineLine} aria-hidden="true" />
+        {EDUCATION.map((edu, index) => {
+          const isLeft = index % 2 === 0;
+          return (
+            <div key={edu.title} style={styles.timelineItem}>
+              {/* Timeline dot */}
+              <div style={{ ...styles.timelineDot, left: "50%", transform: "translateX(-50%)" }} />
+              
+              {/* Content */}
+              <div style={{ ...styles.educationContent, marginLeft: isLeft ? 0 : "52%", marginRight: isLeft ? "52%" : 0, textAlign: isLeft ? "right" : "left" }}>
+                <div style={styles.eduYear}>{edu.year}</div>
+                <h3 style={styles.eduTitle}>{edu.title}</h3>
+                <div style={styles.eduInstitution}>{edu.institution}</div>
+                <p style={styles.eduDesc}>{edu.desc}</p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -998,9 +1052,94 @@ const styles = {
     lineHeight: 1.65,
   },
 
+  /* Education */
+  education: {
+    background: "#fff",
+    padding: "80px 64px",
+    color: DARK,
+  },
+  timelineContainer: {
+    position: "relative",
+    maxWidth: 900,
+    margin: "0 auto",
+  },
+  timelineLine: {
+    position: "absolute",
+    left: "50%",
+    top: 24,
+    bottom: 0,
+    width: 2,
+    background: BORDER,
+    transform: "translateX(-50%)",
+    zIndex: 1,
+  },
+  timelineItem: {
+    position: "relative",
+    marginBottom: 48,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+  timelineDot: {
+    position: "absolute",
+    width: 12,
+    height: 12,
+    borderRadius: "50%",
+    background: ACCENT,
+    top: 6,
+    zIndex: 2,
+  },
+  educationContent: {
+    flex: 1,
+    paddingTop: 0,
+  },
+  eduYear: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 12,
+    fontWeight: 700,
+    color: ACCENT,
+    letterSpacing: 0.5,
+    marginBottom: 6,
+    textTransform: "uppercase",
+  },
+  eduTitle: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 18,
+    fontWeight: 700,
+    color: DARK,
+    marginBottom: 4,
+  },
+  eduInstitution: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 14,
+    color: MUTED,
+    marginBottom: 12,
+  },
+  eduDesc: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 14,
+    color: "rgba(0,0,0,0.7)",
+    lineHeight: 1.65,
+    marginBottom: 12,
+  },
+  viewCertificate: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    color: ACCENT,
+    textDecoration: "none",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 13,
+    fontWeight: 600,
+    transition: "color 0.2s",
+  },
+  certIcon: {
+    fontSize: 14,
+  },
+
   /* Contact */
   contact: {
-    background: DARK,
+    background: "#fff",
     padding: "80px 64px",
   },
   contactInner: {
@@ -1011,7 +1150,7 @@ const styles = {
   contactSub: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 15,
-    color: "rgba(255,255,255,0.5)",
+    color: MUTED,
     marginBottom: 32,
   },
   contactPills: {
@@ -1030,25 +1169,25 @@ const styles = {
     fontSize: 14,
     fontWeight: 500,
     textDecoration: "none",
-    border: "1px solid rgba(255,255,255,0.12)",
-    color: "rgba(255,255,255,0.7)",
-    background: "rgba(255,255,255,0.04)",
+    border: `1px solid ${BORDER}`,
+    color: DARK,
+    background: "rgba(15,43,43,0.04)",
     transition: "border-color 0.2s, color 0.2s, background 0.2s",
   },
 
   /* Footer */
   footer: {
-    background: DARK,
+    background: "#fff",
     padding: "20px 64px",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    borderTop: "1px solid rgba(255,255,255,0.06)",
+    borderTop: `1px solid ${BORDER}`,
   },
   footerText: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 11,
-    color: "rgba(255,255,255,0.3)",
+    color: MUTED,
   },
 };
 
@@ -1130,6 +1269,7 @@ export default function Portfolio() {
         <About />
         <Projects />
         <Services />
+        <Education />
         <Contact />
       </main>
       <Footer />
