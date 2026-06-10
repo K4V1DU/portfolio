@@ -706,15 +706,13 @@ function AboutMe() {
             <span style={aboutMeStyles.accentText}>Built to deliver.</span>
           </h2>
           <p style={aboutMeStyles.lead}>
-            I'm <strong>Kavidu Purnamal</strong>, a full-stack developer and
-            SLIIT student who bridges complex backend systems with clean,
-            intuitive frontends.
-          </p>
+  Hey, I'm Kavidu Purnamal, a passionate full-stack developer and SLIIT student
+who loves turning ideas into clean, intuitive web experiences.
+</p>
           <p style={aboutMeStyles.body}>
-            With 3+ years deep in the MERN stack, I've built everything from
-            boarding rental platforms to developer productivity tools. What
-            drives me isn't just shipping code — it's building things people
-            enjoy using.
+            With 3+ years deep in the MERN stack, I've built everything from dynamic web
+applications to developer productivity tools. What drives me isn't just shipping
+code. It's building things people enjoy using.
           </p>
           <p style={aboutMeStyles.body}>
             I absorb new technologies fast, write clean maintainable code, and
@@ -1591,18 +1589,20 @@ const aboutMeStyles = {
     color: ACCENT,
   },
   lead: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 17,
-    color: DARK,
-    lineHeight: 1.65,
-    fontWeight: 500,
-  },
+  fontFamily: "'Poppins', sans-serif",
+  fontSize: 18,
+  color: MUTED,
+  lineHeight: 1.65,
+  fontWeight: 550,
+  letterSpacing: "-0.3px",
+},
   body: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 15,
-    color: MUTED,
-    lineHeight: 1.8,
-  },
+  fontFamily: "'Poppins', sans-serif",
+  fontSize: 15,
+  color: MUTED,
+  lineHeight: 1.8,
+  textAlign: "justify",
+},
   pillsRow: {
     display: "flex",
     flexWrap: "wrap",
