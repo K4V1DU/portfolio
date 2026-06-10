@@ -93,7 +93,11 @@ const EDUCATION = [
 /* ── Contact info items ── */
 const CONTACT_INFO = [
   { icon: "🐙", text: "K4V1DU", href: "https://github.com/K4V1DU" },
-  { icon: "💼", text: "kavidu-purnamal", href: "https://linkedin.com/in/kavidu-purnamal" },
+  {
+    icon: "💼",
+    text: "kavidu-purnamal",
+    href: "https://linkedin.com/in/kavidu-purnamal",
+  },
   { icon: "📞", text: "+94 715 294 616", href: "tel:+94715294616" },
 ];
 
@@ -115,7 +119,7 @@ function useCounter(target, duration = 1800) {
         };
         requestAnimationFrame(step);
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -203,7 +207,8 @@ function Hero() {
 
       <div style={styles.heroLeft}>
         <p style={styles.greeting}>
-          Hello there, I'm <span style={styles.accentName}>Kavidu Purnamal</span>
+          Hello there, I'm{" "}
+          <span style={styles.accentName}>Kavidu Purnamal</span>
         </p>
 
         <h1 style={styles.heroHeadline}>
@@ -229,7 +234,11 @@ function Hero() {
       </div>
 
       <div style={styles.heroRight}>
-        <img src="/images/photo9.png" alt="Kavidu Purnamal" style={styles.heroPhoto} />
+        <img
+          src="/images/photo9.png"
+          alt="Kavidu Purnamal"
+          style={styles.heroPhoto}
+        />
       </div>
     </section>
   );
@@ -248,18 +257,20 @@ function About() {
         <div style={styles.aboutPanel}>
           <div style={styles.aboutColumn}>
             <h3 style={styles.aboutSubheading}>
-              Versatile full-stack software engineer delivering enterprise-grade web applications
-              and polished digital experiences.
+              Versatile full-stack software engineer delivering enterprise-grade
+              web applications and polished digital experiences.
             </h3>
             <p style={styles.aboutText}>
-              I'm Kavidu Purnamal, a full-stack developer and student at SLIIT who bridges the gap
-              between complex backend systems and clear frontend interfaces.
+              I'm Kavidu Purnamal, a full-stack developer and student at SLIIT
+              who bridges the gap between complex backend systems and clear
+              frontend interfaces.
             </p>
             <p style={styles.aboutText}>
-              What sets me apart is my speed in picking up new technologies and my love for coding,
-              whether I am architecting scalable web applications with Node.js or diving into game
-              development. I absorb new concepts quickly, write clean code, and adapt fast to ensure
-              software is built for peak performance.
+              What sets me apart is my speed in picking up new technologies and
+              my love for coding, whether I am architecting scalable web
+              applications with Node.js or diving into game development. I
+              absorb new concepts quickly, write clean code, and adapt fast to
+              ensure software is built for peak performance.
             </p>
           </div>
 
@@ -267,18 +278,66 @@ function About() {
 
           <div style={styles.skillsColumn}>
             <div style={styles.skillsGrid}>
-              <img src="/images/icon1.png"  alt="Skill icon 1"  style={styles.skillIcon} />
-              <img src="/images/icon6.jpg"  alt="Skill icon 2"  style={styles.skillIcon} />
-              <img src="/images/icon3.jpg"  alt="Skill icon 3"  style={styles.skillIcon} />
-              <img src="/images/icon2.png"  alt="Skill icon 4"  style={styles.skillIcon} />
-              <img src="/images/icon12.jpg" alt="Skill icon 5"  style={styles.skillIcon} />
-              <img src="/images/icon13.jpg" alt="Skill icon 6"  style={styles.skillIcon} />
-              <img src="/images/icon9.jpg"  alt="Skill icon 7"  style={styles.skillIcon} />
-              <img src="/images/icon8.jpg"  alt="Skill icon 8"  style={styles.skillIcon} />
-              <img src="/images/icon7.jpg"  alt="Skill icon 9"  style={styles.skillIcon} />
-              <img src="/images/icon15.jpg" alt="Skill icon 10" style={styles.skillIcon} />
-              <img src="/images/icon16.jpg" alt="Skill icon 11" style={styles.skillIcon} />
-              <img src="/images/icon17.jpg" alt="Skill icon 12" style={styles.skillIcon} />
+              <img
+                src="/images/icon1.png"
+                alt="Skill icon 1"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon6.jpg"
+                alt="Skill icon 2"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon3.jpg"
+                alt="Skill icon 3"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon2.png"
+                alt="Skill icon 4"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon12.jpg"
+                alt="Skill icon 5"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon13.jpg"
+                alt="Skill icon 6"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon9.jpg"
+                alt="Skill icon 7"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon8.jpg"
+                alt="Skill icon 8"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon7.jpg"
+                alt="Skill icon 9"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon15.jpg"
+                alt="Skill icon 10"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon16.jpg"
+                alt="Skill icon 11"
+                style={styles.skillIcon}
+              />
+              <img
+                src="/images/icon17.jpg"
+                alt="Skill icon 12"
+                style={styles.skillIcon}
+              />
             </div>
           </div>
         </div>
@@ -299,22 +358,34 @@ function Projects() {
           return (
             <div
               key={p.name}
-              style={{ ...styles.projectShowcase, flexDirection: isEven ? "row" : "row-reverse" }}
+              style={{
+                ...styles.projectShowcase,
+                flexDirection: isEven ? "row" : "row-reverse",
+              }}
               className="project-showcase"
             >
-              <div style={styles.projectImageContainer} className="project-image-container">
+              <div
+                style={styles.projectImageContainer}
+                className="project-image-container"
+              >
                 <img
                   src={p.image}
                   alt={p.name}
                   style={styles.projectImage}
                   className="project-image"
                 />
-                <div style={styles.projectImageOverlay} className="project-image-overlay">
+                <div
+                  style={styles.projectImageOverlay}
+                  className="project-image-overlay"
+                >
                   <span style={styles.projectEmoji}>{p.emoji}</span>
                 </div>
               </div>
 
-              <div style={styles.projectContentContainer} className="project-content-container">
+              <div
+                style={styles.projectContentContainer}
+                className="project-content-container"
+              >
                 <h3 style={styles.projectName}>{p.name}</h3>
                 <p style={styles.projectDesc}>{p.desc}</p>
                 <p style={styles.projectDetails}>{p.details}</p>
@@ -365,7 +436,11 @@ function Education() {
           return (
             <div key={edu.title} style={styles.timelineItem}>
               <div
-                style={{ ...styles.timelineDot, left: "50%", transform: "translateX(-50%)" }}
+                style={{
+                  ...styles.timelineDot,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                }}
               />
               <div
                 style={{
@@ -399,7 +474,6 @@ function Contact() {
   return (
     <section id="contact" style={styles.contact}>
       <div style={styles.contactInner}>
-
         {/* ── Eyebrow: — CONTACT ── */}
         <div style={styles.contactEyebrowWrap}>
           <span style={styles.contactEyebrowDash} />
@@ -408,16 +482,19 @@ function Contact() {
 
         {/* ── Massive display headline ── */}
         <h2 style={styles.contactHeadline}>
-          Let's Build<br />
-          Something<br />
-          Amazing<br />
+          Let's Build
+          <br />
+          Something
+          <br />
+          Amazing
+          <br />
           Together
         </h2>
 
         {/* ── Subtitle ── */}
         <p style={styles.contactSubtitle}>
-          Whether you have a project in mind, want to collaborate,
-          or just want to say hello — my inbox is always open.
+          Whether you have a project in mind, want to collaborate, or just want
+          to say hello — my inbox is always open.
         </p>
 
         {/* ── CTA buttons ── */}
@@ -450,13 +527,17 @@ function Contact() {
         {/* ── Info row: GitHub · LinkedIn · Phone ── */}
         <div style={styles.contactInfoRow}>
           {CONTACT_INFO.map(({ icon, text, href }) => (
-            <a key={text} href={href} style={styles.contactInfoItem} className="contact-info-link">
+            <a
+              key={text}
+              href={href}
+              style={styles.contactInfoItem}
+              className="contact-info-link"
+            >
               <span style={styles.contactInfoIcon}>{icon}</span>
               <span>{text}</span>
             </a>
           ))}
         </div>
-
       </div>
     </section>
   );
@@ -466,27 +547,87 @@ function Contact() {
 function Footer() {
   return (
     <footer style={styles.footer}>
-      <p style={styles.footerText}>© {new Date().getFullYear()} · Built with MERN Stack</p>
+      <p style={styles.footerText}>
+        © {new Date().getFullYear()} · Built with MERN Stack
+      </p>
       <p style={styles.footerText}>Designed &amp; Developed by You</p>
     </footer>
+  );
+}
+
+/* ── AboutMe (NEW — with photo) ── */
+function AboutMe() {
+  return (
+    <section id="about-me" style={aboutMeStyles.section}>
+      <div style={aboutMeStyles.inner}>
+
+  {/* LEFT: photo — 35% */}
+  <div style={aboutMeStyles.imageCol}>
+    <div style={aboutMeStyles.imageWrap}>
+      <img
+        src="/images/photo9.png"
+        alt="Kavidu Purnamal"
+        style={aboutMeStyles.photo}
+      />
+    </div>
+  </div>
+
+  {/* RIGHT: text content — 65% */}
+  <div style={aboutMeStyles.textCol}>
+    <div style={styles.sectionEyebrow}>Who I Am</div>
+    <h2 style={aboutMeStyles.heading}>
+      Fast to learn.
+      <br />
+      <span style={aboutMeStyles.accentText}>Built to deliver.</span>
+    </h2>
+    <p style={aboutMeStyles.lead}>
+      I'm <strong>Kavidu Purnamal</strong>, a full-stack developer and SLIIT student
+      who bridges complex backend systems with clean, intuitive frontends.
+    </p>
+    <p style={aboutMeStyles.body}>
+      With 3+ years deep in the MERN stack, I've built everything from boarding rental
+      platforms to developer productivity tools. What drives me isn't just shipping
+      code — it's building things people enjoy using.
+    </p>
+    <p style={aboutMeStyles.body}>
+      I absorb new technologies fast, write clean maintainable code, and care deeply
+      about performance and accessibility. Whether it's a startup MVP or a polished
+      SaaS product, I bring the same level of focus to every project.
+    </p>
+    <div style={aboutMeStyles.pillsRow}>
+      {["MongoDB", "Express.js", "React", "Node.js", "REST APIs", "UI/UX"].map((tag, index, arr) => (
+        <span key={tag}>
+          <span style={aboutMeStyles.pill}>{tag}</span>
+          {index < arr.length - 1 && (
+            <span style={{ ...aboutMeStyles.pill, padding: "0 6px" }}> · </span>
+          )}
+        </span>
+      ))}
+    </div>
+  </div>
+
+</div>
+    </section>
   );
 }
 
 /* ══════════════════════════════════════════
    STYLES
 ══════════════════════════════════════════ */
-const CREAM  = "#ffffff";
-const DARK   = "#0f2b2b";
+const CREAM = "#ffffff";
+const DARK = "#0f2b2b";
 const ACCENT = "#ff8a3d";
 const ACCENT_LIGHT = "#fff2e6";
-const MUTED  = "#6b6f66";
+const MUTED = "#6b6f66";
 const BORDER = "rgba(15,43,43,0.08)";
 
 const styles = {
   /* ── Nav ── */
   nav: {
     position: "fixed",
-    top: 0, left: 0, right: 0,
+    top: 0,
+    left: 0,
+    right: 0,
     zIndex: 100,
     display: "flex",
     alignItems: "center",
@@ -542,295 +683,529 @@ const styles = {
   downloadBtnHover: { color: "#fff", background: ACCENT },
   downloadIcon: { fontSize: 18, display: "flex", alignItems: "center" },
   hamburger: {
-    display: "flex", flexDirection: "column", gap: 5,
-    background: DARK, border: "none", borderRadius: "50%",
-    width: 44, height: 44,
-    alignItems: "center", justifyContent: "center",
-    cursor: "pointer", padding: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: 5,
+    background: DARK,
+    border: "none",
+    borderRadius: "50%",
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    padding: 0,
   },
   hamburgerLine: (open, i) => ({
-    display: "block", width: 18, height: 2,
-    background: "#fff", borderRadius: 2,
+    display: "block",
+    width: 18,
+    height: 2,
+    background: "#fff",
+    borderRadius: 2,
     transition: "transform 0.2s, opacity 0.2s",
     transform:
-      open && i === 0 ? "rotate(45deg) translate(5px, 5px)"
-      : open && i === 2 ? "rotate(-45deg) translate(5px, -5px)"
-      : "none",
+      open && i === 0
+        ? "rotate(45deg) translate(5px, 5px)"
+        : open && i === 2
+          ? "rotate(-45deg) translate(5px, -5px)"
+          : "none",
     opacity: open && i === 1 ? 0 : 1,
   }),
   mobileMenu: {
-    position: "fixed", top: 80, left: 0, right: 0,
-    background: CREAM, display: "flex", flexDirection: "column",
-    gap: 0, padding: "8px 0 24px",
-    boxShadow: "0 8px 32px rgba(0,0,0,0.1)", zIndex: 99,
+    position: "fixed",
+    top: 80,
+    left: 0,
+    right: 0,
+    background: CREAM,
+    display: "flex",
+    flexDirection: "column",
+    gap: 0,
+    padding: "8px 0 24px",
+    boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+    zIndex: 99,
   },
   mobileLink: {
-    color: DARK, textDecoration: "none", padding: "14px 48px",
-    fontSize: 15, fontFamily: "'Poppins', sans-serif",
+    color: DARK,
+    textDecoration: "none",
+    padding: "14px 48px",
+    fontSize: 15,
+    fontFamily: "'Poppins', sans-serif",
     borderBottom: `1px solid ${BORDER}`,
   },
   mobileCta: {
-    color: "#fff", background: ACCENT, textDecoration: "none",
-    padding: "14px 48px", fontSize: 15,
-    fontFamily: "'Poppins', sans-serif", fontWeight: 600,
-    display: "block", textAlign: "center",
-    borderRadius: 8, margin: "16px 48px 0",
+    color: "#fff",
+    background: ACCENT,
+    textDecoration: "none",
+    padding: "14px 48px",
+    fontSize: 15,
+    fontFamily: "'Poppins', sans-serif",
+    fontWeight: 600,
+    display: "block",
+    textAlign: "center",
+    borderRadius: 8,
+    margin: "16px 48px 0",
   },
 
   /* ── Hero ── */
   hero: {
-    height: "760px", maxHeight: "760px",
+    height: "760px",
+    maxHeight: "760px",
     background: "#ffffff",
-    display: "flex", alignItems: "flex-start",
-    position: "relative", overflow: "hidden", paddingTop: 80,
+    display: "flex",
+    alignItems: "flex-start",
+    position: "relative",
+    overflow: "hidden",
+    paddingTop: 80,
   },
   watermarkTop: {
-    position: "absolute", top: "6%", left: "6%",
-    fontFamily: "'Poppins', sans-serif", fontWeight: 900,
+    position: "absolute",
+    top: "6%",
+    left: "6%",
+    fontFamily: "'Poppins', sans-serif",
+    fontWeight: 900,
     fontSize: "clamp(36px, 6.5vw, 92px)",
     color: "transparent",
     WebkitTextStroke: "1.2px rgba(15,43,43,0.12)",
-    letterSpacing: "-2px", whiteSpace: "nowrap",
-    userSelect: "none", pointerEvents: "none", zIndex: 0,
+    letterSpacing: "-2px",
+    whiteSpace: "nowrap",
+    userSelect: "none",
+    pointerEvents: "none",
+    zIndex: 0,
   },
   watermarkBottom: {
-    position: "absolute", bottom: "8%", left: "18%",
-    fontFamily: "'Poppins', sans-serif", fontWeight: 900,
+    position: "absolute",
+    bottom: "8%",
+    left: "18%",
+    fontFamily: "'Poppins', sans-serif",
+    fontWeight: 900,
     fontSize: "clamp(36px, 6.5vw, 92px)",
     color: "transparent",
     WebkitTextStroke: "1.2px rgba(15,43,43,0.12)",
-    letterSpacing: "-2px", whiteSpace: "nowrap",
-    userSelect: "none", pointerEvents: "none", zIndex: 0,
+    letterSpacing: "-2px",
+    whiteSpace: "nowrap",
+    userSelect: "none",
+    pointerEvents: "none",
+    zIndex: 0,
   },
   heroLeft: {
     flex: "0 0 60%",
-    display: "flex", flexDirection: "column", justifyContent: "flex-start",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
     padding: "100px 64px 80px 96px",
-    position: "relative", zIndex: 2, maxWidth: 920,
+    position: "relative",
+    zIndex: 2,
+    maxWidth: 920,
   },
   greeting: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 34, fontWeight: 700, color: DARK, marginBottom: 20,
+    fontSize: 34,
+    fontWeight: 700,
+    color: DARK,
+    marginBottom: 20,
   },
   wave: { fontSize: 20 },
   accentName: { color: ACCENT, fontWeight: 600 },
   heroHeadline: {
     fontFamily: "'Inter', sans-serif",
     fontSize: "clamp(28px, 3.6vw, 56px)",
-    fontWeight: 800, lineHeight: 1.08,
-    color: DARK, letterSpacing: "-2px", marginBottom: 18,
+    fontWeight: 800,
+    lineHeight: 1.08,
+    color: DARK,
+    letterSpacing: "-2px",
+    marginBottom: 18,
   },
   accentUnderline: {
-    color: ACCENT, textDecoration: "underline",
-    textDecorationColor: ACCENT, textDecorationThickness: 3, textUnderlineOffset: 5,
+    color: ACCENT,
+    textDecoration: "underline",
+    textDecorationColor: ACCENT,
+    textDecorationThickness: 3,
+    textUnderlineOffset: 5,
   },
   heroSub: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 12, color: MUTED, lineHeight: 1.6, marginBottom: 24, maxWidth: 560,
+    fontSize: 12,
+    color: MUTED,
+    lineHeight: 1.6,
+    marginBottom: 24,
+    maxWidth: 560,
   },
-  stackRow: { display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 32 },
-  stackLabel: { fontFamily: "'Poppins', sans-serif", fontSize: 11, color: MUTED },
+  stackRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+    flexWrap: "wrap",
+    marginBottom: 32,
+  },
+  stackLabel: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 11,
+    color: MUTED,
+  },
   stackChip: {
-    fontFamily: "'Poppins', sans-serif", fontSize: 11,
-    padding: "4px 10px", borderRadius: 5,
-    border: `1px solid ${BORDER}`, background: "#fff", color: DARK,
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 11,
+    padding: "4px 10px",
+    borderRadius: 5,
+    border: `1px solid ${BORDER}`,
+    background: "#fff",
+    color: DARK,
   },
-  ctaRow: { display: "flex", gap: 20, flexWrap: "wrap", marginTop: 18, marginBottom: 40 },
+  ctaRow: {
+    display: "flex",
+    gap: 20,
+    flexWrap: "wrap",
+    marginTop: 18,
+    marginBottom: 40,
+  },
   btnPrimary: {
-    background: ACCENT, color: "#fff",
-    padding: "16px 36px", borderRadius: 10,
-    fontFamily: "'Poppins', sans-serif", fontSize: 15, fontWeight: 700,
+    background: ACCENT,
+    color: "#fff",
+    padding: "16px 36px",
+    borderRadius: 10,
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 15,
+    fontWeight: 700,
     textDecoration: "none",
-    boxShadow: "0 12px 36px rgba(255,138,61,0.18)", display: "inline-block",
+    boxShadow: "0 12px 36px rgba(255,138,61,0.18)",
+    display: "inline-block",
   },
   btnGhost: {
-    background: "transparent", color: ACCENT,
-    padding: "14px 34px", borderRadius: 10,
-    fontFamily: "'Poppins', sans-serif", fontSize: 15, fontWeight: 600,
-    textDecoration: "none", border: `2px solid ${ACCENT}`, display: "inline-block",
+    background: "transparent",
+    color: ACCENT,
+    padding: "14px 34px",
+    borderRadius: 10,
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 15,
+    fontWeight: 600,
+    textDecoration: "none",
+    border: `2px solid ${ACCENT}`,
+    display: "inline-block",
   },
-  statsRow: { display: "flex", gap: 20, flexWrap: "wrap" },
-  statCard: { display: "flex", flexDirection: "column", gap: 2 },
-  statNum: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: 32, fontWeight: 800, color: DARK, letterSpacing: -1,
-  },
-  statLabel: { fontFamily: "'Poppins', sans-serif", fontSize: 12, color: MUTED },
+
   heroRight: {
-    flex: "0 0 40%", position: "relative",
-    display: "flex", alignItems: "center", justifyContent: "center",
-    height: "100%", overflow: "hidden", zIndex: 1,
+    flex: "0 0 40%",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    overflow: "hidden",
+    zIndex: 1,
   },
   heroPhoto: {
-    width: "100%", maxHeight: "100%",
-    objectFit: "contain", objectPosition: "center",
-    display: "block", position: "relative", boxShadow: "none",
+    width: "100%",
+    maxHeight: "100%",
+    objectFit: "contain",
+    objectPosition: "center",
+    display: "block",
+    position: "relative",
+    boxShadow: "none",
   },
   availBadge: {
-    position: "absolute", bottom: 32, left: -20,
-    background: "#fff", borderRadius: 100, padding: "10px 20px",
-    fontFamily: "'Poppins', sans-serif", fontSize: 13, fontWeight: 600, color: DARK,
+    position: "absolute",
+    bottom: 32,
+    left: -20,
+    background: "#fff",
+    borderRadius: 100,
+    padding: "10px 20px",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 13,
+    fontWeight: 600,
+    color: DARK,
     boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-    display: "flex", alignItems: "center", gap: 8, whiteSpace: "nowrap", zIndex: 2,
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+    whiteSpace: "nowrap",
+    zIndex: 2,
   },
   availDot: {
-    width: 8, height: 8, borderRadius: "50%", background: "#22c55e",
-    display: "inline-block", animation: "pulse 2s ease-in-out infinite",
+    width: 8,
+    height: 8,
+    borderRadius: "50%",
+    background: "#22c55e",
+    display: "inline-block",
+    animation: "pulse 2s ease-in-out infinite",
   },
 
   /* ── Section commons ── */
   sectionEyebrow: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 15, color: ACCENT, letterSpacing: "2px",
-    textTransform: "uppercase", marginBottom: 8,
+    fontSize: 15,
+    color: ACCENT,
+    letterSpacing: "2px",
+    textTransform: "uppercase",
+    marginBottom: 8,
   },
   sectionTitle: {
     fontFamily: "'Inter', sans-serif",
     fontSize: "clamp(32px, 4vw, 48px)",
-    fontWeight: 800, color: DARK, letterSpacing: -1, marginBottom: 24,
+    fontWeight: 800,
+    color: DARK,
+    letterSpacing: -1,
+    marginBottom: 24,
   },
 
   /* ── About ── */
   about: { background: "#fff", padding: "80px 64px", width: "100%" },
   aboutInner: { width: "100%", maxWidth: "none" },
   aboutPanel: {
-    display: "grid", gridTemplateColumns: "1fr 1px 1fr",
-    gap: 32, alignItems: "stretch",
+    display: "grid",
+    gridTemplateColumns: "1fr 1px 1fr",
+    gap: 32,
+    alignItems: "stretch",
   },
   headingPanel: {
-    display: "grid", gridTemplateColumns: "1fr 1fr",
-    gap: 32, alignItems: "baseline", marginBottom: 24,
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 32,
+    alignItems: "baseline",
+    marginBottom: 24,
   },
   skillsColumn: { display: "flex", flexDirection: "column", gap: 24 },
   skillsGrid: {
-    display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    display: "grid",
+    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
     gap: "28px 32px",
   },
   aboutSubheading: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: 22, fontWeight: 700, color: DARK, lineHeight: 1.2, marginBottom: 24,
+    fontSize: 22,
+    fontWeight: 700,
+    color: DARK,
+    lineHeight: 1.2,
+    marginBottom: 24,
   },
   sectionDivider: {
-    width: 1, background: "rgba(15,23,42,0.12)", borderRadius: 1, alignSelf: "stretch",
+    width: 1,
+    background: "rgba(15,23,42,0.12)",
+    borderRadius: 1,
+    alignSelf: "stretch",
   },
   aboutColumn: { display: "flex", flexDirection: "column", gap: 16 },
   aboutText: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 16, color: MUTED, lineHeight: 1.8, marginBottom: 0,
+    fontSize: 16,
+    color: MUTED,
+    lineHeight: 1.8,
+    marginBottom: 0,
   },
   skillIcon: { width: 72, height: 72, display: "block", objectFit: "contain" },
 
   /* ── Projects ── */
   projects: { background: CREAM, padding: "80px 64px" },
-  projectsContainer: { display: "flex", flexDirection: "column", gap: 80, marginTop: 24 },
+  projectsContainer: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 80,
+    marginTop: 24,
+  },
   projectShowcase: {
-    display: "flex", alignItems: "stretch", gap: 48,
-    borderRadius: 20, overflow: "hidden", transition: "transform 0.3s ease",
+    display: "flex",
+    alignItems: "stretch",
+    gap: 48,
+    borderRadius: 20,
+    overflow: "hidden",
+    transition: "transform 0.3s ease",
   },
   projectImageContainer: {
-    flex: "1 1 35%", minWidth: 0,
-    position: "relative", height: 420, overflow: "hidden", borderRadius: 16,
+    flex: "1 1 35%",
+    minWidth: 0,
+    position: "relative",
+    height: 420,
+    overflow: "hidden",
+    borderRadius: 16,
   },
   projectImage: {
-    width: "100%", height: "100%",
-    objectFit: "cover", objectPosition: "center", transition: "transform 0.3s ease",
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    objectPosition: "center",
+    transition: "transform 0.3s ease",
   },
   projectImageOverlay: {
-    position: "absolute", inset: 0,
-    display: "flex", alignItems: "center", justifyContent: "center",
-    background: "rgba(15,43,43,0.3)", backdropFilter: "blur(2px)",
-    opacity: 0, transition: "opacity 0.3s ease",
+    position: "absolute",
+    inset: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "rgba(15,43,43,0.3)",
+    backdropFilter: "blur(2px)",
+    opacity: 0,
+    transition: "opacity 0.3s ease",
   },
   projectEmoji: { fontSize: 64 },
   projectContentContainer: {
-    flex: "1 1 65%", minWidth: 0,
-    display: "flex", flexDirection: "column", justifyContent: "center",
+    flex: "1 1 65%",
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
     padding: "40px 48px",
   },
   projectTags: { display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" },
   projectTag: {
-    fontFamily: "'Poppins', sans-serif", fontSize: 11,
-    padding: "6px 14px", borderRadius: 6,
-    background: ACCENT_LIGHT, border: `1px solid rgba(224,124,42,0.3)`,
-    color: ACCENT, fontWeight: 600,
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 11,
+    padding: "6px 14px",
+    borderRadius: 6,
+    background: ACCENT_LIGHT,
+    border: `1px solid rgba(224,124,42,0.3)`,
+    color: ACCENT,
+    fontWeight: 600,
   },
   projectName: {
     fontFamily: "'Inter', sans-serif",
     fontSize: "clamp(28px, 4vw, 42px)",
-    fontWeight: 800, color: DARK, marginBottom: 16, letterSpacing: -1,
+    fontWeight: 800,
+    color: DARK,
+    marginBottom: 16,
+    letterSpacing: -1,
   },
   projectDesc: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 16, color: MUTED, lineHeight: 1.7, marginBottom: 12, overflowWrap: "break-word",
+    fontSize: 16,
+    color: MUTED,
+    lineHeight: 1.7,
+    marginBottom: 12,
+    overflowWrap: "break-word",
   },
   projectDetails: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 14, color: MUTED, lineHeight: 1.7,
-    marginBottom: 32, opacity: 0.85, overflowWrap: "break-word",
+    fontSize: 14,
+    color: MUTED,
+    lineHeight: 1.7,
+    marginBottom: 32,
+    opacity: 0.85,
+    overflowWrap: "break-word",
   },
-  projectFooter: { display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" },
+  projectFooter: {
+    display: "flex",
+    alignItems: "center",
+    gap: 24,
+    flexWrap: "wrap",
+  },
   btnMoreDetails: {
-    background: ACCENT, color: "#fff",
-    padding: "14px 32px", borderRadius: 10,
-    fontFamily: "'Poppins', sans-serif", fontSize: 15, fontWeight: 700,
+    background: ACCENT,
+    color: "#fff",
+    padding: "14px 32px",
+    borderRadius: 10,
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 15,
+    fontWeight: 700,
     textDecoration: "none",
     boxShadow: "0 12px 36px rgba(255,138,61,0.22)",
-    display: "inline-block", border: "none", cursor: "pointer",
+    display: "inline-block",
+    border: "none",
+    cursor: "pointer",
   },
-  projectStack: { fontFamily: "'Poppins', sans-serif", fontSize: 12, color: MUTED, fontWeight: 500 },
+  projectStack: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 12,
+    color: MUTED,
+    fontWeight: 500,
+  },
 
   /* ── Services ── */
   services: { background: "#fff", padding: "80px 64px" },
   servicesGrid: {
-    display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: 16, marginTop: 8,
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: 16,
+    marginTop: 8,
   },
   serviceCard: {
-    background: CREAM, border: `1px solid ${BORDER}`,
-    borderRadius: 14, padding: "24px 20px",
-    transition: "border-color 0.2s, transform 0.2s", cursor: "default",
+    background: CREAM,
+    border: `1px solid ${BORDER}`,
+    borderRadius: 14,
+    padding: "24px 20px",
+    transition: "border-color 0.2s, transform 0.2s",
+    cursor: "default",
   },
   serviceIcon: { fontSize: 26, marginBottom: 14 },
   serviceName: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: 16, fontWeight: 700, color: DARK, marginBottom: 8,
+    fontSize: 16,
+    fontWeight: 700,
+    color: DARK,
+    marginBottom: 8,
   },
-  serviceDesc: { fontFamily: "'Poppins', sans-serif", fontSize: 13, color: MUTED, lineHeight: 1.65 },
+  serviceDesc: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 13,
+    color: MUTED,
+    lineHeight: 1.65,
+  },
 
   /* ── Education ── */
   education: { background: "#fff", padding: "80px 64px", color: DARK },
   timelineContainer: { position: "relative", maxWidth: 900, margin: "0 auto" },
   timelineLine: {
-    position: "absolute", left: "50%", top: 24, bottom: 0,
-    width: 2, background: BORDER, transform: "translateX(-50%)", zIndex: 1,
+    position: "absolute",
+    left: "50%",
+    top: 24,
+    bottom: 0,
+    width: 2,
+    background: BORDER,
+    transform: "translateX(-50%)",
+    zIndex: 1,
   },
   timelineItem: {
-    position: "relative", marginBottom: 48,
-    display: "flex", justifyContent: "space-between", alignItems: "flex-start",
+    position: "relative",
+    marginBottom: 48,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
   },
   timelineDot: {
-    position: "absolute", width: 12, height: 12,
-    borderRadius: "50%", background: ACCENT, top: 6, zIndex: 2,
+    position: "absolute",
+    width: 12,
+    height: 12,
+    borderRadius: "50%",
+    background: ACCENT,
+    top: 6,
+    zIndex: 2,
   },
   educationContent: { flex: 1, paddingTop: 0 },
   eduYear: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 12, fontWeight: 700, color: ACCENT,
-    letterSpacing: 0.5, marginBottom: 6, textTransform: "uppercase",
+    fontSize: 12,
+    fontWeight: 700,
+    color: ACCENT,
+    letterSpacing: 0.5,
+    marginBottom: 6,
+    textTransform: "uppercase",
   },
   eduTitle: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 18, fontWeight: 700, color: DARK, marginBottom: 4,
+    fontSize: 18,
+    fontWeight: 700,
+    color: DARK,
+    marginBottom: 4,
   },
-  eduInstitution: { fontFamily: "'Poppins', sans-serif", fontSize: 14, color: MUTED, marginBottom: 12 },
+  eduInstitution: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 14,
+    color: MUTED,
+    marginBottom: 12,
+  },
   eduDesc: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 14, color: "rgba(0,0,0,0.7)", lineHeight: 1.65, marginBottom: 12,
+    fontSize: 14,
+    color: "rgba(0,0,0,0.7)",
+    lineHeight: 1.65,
+    marginBottom: 12,
   },
   viewCertificate: {
-    display: "inline-flex", alignItems: "center", gap: 6,
-    color: ACCENT, textDecoration: "none",
-    fontFamily: "'Poppins', sans-serif", fontSize: 13, fontWeight: 600,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    color: ACCENT,
+    textDecoration: "none",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 13,
+    fontWeight: 600,
   },
   certIcon: { fontSize: 14 },
 
@@ -972,11 +1347,18 @@ const styles = {
 
   /* ── Footer ── */
   footer: {
-    background: "#fff", padding: "20px 64px",
-    display: "flex", alignItems: "center", justifyContent: "space-between",
+    background: "#fff",
+    padding: "20px 64px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
     borderTop: `1px solid ${BORDER}`,
   },
-  footerText: { fontFamily: "'Poppins', sans-serif", fontSize: 11, color: MUTED },
+  footerText: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 11,
+    color: MUTED,
+  },
 };
 
 /* ══════════════════════════════════════════
@@ -1034,6 +1416,119 @@ function FontLoader() {
   return null;
 }
 
+/* ── AboutMe styles ── */
+const aboutMeStyles = {
+  section: {
+    background: "#fff",
+    padding: "100px 96px",
+    overflow: "hidden",
+  },
+  inner: {
+    display: "flex",
+    alignItems: "center",
+    gap: 72,
+    maxWidth: 1200,
+    margin: "0 auto",
+  },
+
+  /* Left col */
+  textCol: {
+    flex: "0 0 65%",
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
+  },
+  heading: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "clamp(34px, 4vw, 52px)",
+    fontWeight: 900,
+    color: DARK,
+    letterSpacing: "-2px",
+    lineHeight: 1.05,
+    marginBottom: 8,
+  },
+  accentText: {
+    color: ACCENT,
+  },
+  lead: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 17,
+    color: DARK,
+    lineHeight: 1.65,
+    fontWeight: 500,
+  },
+  body: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 15,
+    color: MUTED,
+    lineHeight: 1.8,
+  },
+  pillsRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: 0,
+    marginTop: 4,
+  },
+ pill: {
+  fontFamily: "'Poppins', sans-serif",
+  fontSize: 14,
+  fontWeight: 400,
+  color: ACCENT,
+  whiteSpace: "nowrap",
+},
+  statsRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: 28,
+    marginTop: 8,
+    paddingTop: 24,
+    borderTop: `1px solid ${BORDER}`,
+  },
+  stat: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 3,
+  },
+  statNum: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: 28,
+    fontWeight: 900,
+    color: DARK,
+    letterSpacing: -1,
+  },
+  statLabel: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 11,
+    color: MUTED,
+    fontWeight: 500,
+  },
+  statDivider: {
+    width: 1,
+    height: 40,
+    background: BORDER,
+    flexShrink: 0,
+  },
+
+  /* Right col */
+  imageCol: {
+    flex: "0 0 35%",
+    position: "relative",
+  },
+  imageWrap: {
+    position: "relative",
+    borderRadius: 24,
+    overflow: "visible",
+  },
+  photo: {
+    width: "100%",
+    borderRadius: 24,
+    display: "block",
+    position: "relative",
+    zIndex: 1,
+  },
+};
+
 /* ══════════════════════════════════════════
    ROOT EXPORT
 ══════════════════════════════════════════ */
@@ -1045,9 +1540,9 @@ export default function Portfolio() {
       <main>
         <Hero />
         <Projects />
-        <Services />
+        <AboutMe />
         <Education />
-        <About />
+        <Services />
         <Contact />
       </main>
       <Footer />
