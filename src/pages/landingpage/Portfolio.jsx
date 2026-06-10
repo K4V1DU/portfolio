@@ -1266,10 +1266,10 @@ export default function Portfolio() {
       <Nav />
       <main>
         <Hero />
-        <About />
         <Projects />
         <Services />
         <Education />
+        <About />
         <Contact />
       </main>
       <Footer />
