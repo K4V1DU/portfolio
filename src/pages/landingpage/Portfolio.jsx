@@ -92,13 +92,22 @@ const EDUCATION = [
 
 /* ── Contact info items ── */
 const CONTACT_INFO = [
-  { icon: "🐙", text: "K4V1DU", href: "https://github.com/K4V1DU" },
   {
-    icon: "💼",
+    icon: "/images/icon23.jpg",
     text: "kavidu-purnamal",
     href: "https://linkedin.com/in/kavidu-purnamal",
   },
-  { icon: "📞", text: "+94 715 294 616", href: "tel:+94715294616" },
+  {
+    icon: "/images/icon16.jpg",
+    text: "K4V1DU",
+    href: "https://github.com/K4V1DU",
+  },
+
+  {
+    icon: "/images/icon24.jpg",
+    text: "+94 715 294 616",
+    href: "tel:+94715294616",
+  },
 ];
 
 /* ── Animated counter hook ── */
@@ -408,8 +417,7 @@ function Services() {
   return (
     <section id="services" style={styles.services}>
       <div style={servicesLayoutStyles.wrapper}>
-
-        {/* LEFT — sticky */}
+        {/* LEFT — sticky centered */}
         <div style={servicesLayoutStyles.leftCol}>
           <div style={styles.sectionEyebrow}>What I Offer</div>
           <h2 style={servicesLayoutStyles.title}>
@@ -423,9 +431,70 @@ function Services() {
             clear communication, and a focus on what actually matters: shipping
             something that works.
           </p>
-          <a href="#contact" style={servicesLayoutStyles.cta}>
-            Start a Project →
-          </a>
+
+          {/* ── Tech icons ── */}
+          <div style={servicesLayoutStyles.iconsGrid}>
+            <img
+              src="/images/icon1.png"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon6.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon3.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon2.png"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon12.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon13.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon9.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon8.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon7.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon15.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon16.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+            <img
+              src="/images/icon17.jpg"
+              alt="skill"
+              style={servicesLayoutStyles.icon}
+            />
+          </div>
         </div>
 
         {/* RIGHT — scrollable cards */}
@@ -462,14 +531,18 @@ function Services() {
               <div style={servicesLayoutStyles.cardDivider} />
               <p style={servicesLayoutStyles.cardDesc}>{s.desc}</p>
               <div style={servicesLayoutStyles.cardTags}>
-                {s.tags.map((t) => (
-                  <span key={t} style={servicesLayoutStyles.cardTag}>{t}</span>
+                {s.tags.map((t, i) => (
+                  <span key={t} style={servicesLayoutStyles.cardTag}>
+                    {t}
+                    {i < s.tags.length - 1 && (
+                      <span style={{ margin: "0 6px", opacity: 0.5 }}>·</span>
+                    )}
+                  </span>
                 ))}
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
@@ -515,10 +588,6 @@ function Education() {
   );
 }
 
-/* ══════════════════════════════════════════
-   CONTACT — redesigned to match screenshot
-   (orange accent · white background)
-══════════════════════════════════════════ */
 function Contact() {
   const [emailHovered, setEmailHovered] = useState(false);
   const [linkedinHovered, setLinkedinHovered] = useState(false);
@@ -534,13 +603,9 @@ function Contact() {
 
         {/* ── Massive display headline ── */}
         <h2 style={styles.contactHeadline}>
-          Let's Build
+          Let's Build Something
           <br />
-          Something
-          <br />
-          Amazing
-          <br />
-          Together
+          Amazing Together
         </h2>
 
         {/* ── Subtitle ── */}
@@ -552,7 +617,7 @@ function Contact() {
         {/* ── CTA buttons ── */}
         <div style={styles.contactBtnsRow}>
           <a
-            href="mailto:you@email.com"
+            href="mailto:kavidupurnamal2001@gmail.com"
             style={{
               ...styles.contactBtnFilled,
               ...(emailHovered ? styles.contactBtnFilledHover : {}),
@@ -560,11 +625,20 @@ function Contact() {
             onMouseEnter={() => setEmailHovered(true)}
             onMouseLeave={() => setEmailHovered(false)}
           >
-            <span style={styles.contactBtnIcon}>✉️</span>
+            <img
+              src="/images/icon24.png"
+              alt=""
+              style={{
+                width: 20,
+                height: 20,
+                objectFit: "contain",
+                verticalAlign: "middle",
+              }}
+            />
             Send Email
           </a>
           <a
-            href="#"
+            href="https://linkedin.com/in/kavidu-purnamal"
             style={{
               ...styles.contactBtnOutline,
               ...(linkedinHovered ? styles.contactBtnOutlineHover : {}),
@@ -585,7 +659,7 @@ function Contact() {
               style={styles.contactInfoItem}
               className="contact-info-link"
             >
-              <span style={styles.contactInfoIcon}>{icon}</span>
+              <img src={icon} alt="" style={styles.contactInfoIcon} />
               <span>{text}</span>
             </a>
           ))}
@@ -612,53 +686,62 @@ function AboutMe() {
   return (
     <section id="about-me" style={aboutMeStyles.section}>
       <div style={aboutMeStyles.inner}>
+        {/* LEFT: photo — 35% */}
+        <div style={aboutMeStyles.imageCol}>
+          <div style={aboutMeStyles.imageWrap}>
+            <img
+              src="/images/photo9.png"
+              alt="Kavidu Purnamal"
+              style={aboutMeStyles.photo}
+            />
+          </div>
+        </div>
 
-  {/* LEFT: photo — 35% */}
-  <div style={aboutMeStyles.imageCol}>
-    <div style={aboutMeStyles.imageWrap}>
-      <img
-        src="/images/photo9.png"
-        alt="Kavidu Purnamal"
-        style={aboutMeStyles.photo}
-      />
-    </div>
-  </div>
-
-  {/* RIGHT: text content — 65% */}
-  <div style={aboutMeStyles.textCol}>
-    <div style={styles.sectionEyebrow}>Who I Am</div>
-    <h2 style={aboutMeStyles.heading}>
-      Fast to learn.
-      <br />
-      <span style={aboutMeStyles.accentText}>Built to deliver.</span>
-    </h2>
-    <p style={aboutMeStyles.lead}>
-      I'm <strong>Kavidu Purnamal</strong>, a full-stack developer and SLIIT student
-      who bridges complex backend systems with clean, intuitive frontends.
-    </p>
-    <p style={aboutMeStyles.body}>
-      With 3+ years deep in the MERN stack, I've built everything from boarding rental
-      platforms to developer productivity tools. What drives me isn't just shipping
-      code — it's building things people enjoy using.
-    </p>
-    <p style={aboutMeStyles.body}>
-      I absorb new technologies fast, write clean maintainable code, and care deeply
-      about performance and accessibility. Whether it's a startup MVP or a polished
-      SaaS product, I bring the same level of focus to every project.
-    </p>
-    <div style={aboutMeStyles.pillsRow}>
-      {["MongoDB", "Express.js", "React", "Node.js", "REST APIs", "UI/UX"].map((tag, index, arr) => (
-        <span key={tag}>
-          <span style={aboutMeStyles.pill}>{tag}</span>
-          {index < arr.length - 1 && (
-            <span style={{ ...aboutMeStyles.pill, padding: "0 6px" }}> · </span>
-          )}
-        </span>
-      ))}
-    </div>
-  </div>
-
-</div>
+        {/* RIGHT: text content — 65% */}
+        <div style={aboutMeStyles.textCol}>
+          <div style={styles.sectionEyebrow}>Who I Am</div>
+          <h2 style={aboutMeStyles.heading}>
+            Fast to learn.
+            <br />
+            <span style={aboutMeStyles.accentText}>Built to deliver.</span>
+          </h2>
+          <p style={aboutMeStyles.lead}>
+  Hey, I'm Kavidu Purnamal, a passionate full-stack developer and SLIIT student
+who loves turning ideas into clean, intuitive web experiences.
+</p>
+          <p style={aboutMeStyles.body}>
+            With 3+ years deep in the MERN stack, I've built everything from dynamic web
+applications to developer productivity tools. What drives me isn't just shipping
+code. It's building things people enjoy using.
+          </p>
+          <p style={aboutMeStyles.body}>
+            I absorb new technologies fast, write clean maintainable code, and
+            care deeply about performance and accessibility. Whether it's a
+            startup MVP or a polished SaaS product, I bring the same level of
+            focus to every project.
+          </p>
+          <div style={aboutMeStyles.pillsRow}>
+            {[
+              "MongoDB",
+              "Express.js",
+              "React",
+              "Node.js",
+              "REST APIs",
+              "UI/UX",
+            ].map((tag, index, arr) => (
+              <span key={tag}>
+                <span style={aboutMeStyles.pill}>{tag}</span>
+                {index < arr.length - 1 && (
+                  <span style={{ ...aboutMeStyles.pill, padding: "0 6px" }}>
+                    {" "}
+                    ·{" "}
+                  </span>
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -1160,7 +1243,7 @@ const styles = {
   },
 
   /* ── Services ── */
-  services: { background: "#fff", padding: "80px 64px" },
+  services: { background: "#fff", padding: "0 64px 80px" },
   servicesGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
@@ -1303,7 +1386,7 @@ const styles = {
   /* massive headline */
   contactHeadline: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: "clamp(56px, 9vw, 108px)",
+    fontSize: "clamp(36px, 5vw, 64px)",
     fontWeight: 900,
     color: DARK,
     letterSpacing: "-4px",
@@ -1393,8 +1476,11 @@ const styles = {
     transition: "color 0.2s",
   },
   contactInfoIcon: {
-    fontSize: 16,
-    lineHeight: 1,
+    width: 20,
+    height: 20,
+    objectFit: "contain",
+    display: "inline-block",
+    verticalAlign: "middle",
   },
 
   /* ── Footer ── */
@@ -1468,7 +1554,6 @@ function FontLoader() {
   return null;
 }
 
-
 /* ── AboutMe styles ── */
 const aboutMeStyles = {
   section: {
@@ -1504,18 +1589,20 @@ const aboutMeStyles = {
     color: ACCENT,
   },
   lead: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 17,
-    color: DARK,
-    lineHeight: 1.65,
-    fontWeight: 500,
-  },
+  fontFamily: "'Poppins', sans-serif",
+  fontSize: 18,
+  color: MUTED,
+  lineHeight: 1.65,
+  fontWeight: 550,
+  letterSpacing: "-0.3px",
+},
   body: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 15,
-    color: MUTED,
-    lineHeight: 1.8,
-  },
+  fontFamily: "'Poppins', sans-serif",
+  fontSize: 15,
+  color: MUTED,
+  lineHeight: 1.8,
+  textAlign: "justify",
+},
   pillsRow: {
     display: "flex",
     flexWrap: "wrap",
@@ -1523,13 +1610,13 @@ const aboutMeStyles = {
     gap: 0,
     marginTop: 4,
   },
- pill: {
-  fontFamily: "'Poppins', sans-serif",
-  fontSize: 14,
-  fontWeight: 400,
-  color: ACCENT,
-  whiteSpace: "nowrap",
-},
+  pill: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 14,
+    fontWeight: 400,
+    color: ACCENT,
+    whiteSpace: "nowrap",
+  },
   statsRow: {
     display: "flex",
     alignItems: "center",
@@ -1582,25 +1669,25 @@ const aboutMeStyles = {
   },
 };
 
-
 const servicesLayoutStyles = {
   wrapper: {
     display: "flex",
     alignItems: "flex-start",
-    gap: 64,
+    gap: 16,
     maxWidth: 1200,
     margin: "0 auto",
   },
 
-  /* LEFT — sticky */
   leftCol: {
-    flex: "0 0 38%",
+    flex: "0 0 52%",
     position: "sticky",
-    top: 100,
+    top: "calc(50vh - 250px)",
     display: "flex",
     flexDirection: "column",
     gap: 24,
+    alignSelf: "flex-start",
   },
+
   title: {
     fontFamily: "'Inter', sans-serif",
     fontSize: "clamp(32px, 3.5vw, 46px)",
@@ -1609,16 +1696,20 @@ const servicesLayoutStyles = {
     letterSpacing: "-2px",
     lineHeight: 1.08,
   },
+
   accent: {
     color: ACCENT,
   },
+
   desc: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 15,
     color: MUTED,
     lineHeight: 1.8,
-    maxWidth: 380,
+    maxWidth: "95%",
+    textAlign: "justify",
   },
+
   cta: {
     display: "inline-flex",
     alignItems: "center",
@@ -1636,22 +1727,21 @@ const servicesLayoutStyles = {
     marginTop: 8,
   },
 
-  /* RIGHT — scrollable cards */
   rightCol: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
     gap: 20,
   },
+
   card: {
     background: "#fff",
-    border: `1px solid ${BORDER}`,
-    borderRadius: 20,
     padding: "36px 40px",
     display: "flex",
     flexDirection: "column",
     gap: 12,
   },
+
   cardTitle: {
     fontFamily: "'Inter', sans-serif",
     fontSize: 22,
@@ -1659,6 +1749,7 @@ const servicesLayoutStyles = {
     color: DARK,
     letterSpacing: "-0.5px",
   },
+
   cardShort: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 12,
@@ -1667,33 +1758,49 @@ const servicesLayoutStyles = {
     textTransform: "uppercase",
     letterSpacing: "1.5px",
   },
+
   cardDivider: {
     width: "100%",
     height: 1,
     background: BORDER,
     margin: "4px 0",
   },
+
   cardDesc: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 14,
     color: MUTED,
     lineHeight: 1.8,
+    textAlign: "justify",
   },
+
   cardTags: {
     display: "flex",
     flexWrap: "wrap",
-    gap: 8,
+    alignItems: "center",
+    gap: 0,
     marginTop: 8,
   },
+
   cardTag: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 11,
-    fontWeight: 600,
-    color: DARK,
-    background: "#f5f5f5",
-    border: `1px solid ${BORDER}`,
-    borderRadius: 6,
-    padding: "5px 12px",
+    fontSize: 13,
+    fontWeight: 400,
+    color: MUTED,
+  },
+
+  iconsGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(6, 1fr)",
+    gap: 16,
+    marginTop: 8,
+  },
+
+  icon: {
+    width: 48,
+    height: 48,
+    objectFit: "contain",
+    display: "block",
   },
 };
 
@@ -1709,7 +1816,7 @@ export default function Portfolio() {
         <Hero />
         <Projects />
         <AboutMe />
-        <Education />
+
         <Services />
         <Contact />
       </main>
