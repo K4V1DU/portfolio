@@ -92,13 +92,9 @@ const EDUCATION = [
 
 /* ── Contact info items ── */
 const CONTACT_INFO = [
-  { icon: "🐙", text: "K4V1DU", href: "https://github.com/K4V1DU" },
-  {
-    icon: "💼",
-    text: "kavidu-purnamal",
-    href: "https://linkedin.com/in/kavidu-purnamal",
-  },
-  { icon: "📞", text: "+94 715 294 616", href: "tel:+94715294616" },
+  { icon: "/images/icon20.jpg", text: "K4V1DU", href: "https://github.com/K4V1DU" },
+  { icon: "/images/icon20.jpg", text: "kavidu-purnamal", href: "https://linkedin.com/in/kavidu-purnamal" },
+  { icon: "/images/icon20.jpg", text: "+94 715 294 616", href: "tel:+94715294616" },
 ];
 
 /* ── Animated counter hook ── */
@@ -409,7 +405,7 @@ function Services() {
     <section id="services" style={styles.services}>
       <div style={servicesLayoutStyles.wrapper}>
 
-        {/* LEFT — sticky */}
+        {/* LEFT — sticky centered */}
         <div style={servicesLayoutStyles.leftCol}>
           <div style={styles.sectionEyebrow}>What I Offer</div>
           <h2 style={servicesLayoutStyles.title}>
@@ -423,9 +419,22 @@ function Services() {
             clear communication, and a focus on what actually matters: shipping
             something that works.
           </p>
-          <a href="#contact" style={servicesLayoutStyles.cta}>
-            Start a Project →
-          </a>
+
+          {/* ── Tech icons ── */}
+          <div style={servicesLayoutStyles.iconsGrid}>
+            <img src="/images/icon1.png"  alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon6.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon3.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon2.png"  alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon12.jpg" alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon13.jpg" alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon9.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon8.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon7.jpg"  alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon15.jpg" alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon16.jpg" alt="skill" style={servicesLayoutStyles.icon} />
+            <img src="/images/icon17.jpg" alt="skill" style={servicesLayoutStyles.icon} />
+          </div>
         </div>
 
         {/* RIGHT — scrollable cards */}
@@ -462,8 +471,12 @@ function Services() {
               <div style={servicesLayoutStyles.cardDivider} />
               <p style={servicesLayoutStyles.cardDesc}>{s.desc}</p>
               <div style={servicesLayoutStyles.cardTags}>
-                {s.tags.map((t) => (
-                  <span key={t} style={servicesLayoutStyles.cardTag}>{t}</span>
+                {s.tags.map((t, i) => (
+                  <span key={t} style={servicesLayoutStyles.cardTag}>
+                    {t}{i < s.tags.length - 1 && (
+                      <span style={{ margin: "0 6px", opacity: 0.5 }}>·</span>
+                    )}
+                  </span>
                 ))}
               </div>
             </div>
@@ -515,10 +528,7 @@ function Education() {
   );
 }
 
-/* ══════════════════════════════════════════
-   CONTACT — redesigned to match screenshot
-   (orange accent · white background)
-══════════════════════════════════════════ */
+
 function Contact() {
   const [emailHovered, setEmailHovered] = useState(false);
   const [linkedinHovered, setLinkedinHovered] = useState(false);
@@ -585,7 +595,7 @@ function Contact() {
               style={styles.contactInfoItem}
               className="contact-info-link"
             >
-              <span style={styles.contactInfoIcon}>{icon}</span>
+              <img src={icon} alt="" style={styles.contactInfoIcon} />
               <span>{text}</span>
             </a>
           ))}
@@ -594,6 +604,10 @@ function Contact() {
     </section>
   );
 }
+
+
+
+
 
 /* ── Footer ── */
 function Footer() {
@@ -1160,7 +1174,7 @@ const styles = {
   },
 
   /* ── Services ── */
-  services: { background: "#fff", padding: "80px 64px" },
+  services: { background: "#fff", padding: "0 64px 80px" },
   servicesGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
@@ -1393,9 +1407,12 @@ const styles = {
     transition: "color 0.2s",
   },
   contactInfoIcon: {
-    fontSize: 16,
-    lineHeight: 1,
-  },
+  width: 20,
+  height: 20,
+  objectFit: "contain",
+  display: "inline-block",
+  verticalAlign: "middle",
+},
 
   /* ── Footer ── */
   footer: {
@@ -1587,20 +1604,21 @@ const servicesLayoutStyles = {
   wrapper: {
     display: "flex",
     alignItems: "flex-start",
-    gap: 64,
+    gap: 16,
     maxWidth: 1200,
     margin: "0 auto",
   },
 
-  /* LEFT — sticky */
   leftCol: {
-    flex: "0 0 38%",
-    position: "sticky",
-    top: 100,
-    display: "flex",
-    flexDirection: "column",
-    gap: 24,
-  },
+  flex: "0 0 52%",
+  position: "sticky",
+  top: "calc(50vh - 250px)",
+  display: "flex",
+  flexDirection: "column",
+  gap: 24,
+  alignSelf: "flex-start",
+},
+
   title: {
     fontFamily: "'Inter', sans-serif",
     fontSize: "clamp(32px, 3.5vw, 46px)",
@@ -1609,16 +1627,20 @@ const servicesLayoutStyles = {
     letterSpacing: "-2px",
     lineHeight: 1.08,
   },
+
   accent: {
     color: ACCENT,
   },
+
   desc: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 15,
     color: MUTED,
     lineHeight: 1.8,
-    maxWidth: 380,
+    maxWidth: "95%",
+    textAlign: "justify",
   },
+
   cta: {
     display: "inline-flex",
     alignItems: "center",
@@ -1636,22 +1658,21 @@ const servicesLayoutStyles = {
     marginTop: 8,
   },
 
-  /* RIGHT — scrollable cards */
   rightCol: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
     gap: 20,
   },
+
   card: {
     background: "#fff",
-    border: `1px solid ${BORDER}`,
-    borderRadius: 20,
     padding: "36px 40px",
     display: "flex",
     flexDirection: "column",
     gap: 12,
   },
+
   cardTitle: {
     fontFamily: "'Inter', sans-serif",
     fontSize: 22,
@@ -1659,6 +1680,7 @@ const servicesLayoutStyles = {
     color: DARK,
     letterSpacing: "-0.5px",
   },
+
   cardShort: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 12,
@@ -1667,33 +1689,49 @@ const servicesLayoutStyles = {
     textTransform: "uppercase",
     letterSpacing: "1.5px",
   },
+
   cardDivider: {
     width: "100%",
     height: 1,
     background: BORDER,
     margin: "4px 0",
   },
+
   cardDesc: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 14,
     color: MUTED,
     lineHeight: 1.8,
+    textAlign: "justify",
   },
+
   cardTags: {
     display: "flex",
     flexWrap: "wrap",
-    gap: 8,
+    alignItems: "center",
+    gap: 0,
     marginTop: 8,
   },
+
   cardTag: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 11,
-    fontWeight: 600,
-    color: DARK,
-    background: "#f5f5f5",
-    border: `1px solid ${BORDER}`,
-    borderRadius: 6,
-    padding: "5px 12px",
+    fontSize: 13,
+    fontWeight: 400,
+    color: MUTED,
+  },
+
+  iconsGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(6, 1fr)",
+    gap: 16,
+    marginTop: 8,
+  },
+
+  icon: {
+    width: 48,
+    height: 48,
+    objectFit: "contain",
+    display: "block",
   },
 };
 
@@ -1709,7 +1747,7 @@ export default function Portfolio() {
         <Hero />
         <Projects />
         <AboutMe />
-        <Education />
+       
         <Services />
         <Contact />
       </main>
