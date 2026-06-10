@@ -910,7 +910,7 @@ const styles = {
   watermarkBottom: {
     position: "absolute",
     bottom: "8%",
-    left: "18%",
+    left: "40%",
     fontFamily: "'Poppins', sans-serif",
     fontWeight: 900,
     fontSize: "clamp(36px, 6.5vw, 92px)",
@@ -943,7 +943,7 @@ const styles = {
   accentName: { color: ACCENT, fontWeight: 600 },
   heroHeadline: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: "clamp(28px, 3.6vw, 56px)",
+    fontSize: "clamp(26px, 3.5vw, 56px)",
     fontWeight: 800,
     lineHeight: 1.08,
     color: DARK,
@@ -957,14 +957,14 @@ const styles = {
     textDecorationThickness: 3,
     textUnderlineOffset: 5,
   },
-  heroSub: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 12,
-    color: MUTED,
-    lineHeight: 1.6,
-    marginBottom: 24,
-    maxWidth: 560,
-  },
+ heroSub: {
+  fontFamily: "'Poppins', sans-serif",
+  fontSize: 16,
+  color: MUTED,
+  lineHeight: 1.6,
+  marginBottom: 24,
+  maxWidth: 560,
+},
   stackRow: {
     display: "flex",
     alignItems: "center",
