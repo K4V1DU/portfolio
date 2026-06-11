@@ -62,7 +62,7 @@ const PROJECTS = [
     live: "#",
     repo: "#",
     stack: "React · Node.js · PostgreSQL",
-    image: "/images/project3.jpg",
+    image: "/images/project3.png",
   },
 ];
 
@@ -1179,20 +1179,21 @@ const styles = {
     transition: "transform 0.3s ease",
   },
   projectImageContainer: {
-    flex: "1 1 35%",
-    minWidth: 0,
-    position: "relative",
-    height: 420,
-    overflow: "hidden",
-    borderRadius: 16,
-  },
+  flex: "0 0 45%",
+  width: "45%",
+  height: 500,
+  borderRadius: 16,
+  overflow: "hidden",
+  flexShrink: 0,
+},
   projectImage: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    objectPosition: "center",
-    transition: "transform 0.3s ease",
-  },
+  width: "100%",
+  height: "100%",
+  objectFit: "contain",
+  objectPosition: "center",
+  display: "block",
+  transition: "transform 0.3s ease",
+},
   projectImageOverlay: {
     position: "absolute",
     inset: 0,
@@ -1572,7 +1573,7 @@ function FontLoader() {
       }
 
       /* Project image hover */
-      .project-showcase:hover .project-image      { transform: scale(1.05); }
+      
       .project-showcase:hover .project-image-overlay { opacity: 1; }
 
       /* Mobile */
