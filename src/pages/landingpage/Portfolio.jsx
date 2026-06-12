@@ -30,7 +30,7 @@ const SERVICES = [
 const PROJECTS = [
   {
     emoji: "🏠",
-    name: "Boodima",
+    name: "Boodima.lk",
     tags: ["MERN", "Full-Stack", "2024"],
     desc: "A full-stack boarding rental platform connecting tenants with verified local listings — featuring real-time search, location filtering, listing management, and a fully responsive UI.",
     details:
@@ -38,32 +38,32 @@ const PROJECTS = [
     live: "#",
     repo: "#",
     stack: "MongoDB · Express · React · Node",
-    image: "/images/project1.jpg",
+    image: "/images/project4.png",
   },
   {
-    emoji: "⚡",
-    name: "DevLaunch",
-    tags: ["SaaS", "API", "2025"],
-    desc: "A developer productivity platform for bootstrapping and launching side projects fast — with project scaffolding, deployment hooks, and team collaboration built in.",
-    details:
-      "Accelerate your development workflow with intelligent project templates, automated CI/CD pipelines, and real-time team collaboration features.",
-    live: "#",
-    repo: "#",
-    stack: "MERN · REST · JWT",
-    image: "/images/project2.jpg",
-  },
+  emoji: "🎮",
+  name: "GameHub (UI/UX)",
+  tags: ["UI/UX", "Kotlin", "2025"],
+  desc: "A mobile application UI/UX design inspired by the Xbox app — featuring a sleek game library browser, friend activity feed, achievement tracking, and a dark-themed dashboard built natively in Android Studio.",
+  details:
+    "Designed and prototyped entirely in Android Studio using Kotlin. Focused on delivering a console-quality feel on mobile — with smooth navigation, custom components, and an immersive dark UI that mirrors the Xbox ecosystem's visual language.",
+  live: "#",
+  repo: "#",
+  stack: "Kotlin · Android Studio · XML Layouts · Material Design",
+  image: "/images/project3.png",
+},
   {
-    emoji: "🎯",
-    name: "TaskFlow",
-    tags: ["React", "Full-Stack", "2025"],
-    desc: "An intelligent task management and collaboration tool designed for remote teams — with real-time updates, AI-powered task suggestions, and seamless integrations.",
-    details:
-      "Streamline your team's productivity with smart task allocation, progress tracking, and automated workflows that adapt to your project needs.",
-    live: "#",
-    repo: "#",
-    stack: "React · Node.js · PostgreSQL",
-    image: "/images/project3.jpg",
-  },
+  emoji: "🎮",
+  name: "GameHub (UI/UX)",
+  tags: ["UI/UX", "Kotlin", "2025"],
+  desc: "A mobile application UI/UX design inspired by the Xbox app — featuring a sleek game library browser, friend activity feed, achievement tracking, and a dark-themed dashboard built natively in Android Studio.",
+  details:
+    "Designed and prototyped entirely in Android Studio using Kotlin. Focused on delivering a console-quality feel on mobile — with smooth navigation, custom components, and an immersive dark UI that mirrors the Xbox ecosystem's visual language.",
+  live: "#",
+  repo: "#",
+  stack: "Kotlin · Android Studio · XML Layouts · Material Design",
+  image: "/images/project3.png",
+},
 ];
 
 const EDUCATION = [
@@ -1179,20 +1179,21 @@ const styles = {
     transition: "transform 0.3s ease",
   },
   projectImageContainer: {
-    flex: "1 1 35%",
-    minWidth: 0,
-    position: "relative",
-    height: 420,
-    overflow: "hidden",
-    borderRadius: 16,
-  },
+  flex: "0 0 35%",
+  width: "35%",
+  height: 340,
+  borderRadius: 16,
+  overflow: "hidden",
+  flexShrink: 0,
+},
   projectImage: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    objectPosition: "center",
-    transition: "transform 0.3s ease",
-  },
+  width: "100%",
+  height: "100%",
+  objectFit: "contain",
+  objectPosition: "center",
+  display: "block",
+  transition: "transform 0.3s ease",
+},
   projectImageOverlay: {
     position: "absolute",
     inset: 0,
@@ -1572,7 +1573,7 @@ function FontLoader() {
       }
 
       /* Project image hover */
-      .project-showcase:hover .project-image      { transform: scale(1.05); }
+      
       .project-showcase:hover .project-image-overlay { opacity: 1; }
 
       /* Mobile */
