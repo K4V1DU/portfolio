@@ -30,7 +30,7 @@ const SERVICES = [
 const PROJECTS = [
   {
     emoji: "🏠",
-    name: "Boodima",
+    name: "Boodima.lk",
     tags: ["MERN", "Full-Stack", "2024"],
     desc: "A full-stack boarding rental platform connecting tenants with verified local listings — featuring real-time search, location filtering, listing management, and a fully responsive UI.",
     details:
