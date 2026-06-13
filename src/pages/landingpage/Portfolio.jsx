@@ -1,31 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 
+/* ══════════════════════════════════════════
+   CONSTANTS
+══════════════════════════════════════════ */
 const NAV_LINKS = ["Work", "Services", "About", "Blog"];
-
-const STACK = ["MongoDB", "Express.js", "React", "Node.js"];
-
-const SERVICES = [
-  {
-    icon: "🧩",
-    title: "Full-Stack Web Apps",
-    desc: "End-to-end product development — from schema design to deployed React frontend.",
-  },
-  {
-    icon: "🔌",
-    title: "REST API Development",
-    desc: "Clean, documented Node.js & Express APIs with proper auth and error handling.",
-  },
-  {
-    icon: "🎨",
-    title: "UI / UX Engineering",
-    desc: "Modular React components and pixel-perfect, accessible interfaces.",
-  },
-  {
-    icon: "🚀",
-    title: "MVP & Rapid Prototyping",
-    desc: "Fast, focused delivery for startups that need a working product in weeks.",
-  },
-];
 
 const PROJECTS = [
   {
@@ -35,35 +13,24 @@ const PROJECTS = [
     desc: "A full-stack boarding rental platform connecting tenants with verified local listings — featuring real-time search, location filtering, listing management, and a fully responsive UI.",
     details:
       "This platform revolutionizes how students and professionals find accommodation. Built with cutting-edge technology, it provides seamless browsing, secure payments, and verified landlords.",
-    live: "#",
+    live: "https://boodima.lk",
     repo: "#",
     stack: "MongoDB · Express · React · Node",
     image: "/images/project4.png",
   },
   {
-  emoji: "🎮",
-  name: "GameHub (UI/UX)",
-  tags: ["UI/UX", "Kotlin", "2025"],
-  desc: "A mobile application UI/UX design inspired by the Xbox app — featuring a sleek game library browser, friend activity feed, achievement tracking, and a dark-themed dashboard built natively in Android Studio.",
-  details:
-    "Designed and prototyped entirely in Android Studio using Kotlin. Focused on delivering a console-quality feel on mobile — with smooth navigation, custom components, and an immersive dark UI that mirrors the Xbox ecosystem's visual language.",
-  live: "#",
-  repo: "#",
-  stack: "Kotlin · Android Studio · XML Layouts · Material Design",
-  image: "/images/project3.png",
-},
-  {
-  emoji: "🎮",
-  name: "GameHub (UI/UX)",
-  tags: ["UI/UX", "Kotlin", "2025"],
-  desc: "A mobile application UI/UX design inspired by the Xbox app — featuring a sleek game library browser, friend activity feed, achievement tracking, and a dark-themed dashboard built natively in Android Studio.",
-  details:
-    "Designed and prototyped entirely in Android Studio using Kotlin. Focused on delivering a console-quality feel on mobile — with smooth navigation, custom components, and an immersive dark UI that mirrors the Xbox ecosystem's visual language.",
-  live: "#",
-  repo: "#",
-  stack: "Kotlin · Android Studio · XML Layouts · Material Design",
-  image: "/images/project3.png",
-},
+    emoji: "🎮",
+    name: "GameHub (UI/UX)",
+    tags: ["UI/UX", "Kotlin", "2025"],
+    desc: "A mobile application UI/UX design inspired by the Xbox app — featuring a sleek game library browser, friend activity feed, achievement tracking, and a dark-themed dashboard built natively in Android Studio.",
+    details:
+      "Designed and prototyped entirely in Android Studio using Kotlin. Focused on delivering a console-quality feel on mobile — with smooth navigation, custom components, and an immersive dark UI that mirrors the Xbox ecosystem's visual language.",
+    live: "#",
+    repo: "#",
+    stack: "Kotlin · Android Studio · XML Layouts · Material Design",
+    image: "/images/project3.png",
+  },
+  
 ];
 
 const EDUCATION = [
@@ -90,7 +57,6 @@ const EDUCATION = [
   },
 ];
 
-/* ── Contact info items ── */
 const CONTACT_INFO = [
   {
     icon: "/images/icon23.jpg",
@@ -102,13 +68,22 @@ const CONTACT_INFO = [
     text: "K4V1DU",
     href: "https://github.com/K4V1DU",
   },
-
   {
     icon: "/images/icon24.jpg",
     text: "+94 715 294 616",
     href: "tel:+94715294616",
   },
 ];
+
+/* ══════════════════════════════════════════
+   COLORS
+══════════════════════════════════════════ */
+const CREAM = "#ffffff";
+const DARK = "#0f2b2b";
+const ACCENT = "#ff8a3d";
+const ACCENT_LIGHT = "#fff2e6";
+const MUTED = "#6b6f66";
+const BORDER = "rgba(15,43,43,0.08)";
 
 /* ── Animated counter hook ── */
 function useCounter(target, duration = 1800) {
@@ -150,10 +125,13 @@ function StatCard({ value, suffix = "", label }) {
   );
 }
 
-/* ── Nav ── */
+/* ══════════════════════════════════════════
+   NAV — with hamburger menu
+══════════════════════════════════════════ */
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [cvHovered, setCvHovered] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -161,65 +139,124 @@ function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <nav
-      style={{
-        ...styles.nav,
-        background: scrolled ? "rgba(245,241,232,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.06)" : "none",
-      }}
-    >
-      <div style={styles.logo}>
-        <span style={styles.logoText}>
-          Portfolio<span style={styles.logoDot}>.</span>
-        </span>
-      </div>
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 768) setMenuOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
-      <ul style={styles.navLinks}>
-        {NAV_LINKS.map((l) => (
-          <li key={l}>
-            <a href={`#${l.toLowerCase()}`} style={styles.navLink}>
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  return (
+    <>
+      <nav
+        className="nav-bar"
+        style={{
+          ...styles.nav,
+          background: scrolled ? "rgba(255,255,255,0.95)" : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.06)" : "none",
+        }}
+      >
+        <div style={styles.logo}>
+          <span style={styles.logoText}>
+            Portfolio<span style={styles.logoDot}>.</span>
+          </span>
+        </div>
+
+        {/* Desktop nav links */}
+        <ul className="nav-desktop-links" style={styles.navLinks}>
+          {NAV_LINKS.map((l) => (
+            <li key={l}>
+              <a href={`#${l.toLowerCase()}`} style={styles.navLink}>
+                {l}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop download CV button */}
+        <a
+          className="nav-download-btn"
+          href="/cv.pdf"
+          download
+          style={{
+            ...styles.downloadBtn,
+            ...(cvHovered ? styles.downloadBtnHover : {}),
+          }}
+          onMouseEnter={() => setCvHovered(true)}
+          onMouseLeave={() => setCvHovered(false)}
+        >
+          <span style={styles.downloadIcon}>⬇</span>
+          Download CV
+        </a>
+
+        {/* Mobile hamburger button */}
+        <button
+          className="hamburger-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={styles.hamburger}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+        >
+          <span style={styles.hamburgerLine(menuOpen, 0)} />
+          <span style={styles.hamburgerLine(menuOpen, 1)} />
+          <span style={styles.hamburgerLine(menuOpen, 2)} />
+        </button>
+      </nav>
+
+      {/* Mobile slide-down menu */}
+      {menuOpen && (
+        <div style={styles.mobileMenu}>
+          {NAV_LINKS.map((l) => (
+            <a
+              key={l}
+              href={`#${l.toLowerCase()}`}
+              style={styles.mobileLink}
+              onClick={() => setMenuOpen(false)}
+            >
               {l}
             </a>
-          </li>
-        ))}
-      </ul>
-
-      <a
-        href="/cv.pdf"
-        download
-        style={{
-          ...styles.downloadBtn,
-          ...(cvHovered ? styles.downloadBtnHover : {}),
-        }}
-        onMouseEnter={() => setCvHovered(true)}
-        onMouseLeave={() => setCvHovered(false)}
-      >
-        <span style={styles.downloadIcon}>⬇</span>
-        Download CV
-      </a>
-    </nav>
+          ))}
+          <div style={{ padding: "16px 24px 8px" }}>
+            <a
+              href="/cv.pdf"
+              download
+              style={styles.mobileCta}
+              onClick={() => setMenuOpen(false)}
+            >
+              ⬇ Download CV
+            </a>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
-/* ── Hero ── */
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
 function Hero() {
   return (
-    <section id="hero" style={styles.hero}>
-      <div style={styles.watermarkTop} aria-hidden="true">
+    <section id="hero" className="hero-section" style={styles.hero}>
+      <div className="watermark-top" style={styles.watermarkTop} aria-hidden="true">
         FULL STACK DEV
       </div>
-      <div style={styles.watermarkBottom} aria-hidden="true">
-        
-      </div>
+      <div className="watermark-bottom" style={styles.watermarkBottom} aria-hidden="true" />
 
-      <div style={styles.heroLeft}>
+      <div className="hero-left" style={styles.heroLeft}>
         <p style={styles.greeting}>
           Hi, I'm <span style={styles.accentName}>Kavidu Purnamal</span>
         </p>
 
-        <h1 style={styles.heroHeadline}>
+        <h1 className="hero-headline" style={styles.heroHeadline}>
           Great software starts
           <br />
           with a developer
@@ -228,8 +265,7 @@ function Hero() {
         </h1>
 
         <p style={styles.heroSub}>
-          Clean code, thoughtful design, and a passion for building things
-          right.
+          Clean code, thoughtful design, and a passion for building things right.
         </p>
 
         <div
@@ -260,9 +296,7 @@ function Hero() {
                     {s}
                   </span>
                   {index < arr.length - 1 && (
-                    <span
-                      style={{ margin: "0 6px", color: MUTED, opacity: 0.5 }}
-                    >
+                    <span style={{ margin: "0 6px", color: MUTED, opacity: 0.5 }}>
                       ·
                     </span>
                   )}
@@ -273,7 +307,7 @@ function Hero() {
         </div>
       </div>
 
-      <div style={styles.heroRight}>
+      <div className="hero-right" style={styles.heroRight}>
         <img
           src="/images/photo9.png"
           alt="Kavidu Purnamal"
@@ -284,17 +318,19 @@ function Hero() {
   );
 }
 
-/* ── About ── */
+/* ══════════════════════════════════════════
+   ABOUT (original — not rendered but kept)
+══════════════════════════════════════════ */
 function About() {
   return (
-    <section id="about" style={styles.about}>
+    <section id="about" className="about-section" style={styles.about}>
       <div style={styles.aboutInner}>
         <div style={styles.sectionEyebrow}>Who I Am</div>
-        <div style={styles.headingPanel}>
+        <div className="heading-panel" style={styles.headingPanel}>
           <h2 style={styles.sectionTitle}>About Me</h2>
           <h2 style={styles.sectionTitle}>My Skills</h2>
         </div>
-        <div style={styles.aboutPanel}>
+        <div className="about-panel" style={styles.aboutPanel}>
           <div style={styles.aboutColumn}>
             <h3 style={styles.aboutSubheading}>
               Versatile full-stack software engineer delivering enterprise-grade
@@ -308,76 +344,22 @@ function About() {
             <p style={styles.aboutText}>
               What sets me apart is my speed in picking up new technologies and
               my love for coding, whether I am architecting scalable web
-              applications with Node.js or diving into game development. I
-              absorb new concepts quickly, write clean code, and adapt fast to
-              ensure software is built for peak performance.
+              applications with Node.js or diving into game development.
             </p>
           </div>
 
-          <div style={styles.sectionDivider} aria-hidden="true" />
+          <div className="section-divider" style={styles.sectionDivider} aria-hidden="true" />
 
           <div style={styles.skillsColumn}>
-            <div style={styles.skillsGrid}>
-              <img
-                src="/images/icon1.png"
-                alt="Skill icon 1"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon6.jpg"
-                alt="Skill icon 2"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon3.jpg"
-                alt="Skill icon 3"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon2.png"
-                alt="Skill icon 4"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon12.jpg"
-                alt="Skill icon 5"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon13.jpg"
-                alt="Skill icon 6"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon9.jpg"
-                alt="Skill icon 7"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon8.jpg"
-                alt="Skill icon 8"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon7.jpg"
-                alt="Skill icon 9"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon15.jpg"
-                alt="Skill icon 10"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon16.jpg"
-                alt="Skill icon 11"
-                style={styles.skillIcon}
-              />
-              <img
-                src="/images/icon17.jpg"
-                alt="Skill icon 12"
-                style={styles.skillIcon}
-              />
+            <div className="skills-grid" style={styles.skillsGrid}>
+              {[1,6,3,2,12,13,9,8,7,15,16,17].map((n, i) => (
+                <img
+                  key={i}
+                  src={`/images/icon${n}.${[1,2].includes(n) ? "png" : "jpg"}`}
+                  alt={`Skill icon ${i + 1}`}
+                  style={styles.skillIcon}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -386,18 +368,83 @@ function About() {
   );
 }
 
-/* ── Projects ── */
+/* ══════════════════════════════════════════
+   ABOUT ME (rendered version with photo)
+══════════════════════════════════════════ */
+function AboutMe() {
+  return (
+    <section id="about-me" className="about-me-section" style={aboutMeStyles.section}>
+      <div className="about-me-inner" style={aboutMeStyles.inner}>
+
+        {/* LEFT: photo */}
+        <div className="about-me-image-col" style={aboutMeStyles.imageCol}>
+          <div style={aboutMeStyles.imageWrap}>
+            <img
+              src="/images/photo9.png"
+              alt="Kavidu Purnamal"
+              style={aboutMeStyles.photo}
+            />
+          </div>
+        </div>
+
+        {/* RIGHT: text */}
+        <div className="about-me-text-col" style={aboutMeStyles.textCol}>
+          <div style={styles.sectionEyebrow}>Who I Am</div>
+          <h2 style={aboutMeStyles.heading}>
+            Fast to learn.
+            <br />
+            <span style={aboutMeStyles.accentText}>Built to deliver.</span>
+          </h2>
+          <p style={aboutMeStyles.lead}>
+            Hey, I'm Kavidu Purnamal, a passionate full-stack developer and
+            SLIIT student who loves turning ideas into clean, intuitive web
+            experiences.
+          </p>
+          <p style={aboutMeStyles.body}>
+            With 3+ years deep in the MERN stack, I've built everything from
+            dynamic web applications to developer productivity tools. What
+            drives me isn't just shipping code — it's building things people
+            enjoy using.
+          </p>
+          <p style={aboutMeStyles.body}>
+            I absorb new technologies fast, write clean maintainable code, and
+            care deeply about performance and accessibility. Whether it's a
+            startup MVP or a polished SaaS product, I bring the same level of
+            focus to every project.
+          </p>
+          <div style={aboutMeStyles.pillsRow}>
+            {["MongoDB","Express.js","React","Node.js","REST APIs","UI/UX"].map(
+              (tag, index, arr) => (
+                <span key={tag}>
+                  <span style={aboutMeStyles.pill}>{tag}</span>
+                  {index < arr.length - 1 && (
+                    <span style={{ ...aboutMeStyles.pill, padding: "0 6px" }}> · </span>
+                  )}
+                </span>
+              ),
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════
+   PROJECTS
+══════════════════════════════════════════ */
 function Projects() {
   return (
-    <section id="work" style={styles.projects}>
+    <section id="work" className="projects-section" style={styles.projects}>
       <div style={styles.sectionEyebrow}>Selected Work</div>
       <h2 style={styles.sectionTitle}>Projects</h2>
+
       <div style={styles.projectsContainer} className="projects-container">
         {PROJECTS.map((p, index) => {
           const isEven = index % 2 === 0;
           return (
             <div
-              key={p.name}
+              key={p.name + index}
               style={{
                 ...styles.projectShowcase,
                 flexDirection: isEven ? "row" : "row-reverse",
@@ -405,8 +452,8 @@ function Projects() {
               className="project-showcase"
             >
               <div
-                style={styles.projectImageContainer}
                 className="project-image-container"
+                style={styles.projectImageContainer}
               >
                 <img
                   src={p.image}
@@ -444,12 +491,45 @@ function Projects() {
   );
 }
 
+/* ══════════════════════════════════════════
+   SERVICES
+══════════════════════════════════════════ */
 function Services() {
+  const serviceCards = [
+    {
+      title: "Full-Stack Web Apps",
+      short: "End-to-end product development",
+      desc: "I handle everything from database schema design and REST API architecture to a fully deployed React frontend. You get a production-ready application built on the MERN stack, optimized for performance, scalability, and maintainability.",
+      tags: ["MongoDB", "Express", "React", "Node.js"],
+    },
+    {
+      title: "REST API Development",
+      short: "Clean, documented backend APIs",
+      desc: "Well-structured Node.js and Express APIs with proper authentication (JWT/OAuth), role-based access control, input validation, and error handling. Built to be consumed by any frontend or mobile app, with clear documentation included.",
+      tags: ["Node.js", "Express", "JWT", "REST"],
+    },
+    {
+      title: "UI / UX Engineering",
+      short: "Pixel-perfect, accessible interfaces",
+      desc: "Modular, reusable React components built from Figma designs or your own vision. I focus on responsive layouts, smooth interactions, and accessibility — so your product looks great and works for everyone, on every device.",
+      tags: ["React", "CSS", "Figma", "Responsive"],
+    },
+    {
+      title: "MVP & Rapid Prototyping",
+      short: "From idea to working product, fast",
+      desc: "Got a startup idea or side project? I help you validate it quickly with a focused, functional MVP. No bloat, no over-engineering — just the core features shipped fast so you can get real feedback from real users.",
+      tags: ["MERN", "Rapid Build", "Startup", "MVP"],
+    },
+  ];
+
+  const iconNums = [1, 6, 3, 2, 12, 13, 9, 8, 7, 15, 16, 17];
+
   return (
-    <section id="services" style={styles.services}>
-      <div style={servicesLayoutStyles.wrapper}>
-        {/* LEFT — sticky centered */}
-        <div style={servicesLayoutStyles.leftCol}>
+    <section id="services" className="services-section" style={styles.services}>
+      <div className="services-wrapper" style={servicesLayoutStyles.wrapper}>
+
+        {/* LEFT — sticky on desktop, static on mobile */}
+        <div className="services-left-col" style={servicesLayoutStyles.leftCol}>
           <div style={styles.sectionEyebrow}>What I Offer</div>
           <h2 style={servicesLayoutStyles.title}>
             Services built
@@ -463,99 +543,22 @@ function Services() {
             something that works.
           </p>
 
-          {/* ── Tech icons ── */}
-          <div style={servicesLayoutStyles.iconsGrid}>
-            <img
-              src="/images/icon1.png"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon6.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon3.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon2.png"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon12.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon13.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon9.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon8.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon7.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon15.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon16.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
-            <img
-              src="/images/icon17.jpg"
-              alt="skill"
-              style={servicesLayoutStyles.icon}
-            />
+          <div className="services-icons-grid" style={servicesLayoutStyles.iconsGrid}>
+            {iconNums.map((n, i) => (
+              <img
+                key={i}
+                src={`/images/icon${n}.${[1, 2].includes(n) ? "png" : "jpg"}`}
+                alt="skill"
+                className="services-icon"
+                style={servicesLayoutStyles.icon}
+              />
+            ))}
           </div>
         </div>
 
         {/* RIGHT — scrollable cards */}
-        <div style={servicesLayoutStyles.rightCol}>
-          {[
-            {
-              title: "Full-Stack Web Apps",
-              short: "End-to-end product development",
-              desc: "I handle everything from database schema design and REST API architecture to a fully deployed React frontend. You get a production-ready application built on the MERN stack, optimized for performance, scalability, and maintainability.",
-              tags: ["MongoDB", "Express", "React", "Node.js"],
-            },
-            {
-              title: "REST API Development",
-              short: "Clean, documented backend APIs",
-              desc: "Well-structured Node.js and Express APIs with proper authentication (JWT/OAuth), role-based access control, input validation, and error handling. Built to be consumed by any frontend or mobile app, with clear documentation included.",
-              tags: ["Node.js", "Express", "JWT", "REST"],
-            },
-            {
-              title: "UI / UX Engineering",
-              short: "Pixel-perfect, accessible interfaces",
-              desc: "Modular, reusable React components built from Figma designs or your own vision. I focus on responsive layouts, smooth interactions, and accessibility — so your product looks great and works for everyone, on every device.",
-              tags: ["React", "CSS", "Figma", "Responsive"],
-            },
-            {
-              title: "MVP & Rapid Prototyping",
-              short: "From idea to working product, fast",
-              desc: "Got a startup idea or side project? I help you validate it quickly with a focused, functional MVP. No bloat, no over-engineering — just the core features shipped fast so you can get real feedback from real users.",
-              tags: ["MERN", "Rapid Build", "Startup", "MVP"],
-            },
-          ].map((s) => (
+        <div className="services-right-col" style={servicesLayoutStyles.rightCol}>
+          {serviceCards.map((s) => (
             <div key={s.title} style={servicesLayoutStyles.card}>
               <h3 style={servicesLayoutStyles.cardTitle}>{s.title}</h3>
               <p style={servicesLayoutStyles.cardShort}>{s.short}</p>
@@ -579,19 +582,22 @@ function Services() {
   );
 }
 
-/* ── Education ── */
+/* ══════════════════════════════════════════
+   EDUCATION (kept for optional use)
+══════════════════════════════════════════ */
 function Education() {
   return (
-    <section id="education" style={styles.education}>
+    <section id="education" className="education-section" style={styles.education}>
       <div style={styles.sectionEyebrow}>My Journey</div>
       <h2 style={styles.sectionTitle}>Education</h2>
-      <div style={styles.timelineContainer}>
-        <div style={styles.timelineLine} aria-hidden="true" />
+      <div className="timeline-container-el" style={styles.timelineContainer}>
+        <div className="timeline-line-el" style={styles.timelineLine} aria-hidden="true" />
         {EDUCATION.map((edu, index) => {
           const isLeft = index % 2 === 0;
           return (
-            <div key={edu.title} style={styles.timelineItem}>
+            <div key={edu.title} className="timeline-item-el" style={styles.timelineItem}>
               <div
+                className="timeline-dot-el"
                 style={{
                   ...styles.timelineDot,
                   left: "50%",
@@ -599,6 +605,7 @@ function Education() {
                 }}
               />
               <div
+                className="edu-content-el"
                 style={{
                   ...styles.educationContent,
                   marginLeft: isLeft ? 0 : "52%",
@@ -619,34 +626,33 @@ function Education() {
   );
 }
 
+/* ══════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════ */
 function Contact() {
   const [emailHovered, setEmailHovered] = useState(false);
   const [linkedinHovered, setLinkedinHovered] = useState(false);
 
   return (
-    <section id="contact" style={styles.contact}>
+    <section id="contact" className="contact-section" style={styles.contact}>
       <div style={styles.contactInner}>
-        {/* ── Eyebrow: — CONTACT ── */}
         <div style={styles.contactEyebrowWrap}>
           <span style={styles.contactEyebrowDash} />
           <span style={styles.contactEyebrowText}>CONTACT</span>
         </div>
 
-        {/* ── Massive display headline ── */}
-        <h2 style={styles.contactHeadline}>
+        <h2 className="contact-headline" style={styles.contactHeadline}>
           Let's Build Something
           <br />
           Amazing Together
         </h2>
 
-        {/* ── Subtitle ── */}
         <p style={styles.contactSubtitle}>
           Whether you have a project in mind, want to collaborate, or just want
           to say hello — my inbox is always open.
         </p>
 
-        {/* ── CTA buttons ── */}
-        <div style={styles.contactBtnsRow}>
+        <div className="contact-btns-row" style={styles.contactBtnsRow}>
           <a
             href="mailto:kavidupurnamal2001@gmail.com"
             style={{
@@ -659,12 +665,7 @@ function Contact() {
             <img
               src="/images/icon24.png"
               alt=""
-              style={{
-                width: 20,
-                height: 20,
-                objectFit: "contain",
-                verticalAlign: "middle",
-              }}
+              style={{ width: 20, height: 20, objectFit: "contain", verticalAlign: "middle" }}
             />
             Send Email
           </a>
@@ -681,8 +682,7 @@ function Contact() {
           </a>
         </div>
 
-        {/* ── Info row: GitHub · LinkedIn · Phone ── */}
-        <div style={styles.contactInfoRow}>
+        <div className="contact-info-row" style={styles.contactInfoRow}>
           {CONTACT_INFO.map(({ icon, text, href }) => (
             <a
               key={text}
@@ -700,95 +700,313 @@ function Contact() {
   );
 }
 
-/* ── Footer ── */
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
 function Footer() {
   return (
-    <footer style={styles.footer}>
+    <footer className="footer-bar" style={styles.footer}>
       <p style={styles.footerText}>
         © {new Date().getFullYear()} · Built with MERN Stack
       </p>
-      <p style={styles.footerText}>Designed &amp; Developed by You</p>
+      <p style={styles.footerText}>Designed &amp; Developed by Kavidu Purnamal</p>
     </footer>
   );
 }
 
-/* ── AboutMe (NEW — with photo) ── */
-function AboutMe() {
-  return (
-    <section id="about-me" style={aboutMeStyles.section}>
-      <div style={aboutMeStyles.inner}>
-        {/* LEFT: photo — 35% */}
-        <div style={aboutMeStyles.imageCol}>
-          <div style={aboutMeStyles.imageWrap}>
-            <img
-              src="/images/photo9.png"
-              alt="Kavidu Purnamal"
-              style={aboutMeStyles.photo}
-            />
-          </div>
-        </div>
+/* ══════════════════════════════════════════
+   FONT LOADER + GLOBAL STYLES + MEDIA QUERIES
+══════════════════════════════════════════ */
+function FontLoader() {
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap";
+    document.head.appendChild(link);
 
-        {/* RIGHT: text content — 65% */}
-        <div style={aboutMeStyles.textCol}>
-          <div style={styles.sectionEyebrow}>Who I Am</div>
-          <h2 style={aboutMeStyles.heading}>
-            Fast to learn.
-            <br />
-            <span style={aboutMeStyles.accentText}>Built to deliver.</span>
-          </h2>
-          <p style={aboutMeStyles.lead}>
-            Hey, I'm Kavidu Purnamal, a passionate full-stack developer and
-            SLIIT student who loves turning ideas into clean, intuitive web
-            experiences.
-          </p>
-          <p style={aboutMeStyles.body}>
-            With 3+ years deep in the MERN stack, I've built everything from
-            dynamic web applications to developer productivity tools. What
-            drives me isn't just shipping code. It's building things people
-            enjoy using.
-          </p>
-          <p style={aboutMeStyles.body}>
-            I absorb new technologies fast, write clean maintainable code, and
-            care deeply about performance and accessibility. Whether it's a
-            startup MVP or a polished SaaS product, I bring the same level of
-            focus to every project.
-          </p>
-          <div style={aboutMeStyles.pillsRow}>
-            {[
-              "MongoDB",
-              "Express.js",
-              "React",
-              "Node.js",
-              "REST APIs",
-              "UI/UX",
-            ].map((tag, index, arr) => (
-              <span key={tag}>
-                <span style={aboutMeStyles.pill}>{tag}</span>
-                {index < arr.length - 1 && (
-                  <span style={{ ...aboutMeStyles.pill, padding: "0 6px" }}>
-                    {" "}
-                    ·{" "}
-                  </span>
-                )}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+    const style = document.createElement("style");
+    style.textContent = `
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { background: ${CREAM}; -webkit-font-smoothing: antialiased; }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50%       { opacity: 0.5; transform: scale(0.75); }
+      }
+
+      a:hover { opacity: 0.87; }
+
+      a[style*="background: rgb(255, 138, 61)"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 48px rgba(255,138,61,0.32) !important;
+      }
+
+      .contact-info-link:hover {
+        color: ${ACCENT} !important;
+        opacity: 1 !important;
+      }
+
+      .project-showcase:hover .project-image-overlay { opacity: 1; }
+
+      /* ── Hamburger hidden on desktop ── */
+      .hamburger-btn { display: none !important; }
+
+      /* ════════════════════════════════════
+         TABLET  ≤ 1024px
+      ════════════════════════════════════ */
+      @media (max-width: 1024px) {
+        .hero-left {
+          padding: 100px 40px 60px 60px !important;
+        }
+        .services-wrapper {
+          gap: 32px !important;
+        }
+        .services-left-col {
+          flex: 0 0 44% !important;
+        }
+      }
+
+      /* ════════════════════════════════════
+         MOBILE  ≤ 768px
+      ════════════════════════════════════ */
+      @media (max-width: 768px) {
+
+        /* ── NAV ── */
+        .nav-bar {
+          padding: 14px 20px !important;
+        }
+        .nav-desktop-links {
+          display: none !important;
+        }
+        .nav-download-btn {
+          display: none !important;
+        }
+        .hamburger-btn {
+          display: flex !important;
+          margin-left: auto !important;
+        }
+
+        /* ── HERO ── */
+        .hero-section {
+          flex-direction: column !important;
+          height: auto !important;
+          max-height: none !important;
+          padding-top: 70px !important;
+          overflow: visible !important;
+          align-items: stretch !important;
+        }
+        .hero-left {
+          flex: none !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          padding: 28px 24px 16px !important;
+        }
+        .hero-right {
+          flex: none !important;
+          width: 100% !important;
+          height: 280px !important;
+          justify-content: center !important;
+          overflow: hidden !important;
+        }
+        .hero-headline {
+          font-size: 34px !important;
+          letter-spacing: -1px !important;
+        }
+        .watermark-top,
+        .watermark-bottom {
+          display: none !important;
+        }
+
+        /* ── ABOUT ME ── */
+        .about-me-section {
+          padding: 60px 24px !important;
+        }
+        .about-me-inner {
+          flex-direction: column !important;
+          gap: 32px !important;
+        }
+        .about-me-image-col {
+          flex: none !important;
+          width: 100% !important;
+          max-width: 260px !important;
+          margin: 0 auto !important;
+        }
+        .about-me-text-col {
+          flex: none !important;
+          width: 100% !important;
+        }
+
+        /* ── PROJECTS ── */
+        .projects-section {
+          padding: 60px 24px !important;
+        }
+        .projects-container {
+          gap: 48px !important;
+        }
+        .project-showcase {
+          flex-direction: column !important;
+          gap: 0 !important;
+          border-radius: 16px !important;
+          overflow: hidden !important;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+        }
+        .project-image-container {
+          flex: none !important;
+          width: 100% !important;
+          height: 220px !important;
+          border-radius: 0 !important;
+        }
+        .project-content-container {
+          flex: none !important;
+          width: 100% !important;
+          padding: 24px 20px !important;
+        }
+
+        /* ── SERVICES ── */
+        .services-section {
+          padding: 60px 24px 60px !important;
+        }
+        .services-wrapper {
+          flex-direction: column !important;
+          gap: 40px !important;
+        }
+        .services-left-col {
+          position: static !important;
+          flex: none !important;
+          width: 100% !important;
+        }
+        .services-right-col {
+          flex: none !important;
+          width: 100% !important;
+        }
+        .services-icons-grid {
+          grid-template-columns: repeat(6, 1fr) !important;
+          gap: 10px !important;
+        }
+        .services-icon {
+          width: 36px !important;
+          height: 36px !important;
+        }
+
+        /* ── EDUCATION ── */
+        .education-section {
+          padding: 60px 24px !important;
+        }
+        .timeline-container-el {
+          max-width: 100% !important;
+        }
+        .timeline-line-el {
+          left: 10px !important;
+          transform: none !important;
+        }
+        .timeline-item-el {
+          display: block !important;
+          position: relative !important;
+          margin-bottom: 36px !important;
+        }
+        .timeline-dot-el {
+          left: 10px !important;
+          transform: none !important;
+        }
+        .edu-content-el {
+          margin-left: 32px !important;
+          margin-right: 0 !important;
+          text-align: left !important;
+        }
+
+        /* ── CONTACT ── */
+        .contact-section {
+          padding: 60px 24px 40px !important;
+        }
+        .contact-headline {
+          font-size: 36px !important;
+          letter-spacing: -2px !important;
+        }
+        .contact-btns-row {
+          flex-direction: column !important;
+          align-items: stretch !important;
+          gap: 12px !important;
+        }
+        .contact-btns-row a {
+          justify-content: center !important;
+        }
+        .contact-info-row {
+          flex-direction: column !important;
+          gap: 16px !important;
+          align-items: center !important;
+        }
+
+        /* ── FOOTER ── */
+        .footer-bar {
+          flex-direction: column !important;
+          gap: 6px !important;
+          padding: 16px 24px !important;
+          align-items: center !important;
+          text-align: center !important;
+        }
+
+        /* ── ABOUT (original section) ── */
+        .about-section {
+          padding: 60px 24px !important;
+        }
+        .heading-panel {
+          grid-template-columns: 1fr !important;
+          gap: 0 !important;
+        }
+        .heading-panel h2:last-child {
+          display: none !important;
+        }
+        .about-panel {
+          grid-template-columns: 1fr !important;
+        }
+        .section-divider {
+          display: none !important;
+        }
+        .skills-grid {
+          grid-template-columns: repeat(4, 1fr) !important;
+          gap: 16px !important;
+        }
+        .skills-grid img {
+          width: 52px !important;
+          height: 52px !important;
+        }
+      }
+
+      /* ════════════════════════════════════
+         SMALL MOBILE  ≤ 480px
+      ════════════════════════════════════ */
+      @media (max-width: 480px) {
+        .hero-headline {
+          font-size: 28px !important;
+        }
+        .hero-right {
+          height: 230px !important;
+        }
+        .contact-headline {
+          font-size: 30px !important;
+          letter-spacing: -1.5px !important;
+        }
+        .skills-grid {
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+        .services-icons-grid {
+          grid-template-columns: repeat(4, 1fr) !important;
+        }
+        .project-image-container {
+          height: 180px !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }, []);
+  return null;
 }
 
 /* ══════════════════════════════════════════
    STYLES
 ══════════════════════════════════════════ */
-const CREAM = "#ffffff";
-const DARK = "#0f2b2b";
-const ACCENT = "#ff8a3d";
-const ACCENT_LIGHT = "#fff2e6";
-const MUTED = "#6b6f66";
-const BORDER = "rgba(15,43,43,0.08)";
-
 const styles = {
   /* ── Nav ── */
   nav: {
@@ -850,6 +1068,8 @@ const styles = {
   },
   downloadBtnHover: { color: "#fff", background: ACCENT },
   downloadIcon: { fontSize: 18, display: "flex", alignItems: "center" },
+
+  /* ── Hamburger ── */
   hamburger: {
     display: "flex",
     flexDirection: "column",
@@ -863,6 +1083,8 @@ const styles = {
     justifyContent: "center",
     cursor: "pointer",
     padding: 0,
+    marginLeft: "auto",
+    flexShrink: 0,
   },
   hamburgerLine: (open, i) => ({
     display: "block",
@@ -870,48 +1092,52 @@ const styles = {
     height: 2,
     background: "#fff",
     borderRadius: 2,
-    transition: "transform 0.2s, opacity 0.2s",
+    transition: "transform 0.25s, opacity 0.25s",
     transform:
       open && i === 0
         ? "rotate(45deg) translate(5px, 5px)"
         : open && i === 2
-          ? "rotate(-45deg) translate(5px, -5px)"
-          : "none",
+        ? "rotate(-45deg) translate(5px, -5px)"
+        : "none",
     opacity: open && i === 1 ? 0 : 1,
   }),
+
+  /* ── Mobile menu ── */
   mobileMenu: {
     position: "fixed",
-    top: 80,
+    top: 72,
     left: 0,
     right: 0,
-    background: CREAM,
+    background: "#fff",
     display: "flex",
     flexDirection: "column",
     gap: 0,
-    padding: "8px 0 24px",
-    boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+    paddingBottom: 16,
+    boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
     zIndex: 99,
+    borderTop: `1px solid ${BORDER}`,
   },
   mobileLink: {
     color: DARK,
     textDecoration: "none",
-    padding: "14px 48px",
-    fontSize: 15,
+    padding: "16px 24px",
+    fontSize: 16,
     fontFamily: "'Poppins', sans-serif",
+    fontWeight: 500,
     borderBottom: `1px solid ${BORDER}`,
+    display: "block",
   },
   mobileCta: {
     color: "#fff",
     background: ACCENT,
     textDecoration: "none",
-    padding: "14px 48px",
+    padding: "14px 24px",
     fontSize: 15,
     fontFamily: "'Poppins', sans-serif",
     fontWeight: 600,
     display: "block",
     textAlign: "center",
-    borderRadius: 8,
-    margin: "16px 48px 0",
+    borderRadius: 10,
   },
 
   /* ── Hero ── */
@@ -956,23 +1182,22 @@ const styles = {
     zIndex: 0,
   },
   heroLeft: {
-  flex: "0 0 60%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "flex-start",
-  padding: "140px 64px 80px 96px",
-  position: "relative",
-  zIndex: 2,
-  maxWidth: 920,
-},
+    flex: "0 0 60%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    padding: "140px 64px 80px 96px",
+    position: "relative",
+    zIndex: 2,
+    maxWidth: 920,
+  },
   greeting: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: 34,
+    fontSize: 24,
     fontWeight: 700,
     color: DARK,
     marginBottom: 20,
   },
-  wave: { fontSize: 20 },
   accentName: { color: ACCENT, fontWeight: 600 },
   heroHeadline: {
     fontFamily: "'Inter', sans-serif",
@@ -983,13 +1208,6 @@ const styles = {
     letterSpacing: "-2px",
     marginBottom: 18,
   },
-  accentUnderline: {
-    color: ACCENT,
-    textDecoration: "underline",
-    textDecorationColor: ACCENT,
-    textDecorationThickness: 3,
-    textUnderlineOffset: 5,
-  },
   heroSub: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 16,
@@ -997,34 +1215,6 @@ const styles = {
     lineHeight: 1.6,
     marginBottom: 24,
     maxWidth: 560,
-  },
-  stackRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: 8,
-    flexWrap: "wrap",
-    marginBottom: 32,
-  },
-  stackLabel: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 11,
-    color: MUTED,
-  },
-  stackChip: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 11,
-    padding: "4px 10px",
-    borderRadius: 5,
-    border: `1px solid ${BORDER}`,
-    background: "#fff",
-    color: DARK,
-  },
-  ctaRow: {
-    display: "flex",
-    gap: 20,
-    flexWrap: "wrap",
-    marginTop: 18,
-    marginBottom: 40,
   },
   btnPrimary: {
     background: ACCENT,
@@ -1038,29 +1228,16 @@ const styles = {
     boxShadow: "0 12px 36px rgba(255,138,61,0.18)",
     display: "inline-block",
   },
-  btnGhost: {
-    background: "transparent",
-    color: ACCENT,
-    padding: "14px 34px",
-    borderRadius: 10,
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 15,
-    fontWeight: 600,
-    textDecoration: "none",
-    border: `2px solid ${ACCENT}`,
-    display: "inline-block",
-  },
-
   heroRight: {
-  flex: "0 0 40%",
-  position: "relative",
-  display: "flex",
-  alignItems: "flex-start",
-  justifyContent: "center",
-  height: "100%",
-  overflow: "hidden",
-  zIndex: 1,
-},
+    flex: "0 0 40%",
+    position: "relative",
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    height: "100%",
+    overflow: "hidden",
+    zIndex: 1,
+  },
   heroPhoto: {
     width: "auto",
     height: "100%",
@@ -1070,32 +1247,6 @@ const styles = {
     display: "block",
     position: "relative",
     boxShadow: "none",
-  },
-  availBadge: {
-    position: "absolute",
-    bottom: 32,
-    left: -20,
-    background: "#fff",
-    borderRadius: 100,
-    padding: "10px 20px",
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 13,
-    fontWeight: 600,
-    color: DARK,
-    boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-    display: "flex",
-    alignItems: "center",
-    gap: 8,
-    whiteSpace: "nowrap",
-    zIndex: 2,
-  },
-  availDot: {
-    width: 8,
-    height: 8,
-    borderRadius: "50%",
-    background: "#22c55e",
-    display: "inline-block",
-    animation: "pulse 2s ease-in-out infinite",
   },
 
   /* ── Section commons ── */
@@ -1116,7 +1267,7 @@ const styles = {
     marginBottom: 24,
   },
 
-  /* ── About ── */
+  /* ── About (original) ── */
   about: { background: "#fff", padding: "80px 64px", width: "100%" },
   aboutInner: { width: "100%", maxWidth: "none" },
   aboutPanel: {
@@ -1179,21 +1330,22 @@ const styles = {
     transition: "transform 0.3s ease",
   },
   projectImageContainer: {
-  flex: "0 0 35%",
-  width: "35%",
-  height: 340,
-  borderRadius: 16,
-  overflow: "hidden",
-  flexShrink: 0,
-},
+    flex: "0 0 35%",
+    width: "35%",
+    height: 340,
+    borderRadius: 16,
+    overflow: "hidden",
+    flexShrink: 0,
+    position: "relative",
+  },
   projectImage: {
-  width: "100%",
-  height: "100%",
-  objectFit: "contain",
-  objectPosition: "center",
-  display: "block",
-  transition: "transform 0.3s ease",
-},
+    width: "100%",
+    height: "100%",
+    objectFit: "contain",
+    objectPosition: "center",
+    display: "block",
+    transition: "transform 0.3s ease",
+  },
   projectImageOverlay: {
     position: "absolute",
     inset: 0,
@@ -1213,17 +1365,6 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
     padding: "40px 48px",
-  },
-  projectTags: { display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" },
-  projectTag: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 11,
-    padding: "6px 14px",
-    borderRadius: 6,
-    background: ACCENT_LIGHT,
-    border: `1px solid rgba(224,124,42,0.3)`,
-    color: ACCENT,
-    fontWeight: 600,
   },
   projectName: {
     fontFamily: "'Inter', sans-serif",
@@ -1278,35 +1419,7 @@ const styles = {
   },
 
   /* ── Services ── */
-  services: { background: "#fff", padding: "0 64px 80px" },
-  servicesGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: 16,
-    marginTop: 8,
-  },
-  serviceCard: {
-    background: CREAM,
-    border: `1px solid ${BORDER}`,
-    borderRadius: 14,
-    padding: "24px 20px",
-    transition: "border-color 0.2s, transform 0.2s",
-    cursor: "default",
-  },
-  serviceIcon: { fontSize: 26, marginBottom: 14 },
-  serviceName: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 16,
-    fontWeight: 700,
-    color: DARK,
-    marginBottom: 8,
-  },
-  serviceDesc: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 13,
-    color: MUTED,
-    lineHeight: 1.65,
-  },
+  services: { background: "#fff", padding: "80px 64px 80px" },
 
   /* ── Education ── */
   education: { background: "#fff", padding: "80px 64px", color: DARK },
@@ -1367,33 +1480,17 @@ const styles = {
     lineHeight: 1.65,
     marginBottom: 12,
   },
-  viewCertificate: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 6,
-    color: ACCENT,
-    textDecoration: "none",
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 13,
-    fontWeight: 600,
-  },
-  certIcon: { fontSize: 14 },
 
-  /* ══════════════════════════════════════════
-     CONTACT — redesigned
-     (matches screenshot layout · orange theme · white bg)
-  ══════════════════════════════════════════ */
+  /* ── Contact ── */
   contact: {
-  background: "#ffffff",
-  padding: "80px 64px 60px",
-},
+    background: "#ffffff",
+    padding: "80px 64px 60px",
+  },
   contactInner: {
     maxWidth: 860,
     margin: "0 auto",
     textAlign: "center",
   },
-
-  /* eyebrow: — CONTACT */
   contactEyebrowWrap: {
     display: "flex",
     alignItems: "center",
@@ -1417,8 +1514,6 @@ const styles = {
     letterSpacing: "5px",
     textTransform: "uppercase",
   },
-
-  /* massive headline */
   contactHeadline: {
     fontFamily: "'Inter', sans-serif",
     fontSize: "clamp(36px, 5vw, 64px)",
@@ -1428,8 +1523,6 @@ const styles = {
     lineHeight: 0.96,
     marginBottom: 36,
   },
-
-  /* subtitle */
   contactSubtitle: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 15,
@@ -1438,8 +1531,6 @@ const styles = {
     maxWidth: 520,
     margin: "0 auto 52px",
   },
-
-  /* buttons row */
   contactBtnsRow: {
     display: "flex",
     gap: 16,
@@ -1487,12 +1578,6 @@ const styles = {
     background: DARK,
     color: "#fff",
   },
-  contactBtnIcon: {
-    fontSize: 16,
-    lineHeight: 1,
-  },
-
-  /* info row: GitHub · LinkedIn · Phone */
   contactInfoRow: {
     display: "flex",
     gap: 40,
@@ -1532,62 +1617,28 @@ const styles = {
     fontSize: 11,
     color: MUTED,
   },
+
+  /* ── Stat card (for potential use) ── */
+  statCard: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 4,
+    alignItems: "center",
+  },
+  statNum: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: 28,
+    fontWeight: 900,
+    color: DARK,
+    letterSpacing: -1,
+  },
+  statLabel: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: 11,
+    color: MUTED,
+    fontWeight: 500,
+  },
 };
-
-/* ══════════════════════════════════════════
-   GOOGLE FONTS + GLOBAL STYLES
-══════════════════════════════════════════ */
-function FontLoader() {
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href =
-      "https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap";
-    document.head.appendChild(link);
-
-    const style = document.createElement("style");
-    style.textContent = `
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: smooth; }
-      body { background: ${CREAM}; -webkit-font-smoothing: antialiased; }
-
-      @keyframes pulse {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50%       { opacity: 0.5; transform: scale(0.75); }
-      }
-
-      /* Generic link hover */
-      a:hover { opacity: 0.87; }
-
-      /* Orange-filled button lift */
-      a[style*="background: rgb(255, 138, 61)"]:hover,
-      a[style*='background: rgb(255, 138, 61)']:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 16px 48px rgba(255,138,61,0.32) !important;
-      }
-
-      /* Contact info link hover → orange */
-      .contact-info-link:hover {
-        color: ${ACCENT} !important;
-        opacity: 1 !important;
-      }
-
-      /* Project image hover */
-      
-      .project-showcase:hover .project-image-overlay { opacity: 1; }
-
-      /* Mobile */
-      @media (max-width: 768px) {
-        .project-showcase          { flex-direction: column !important; }
-        .project-image-container   { flex: 0 0 100% !important; height: 300px !important; }
-        .project-content-container { flex: 0 0 100% !important; padding: 30px 0 !important; }
-        .projects-container        { gap: 60px !important; }
-      }
-    `;
-    document.head.appendChild(style);
-  }, []);
-  return null;
-}
 
 /* ── AboutMe styles ── */
 const aboutMeStyles = {
@@ -1603,8 +1654,6 @@ const aboutMeStyles = {
     maxWidth: 1200,
     margin: "0 auto",
   },
-
-  /* Left col */
   textCol: {
     flex: "0 0 65%",
     display: "flex",
@@ -1620,9 +1669,7 @@ const aboutMeStyles = {
     lineHeight: 1.05,
     marginBottom: 8,
   },
-  accentText: {
-    color: ACCENT,
-  },
+  accentText: { color: ACCENT },
   lead: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 18,
@@ -1652,40 +1699,6 @@ const aboutMeStyles = {
     color: ACCENT,
     whiteSpace: "nowrap",
   },
-  statsRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: 28,
-    marginTop: 8,
-    paddingTop: 24,
-    borderTop: `1px solid ${BORDER}`,
-  },
-  stat: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 3,
-  },
-  statNum: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: 28,
-    fontWeight: 900,
-    color: DARK,
-    letterSpacing: -1,
-  },
-  statLabel: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 11,
-    color: MUTED,
-    fontWeight: 500,
-  },
-  statDivider: {
-    width: 1,
-    height: 40,
-    background: BORDER,
-    flexShrink: 0,
-  },
-
-  /* Right col */
   imageCol: {
     flex: "0 0 35%",
     position: "relative",
@@ -1704,6 +1717,7 @@ const aboutMeStyles = {
   },
 };
 
+/* ── Services layout styles ── */
 const servicesLayoutStyles = {
   wrapper: {
     display: "flex",
@@ -1712,7 +1726,6 @@ const servicesLayoutStyles = {
     maxWidth: 1200,
     margin: "0 auto",
   },
-
   leftCol: {
     flex: "0 0 52%",
     position: "sticky",
@@ -1722,7 +1735,6 @@ const servicesLayoutStyles = {
     gap: 24,
     alignSelf: "flex-start",
   },
-
   title: {
     fontFamily: "'Inter', sans-serif",
     fontSize: "clamp(32px, 3.5vw, 46px)",
@@ -1731,11 +1743,7 @@ const servicesLayoutStyles = {
     letterSpacing: "-2px",
     lineHeight: 1.08,
   },
-
-  accent: {
-    color: ACCENT,
-  },
-
+  accent: { color: ACCENT },
   desc: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 15,
@@ -1744,39 +1752,21 @@ const servicesLayoutStyles = {
     maxWidth: "95%",
     textAlign: "justify",
   },
-
-  cta: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 8,
-    background: ACCENT,
-    color: "#fff",
-    padding: "14px 28px",
-    borderRadius: 10,
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: 14,
-    fontWeight: 700,
-    textDecoration: "none",
-    boxShadow: "0 10px 28px rgba(255,138,61,0.22)",
-    alignSelf: "flex-start",
-    marginTop: 8,
-  },
-
   rightCol: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
     gap: 20,
   },
-
   card: {
     background: "#fff",
     padding: "36px 40px",
     display: "flex",
     flexDirection: "column",
     gap: 12,
+    border: `1px solid ${BORDER}`,
+    borderRadius: 12,
   },
-
   cardTitle: {
     fontFamily: "'Inter', sans-serif",
     fontSize: 22,
@@ -1784,7 +1774,6 @@ const servicesLayoutStyles = {
     color: DARK,
     letterSpacing: "-0.5px",
   },
-
   cardShort: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 12,
@@ -1793,14 +1782,12 @@ const servicesLayoutStyles = {
     textTransform: "uppercase",
     letterSpacing: "1.5px",
   },
-
   cardDivider: {
     width: "100%",
     height: 1,
     background: BORDER,
     margin: "4px 0",
   },
-
   cardDesc: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 14,
@@ -1808,7 +1795,6 @@ const servicesLayoutStyles = {
     lineHeight: 1.8,
     textAlign: "justify",
   },
-
   cardTags: {
     display: "flex",
     flexWrap: "wrap",
@@ -1816,21 +1802,18 @@ const servicesLayoutStyles = {
     gap: 0,
     marginTop: 8,
   },
-
   cardTag: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: 13,
     fontWeight: 400,
     color: MUTED,
   },
-
   iconsGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(6, 1fr)",
     gap: 16,
     marginTop: 8,
   },
-
   icon: {
     width: 48,
     height: 48,
@@ -1851,7 +1834,6 @@ export default function Portfolio() {
         <Hero />
         <Projects />
         <AboutMe />
-
         <Services />
         <Contact />
       </main>
