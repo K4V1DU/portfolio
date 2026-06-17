@@ -220,21 +220,23 @@ function Nav() {
 function Hero() {
   const w = useWindowWidth();
   const isMobile = w <= 768;
-  const isSmall  = w <= 480;
+  const isSmall = w <= 480;
+  const mobileHeroTop = isSmall ? 78 : 70;
+  const mobileHeroBottom = isSmall ? 22 : 26;
 
   return (
     <section
       id="hero"
       style={{
         ...styles.hero,
-        height:     isMobile ? "auto"  : "760px",
-        maxHeight:  isMobile ? "none"  : "760px",
-        minHeight:  isSmall  ? "360px" : isMobile ? "420px" : undefined,
-        paddingTop: isMobile ? 65 : 80,
-        overflow:   "hidden",
+        height: isMobile ? (isSmall ? "610px" : "640px") : "760px",
+        maxHeight: isMobile ? "none" : "760px",
+        minHeight: undefined,
+        paddingTop: isMobile ? 52 : 80,
+        paddingBottom: 0,
+        overflow: "hidden",
       }}
     >
-      {/* watermarks — desktop only */}
       {!isMobile && (
         <div style={styles.watermarkTop} aria-hidden="true">FULL STACK DEV</div>
       )}
@@ -243,17 +245,19 @@ function Hero() {
       <div
         style={{
           ...styles.heroLeft,
-          flex:    "0 0 60%",
-          padding: isSmall  ? "28px 4px 16px 12px"
-                 : isMobile ? "36px 6px 20px 16px"
-                 : "140px 64px 80px 96px",
+          flex: isMobile ? "0 0 66%" : "0 0 60%",
+          padding: isSmall
+            ? `${mobileHeroTop}px 16px ${mobileHeroBottom}px 20px`
+            : isMobile
+              ? `${mobileHeroTop}px 20px ${mobileHeroBottom}px 26px`
+              : "140px 64px 80px 96px",
         }}
       >
         <p
           style={{
             ...styles.greeting,
-            fontSize:    isMobile ? (isSmall ? 12 : 14) : 24,
-            marginBottom: isMobile ? 8 : 20,
+            fontSize: isMobile ? (isSmall ? 16 : 18) : 24,
+            marginBottom: isMobile ? 10 : 20,
           }}
         >
           Hi, I'm <span style={styles.accentName}>Kavidu Purnamal</span>
@@ -262,10 +266,14 @@ function Hero() {
         <h1
           style={{
             ...styles.heroHeadline,
-            fontSize:      isSmall  ? "13px" : isMobile ? "17px" : "clamp(26px, 3.5vw, 56px)",
-            letterSpacing: isMobile ? "-0.3px" : "-2px",
-            marginBottom:  isMobile ? 8 : 18,
-            lineHeight:    isMobile ? 1.15 : 1.08,
+            fontSize: isSmall
+              ? "clamp(20px, 5vw, 30px)"
+              : isMobile
+                ? "clamp(23px, 5.4vw, 36px)"
+                : "clamp(26px, 3.5vw, 56px)",
+            letterSpacing: isMobile ? "-0.8px" : "-2px",
+            marginBottom: isMobile ? 12 : 18,
+            lineHeight: isMobile ? 1.12 : 1.08,
           }}
         >
           Great software starts
@@ -273,12 +281,14 @@ function Hero() {
           <br />who cares.
         </h1>
 
-        {!isSmall && (
+        {!isMobile && (
           <p
             style={{
               ...styles.heroSub,
-              fontSize:     isMobile ? 11 : 16,
-              marginBottom: isMobile ? 12 : 24,
+              fontSize: isMobile ? (isSmall ? 12 : 13) : 16,
+              lineHeight: isMobile ? 1.5 : 1.6,
+              marginBottom: isMobile ? 16 : 24,
+              maxWidth: isMobile ? 340 : 560,
             }}
           >
             Clean code, thoughtful design, and a passion for building things right.
@@ -287,11 +297,11 @@ function Hero() {
 
         <div
           style={{
-            display:      "flex",
-            alignItems:   "center",
-            gap:          isMobile ? 10 : 24,
-            flexWrap:     "wrap",
-            marginTop:    isMobile ? 8 : 18,
+            display: "flex",
+            alignItems: "center",
+            gap: isMobile ? 12 : 24,
+            flexWrap: "wrap",
+            marginTop: isMobile ? 6 : 18,
             marginBottom: isMobile ? 0 : 40,
           }}
         >
@@ -299,24 +309,21 @@ function Hero() {
             href="#contact"
             style={{
               ...styles.btnPrimary,
-              padding:  isMobile ? "9px 18px" : "16px 36px",
-              fontSize: isMobile ? 12 : 15,
+              padding: isMobile ? "10px 20px" : "16px 36px",
+              fontSize: isMobile ? 13 : 15,
             }}
           >
             Let's Talk
           </a>
 
-          {/* traits — hidden on mobile to avoid overflow */}
-          {!isMobile && (
-            <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
-              {["Passionate", "Creative", "Reliable", "Adaptable"].map((s, i, arr) => (
-                <span key={s}>
-                  <span style={{ fontFamily: "'Poppins', sans-serif", fontSize: 14, fontWeight: 400, color: MUTED }}>{s}</span>
-                  {i < arr.length - 1 && <span style={{ margin: "0 6px", color: MUTED, opacity: 0.5 }}>·</span>}
-                </span>
-              ))}
-            </div>
-          )}
+          <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+            {["Passionate", "Creative", "Reliable", "Adaptable"].map((s, i, arr) => (
+              <span key={s}>
+                <span style={{ fontFamily: "'Poppins', sans-serif", fontSize: isMobile ? 10 : 14, fontWeight: 400, color: MUTED }}>{s}</span>
+                {i < arr.length - 1 && <span style={{ margin: "0 6px", color: MUTED, opacity: 0.5 }}>·</span>}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -324,10 +331,15 @@ function Hero() {
       <div
         style={{
           ...styles.heroRight,
-          flex:        "0 0 40%",
-          height:      isMobile ? (isSmall ? "320px" : "380px") : "100%",
-          alignSelf:   "stretch",
-          overflow:    "hidden",
+          flex: isMobile ? "0 0 34%" : "0 0 40%",
+          height: "100%",
+          alignSelf: "stretch",
+          justifyContent: isMobile ? "flex-start" : "center",
+          alignItems: isMobile ? "center" : "flex-start",
+          paddingTop: isMobile ? mobileHeroTop : 0,
+          paddingBottom: isMobile ? mobileHeroBottom : 0,
+          paddingRight: isMobile ? (isSmall ? 8 : 16) : 0,
+          overflow: "hidden",
         }}
       >
         <img
@@ -335,9 +347,11 @@ function Hero() {
           alt="Kavidu Purnamal"
           style={{
             ...styles.heroPhoto,
-            height:    "100%",
+            height: "100%",
+            width: isMobile ? "100%" : "auto",
             maxHeight: isMobile ? "none" : "600px",
-            objectFit: "cover",
+            objectFit: isMobile ? "contain" : "cover",
+            objectPosition: isMobile ? "top center" : "top right",
           }}
         />
       </div>
