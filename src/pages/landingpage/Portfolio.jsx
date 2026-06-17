@@ -479,12 +479,12 @@ function AboutMe() {
             </>
           )}
 
-          <div style={{ ...aboutMeStyles.pillsRow, flexWrap: "wrap" }}>
+          <div style={{ ...aboutMeStyles.pillsRow, flexWrap: isMobile ? "nowrap" : "wrap", gap: isMobile ? 0 : 0 }}>
             {["MongoDB","Express.js","React","Node.js","REST APIs","UI/UX"].map((tag, i, arr) => (
               <span key={tag}>
-                <span style={{ ...aboutMeStyles.pill, fontSize: isMobile ? 10 : 14 }}>{tag}</span>
+                <span style={{ ...aboutMeStyles.pill, fontSize: isMobile ? 9 : 13 }}>{tag}</span>
                 {i < arr.length - 1 && (
-                  <span style={{ ...aboutMeStyles.pill, padding: "0 4px", fontSize: isMobile ? 10 : 14 }}> · </span>
+                  <span style={{ ...aboutMeStyles.pill, padding: isMobile ? "0 2px" : "0 4px", fontSize: isMobile ? 9 : 13 }}> · </span>
                 )}
               </span>
             ))}
