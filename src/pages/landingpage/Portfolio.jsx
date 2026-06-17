@@ -222,14 +222,14 @@ function Hero() {
   const isMobile = w <= 768;
   const isSmall = w <= 480;
   const mobileHeroTop = isSmall ? 78 : 70;
-  const mobileHeroBottom = isSmall ? 22 : 26;
+  const mobileHeroBottom = isMobile ? 8 : 26;
 
   return (
     <section
       id="hero"
       style={{
         ...styles.hero,
-        height: isMobile ? (isSmall ? "610px" : "640px") : "760px",
+        height: isMobile ? "auto" : "760px",
         maxHeight: isMobile ? "none" : "760px",
         minHeight: undefined,
         paddingTop: isMobile ? 52 : 80,
