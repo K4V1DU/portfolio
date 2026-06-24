@@ -24,7 +24,7 @@ const PROJECT_DATA = {
   live: "https://boodima.lk",
   repo: "#",
   stack: "MongoDB · Express · React · Node",
-  image: "/images/project4.png",
+  image: "/images/project1/image1.png",
 };
 
 const SCREENSHOTS = [
