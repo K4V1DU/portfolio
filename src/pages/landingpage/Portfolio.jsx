@@ -529,7 +529,10 @@ function Projects() {
                 <p style={styles.projectDesc}>{p.desc}</p>
                 <p style={styles.projectDetails}>{p.details}</p>
                 <div style={styles.projectFooter}>
-                  <a href={p.live} style={styles.btnMoreDetails}>More Details →</a>
+                  <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
+                  {index === 0 && (
+                    <a href="https://boodima.lk" target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px" }}>Live Demo</a>
+                  )}
                   <span style={styles.projectStack}>{p.stack}</span>
                 </div>
               </div>
