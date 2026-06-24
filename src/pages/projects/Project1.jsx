@@ -86,6 +86,19 @@ function Nav() {
 
   return (
     <>
+      <style>{`
+        @media (max-width: 768px) {
+          .nav-links {
+            display: none !important;
+          }
+          .nav-back-btn {
+            display: none !important;
+          }
+          .nav-bar {
+            padding: 18px 24px !important;
+          }
+        }
+      `}</style>
       <nav
         className="nav-bar"
         style={{
@@ -104,12 +117,13 @@ function Nav() {
             </span>
           </Link>
         </div>
-        <ul style={{ listStyle: "none", display: "flex", gap: 32, margin: 0, padding: 0, position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}>
+        <ul className="nav-links" style={{ listStyle: "none", display: "flex", gap: 32, margin: 0, padding: 0, position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}>
           {NAV_LINKS.map((l) => (
             <li key={l}><Link to={`/#${l === "About" ? "about-me" : l.toLowerCase()}`} style={{ color: MUTED, textDecoration: "none", fontSize: 14, fontFamily: "'Poppins', sans-serif", fontWeight: 500, transition: "color 0.2s" }}>{l}</Link></li>
           ))}
         </ul>
         <Link
+          className="nav-back-btn"
           to="/"
           style={{
             marginLeft: "auto",
@@ -148,69 +162,93 @@ function Nav() {
 ══════════════════════════════════════════ */
 function ProjectHeader() {
   return (
-    <section style={{ background: "#fff", padding: "120px 96px 60px" }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 64, alignItems: "flex-start" }}>
-        {/* Left - Image */}
-        <div style={{ flex: "0 0 55%", position: "sticky", top: 120 }}>
-          <div style={{ borderRadius: 20, overflow: "hidden" }}>
-            <img
-              src={PROJECT_DATA.image}
-              alt={PROJECT_DATA.name}
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
+    <>
+      <style>{`
+        @media (max-width: 1024px) {
+          .project-header-container {
+            flex-direction: column !important;
+            gap: 40px !important;
+          }
+          .project-header-image {
+            flex: none !important;
+            width: 100% !important;
+            position: static !important;
+          }
+          .project-header-details {
+            flex: none !important;
+            width: 100% !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .project-header-section {
+            padding: 100px 24px 40px !important;
+          }
+        }
+      `}</style>
+      <section className="project-header-section" style={{ background: "#fff", padding: "120px 96px 60px" }}>
+        <div className="project-header-container" style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 64, alignItems: "flex-start" }}>
+          {/* Left - Image */}
+          <div className="project-header-image" style={{ flex: "0 0 55%", position: "sticky", top: 120 }}>
+            <div style={{ borderRadius: 20, overflow: "hidden" }}>
+              <img
+                src={PROJECT_DATA.image}
+                alt={PROJECT_DATA.name}
+                style={{ width: "100%", height: "auto", display: "block" }}
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Right - Details */}
-        <div style={{ flex: "1 1 45%" }}>
-          <div style={{ fontFamily: "'Poppins', sans-serif", fontSize: 15, color: ACCENT, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 8 }}>
-            Project Details
-          </div>
-          <h1 style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 800, color: DARK, letterSpacing: -2, margin: 0, marginBottom: 32 }}>
-            {PROJECT_DATA.name}
-          </h1>
-          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 18, color: MUTED, lineHeight: 1.7, maxWidth: 800, marginBottom: 16 }}>
-            {PROJECT_DATA.desc}
-          </p>
-          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 15, color: MUTED, lineHeight: 1.7, maxWidth: 800, opacity: 0.85 }}>
-            {PROJECT_DATA.details}
-          </p>
-          <div style={{ display: "flex", gap: 16, marginTop: 32, flexWrap: "wrap" }}>
-            <a
-              href={PROJECT_DATA.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: ACCENT,
-                color: "#fff",
-                padding: "14px 32px",
-                borderRadius: 10,
-                fontFamily: "'Poppins', sans-serif",
-                fontSize: 15,
-                fontWeight: 700,
-                textDecoration: "none",
-                boxShadow: "0 12px 36px rgba(255,138,61,0.22)",
-                transition: "transform 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.transform = "translateY(0)";
-              }}
-            >
-              Live Demo
-            </a>
-          </div>
-          <div style={{ marginTop: 32, fontFamily: "'Poppins', sans-serif", fontSize: 13, color: MUTED, fontWeight: 500 }}>
-            Tech Stack: {PROJECT_DATA.stack}
+          {/* Right - Details */}
+          <div className="project-header-details" style={{ flex: "1 1 45%" }}>
+            <div style={{ fontFamily: "'Poppins', sans-serif", fontSize: 15, color: ACCENT, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 8 }}>
+              Project Details
+            </div>
+            <h1 style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 800, color: DARK, letterSpacing: -2, margin: 0, marginBottom: 32 }}>
+              {PROJECT_DATA.name}
+            </h1>
+            <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 18, color: MUTED, lineHeight: 1.7, maxWidth: 800, marginBottom: 16 }}>
+              {PROJECT_DATA.desc}
+            </p>
+            <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 15, color: MUTED, lineHeight: 1.7, maxWidth: 800, opacity: 0.85 }}>
+              {PROJECT_DATA.details}
+            </p>
+            <div style={{ display: "flex", gap: 16, marginTop: 32, flexWrap: "wrap" }}>
+              <a
+                href={PROJECT_DATA.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: ACCENT,
+                  color: "#fff",
+                  padding: "14px 32px",
+                  borderRadius: 10,
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: 15,
+                  fontWeight: 700,
+                  textDecoration: "none",
+                  boxShadow: "0 12px 36px rgba(255,138,61,0.22)",
+                  transition: "transform 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = "translateY(0)";
+                }}
+              >
+                Live Demo
+              </a>
+            </div>
+            <div style={{ marginTop: 32, fontFamily: "'Poppins', sans-serif", fontSize: 13, color: MUTED, fontWeight: 500 }}>
+              Tech Stack: {PROJECT_DATA.stack}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
@@ -222,10 +260,34 @@ function Screenshots() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section style={{ background: "linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%)", padding: "100px 96px" }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+    <>
+      <style>{`
+        @media (max-width: 1024px) {
+          .screenshots-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 24px !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .screenshots-section {
+            padding: 60px 24px !important;
+          }
+          .screenshots-header {
+            marginBottom: 48px !important;
+          }
+          .screenshots-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .screenshot-card-content {
+            padding: 20px 24px !important;
+          }
+        }
+      `}</style>
+      <section className="screenshots-section" style={{ background: "linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%)", padding: "100px 96px" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
         {/* Section Header */}
-        <div style={{ textAlign: "center", marginBottom: 80 }}>
+        <div className="screenshots-header" style={{ textAlign: "center", marginBottom: 80 }}>
           <div style={{ 
             display: "inline-block", 
             padding: "8px 24px", 
@@ -250,7 +312,7 @@ function Screenshots() {
         </div>
 
         {/* Screenshots Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
+        <div className="screenshots-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
           {SCREENSHOTS.map((screenshot, index) => (
             <div
               key={index}
@@ -320,7 +382,7 @@ function Screenshots() {
               </div>
 
               {/* Content */}
-              <div style={{ padding: "28px 32px" }}>
+              <div className="screenshot-card-content" style={{ padding: "28px 32px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
                   <div style={{ 
                     width: 36, 
@@ -431,6 +493,7 @@ function Screenshots() {
         </div>
       )}
     </section>
+    </>
   );
 }
 
@@ -439,14 +502,26 @@ function Screenshots() {
 ══════════════════════════════════════════ */
 function Footer() {
   return (
-    <footer style={{ background: "#fff", padding: "20px 64px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: `1px solid ${BORDER}` }}>
-      <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 11, color: MUTED, margin: 0 }}>
-        © {new Date().getFullYear()} · Built with MERN Stack
-      </p>
-      <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 11, color: MUTED, margin: 0 }}>
-        Designed &amp; Developed by Kavidu Purnamal
-      </p>
-    </footer>
+    <>
+      <style>{`
+        @media (max-width: 768px) {
+          .footer {
+            flex-direction: column !important;
+            gap: 8px !important;
+            padding: 20px 24px !important;
+            text-align: center !important;
+          }
+        }
+      `}</style>
+      <footer className="footer" style={{ background: "#fff", padding: "20px 64px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: `1px solid ${BORDER}` }}>
+        <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 11, color: MUTED, margin: 0 }}>
+          © {new Date().getFullYear()} · Built with MERN Stack
+        </p>
+        <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 11, color: MUTED, margin: 0 }}>
+          Designed &amp; Developed by Kavidu Purnamal
+        </p>
+      </footer>
+    </>
   );
 }
 
