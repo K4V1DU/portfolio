@@ -41,7 +41,7 @@ const PROJECTS = [
       "A full-stack booking system built with React, Node.js, and Spring Boot. It provides tailored workflows for both students and lecturers to request and manage physical campus assets, secured by a role-based authentication layer using JWT and OAuth2.",
     live: "#",
     repo: "#",
-    stack: "React · Node.js · Spring Boot · JWT · OAuth2 · MongoDB · MySQL",
+    stack: "React · Node.js · Spring Boot · JWT · OAuth2 · MySQL",
     image: "/images/project11.png",
   },
 
