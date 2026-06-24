@@ -532,6 +532,8 @@ function Projects() {
                 <div style={styles.projectFooter}>
                   {index === 0 ? (
                     <Link to="/project1" style={styles.btnMoreDetails}>More Details</Link>
+                  ) : index === 1 ? (
+                    <Link to="/project2" style={styles.btnMoreDetails}>More Details</Link>
                   ) : (
                     <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
                   )}
