@@ -31,6 +31,20 @@ const PROJECTS = [
     stack: "Kotlin · Android Studio · XML Layouts · Material Design",
     image: "/images/project3.png",
   },
+
+  {
+    emoji: "🏫",
+    name: "SmartCampus",
+    tags: ["Full-Stack", "MERN", "Spring Boot", "2026"],
+    desc: "A centralized resource management platform that allows students and lecturers to track, schedule, and book university assets like lecture halls, projectors, and cameras.",
+    details:
+      "A full-stack booking system built with React, Node.js, and Spring Boot. It provides tailored workflows for both students and lecturers to request and manage physical campus assets, secured by a role-based authentication layer using JWT and OAuth2.",
+    live: "#",
+    repo: "#",
+    stack: "React · Node.js · Spring Boot · JWT · OAuth2 · MongoDB · MySQL",
+    image: "/images/project11.png",
+  },
+
 ];
 
 const EDUCATION = [
