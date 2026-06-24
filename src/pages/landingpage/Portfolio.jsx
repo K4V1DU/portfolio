@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 /* ══════════════════════════════════════════
    CONSTANTS
 ══════════════════════════════════════════ */
-const NAV_LINKS = ["Work", "Services", "About", "Blog"];
+const NAV_LINKS = ["Work", "Services", "About", "Contact"];
 
 const PROJECTS = [
   {
@@ -174,7 +174,7 @@ function Nav() {
         </div>
         <ul className="nav-desktop-links" style={styles.navLinks}>
           {NAV_LINKS.map((l) => (
-            <li key={l}><a href={`#${l.toLowerCase()}`} style={styles.navLink}>{l}</a></li>
+            <li key={l}><a href={`#${l === "About" ? "about-me" : l.toLowerCase()}`} style={styles.navLink}>{l}</a></li>
           ))}
         </ul>
         <a
@@ -203,7 +203,7 @@ function Nav() {
       {menuOpen && (
         <div style={styles.mobileMenu}>
           {NAV_LINKS.map((l) => (
-            <a key={l} href={`#${l.toLowerCase()}`} style={styles.mobileLink} onClick={() => setMenuOpen(false)}>{l}</a>
+            <a key={l} href={`#${l === "About" ? "about-me" : l.toLowerCase()}`} style={styles.mobileLink} onClick={() => setMenuOpen(false)}>{l}</a>
           ))}
           <div style={{ padding: "16px 24px 8px" }}>
             <a href="/cv.pdf" download style={styles.mobileCta} onClick={() => setMenuOpen(false)}>⬇ Download CV</a>
@@ -499,6 +499,8 @@ function AboutMe() {
    PROJECTS
 ══════════════════════════════════════════ */
 function Projects() {
+  const [lightboxImage, setLightboxImage] = useState(null);
+
   return (
     <section id="work" className="projects-section" style={styles.projects}>
       <div style={styles.sectionEyebrow}>Selected Work</div>
@@ -512,7 +514,11 @@ function Projects() {
               style={{ ...styles.projectShowcase, flexDirection: isEven ? "row" : "row-reverse" }}
               className="project-showcase"
             >
-              <div className="project-image-container" style={styles.projectImageContainer}>
+              <div 
+                className="project-image-container" 
+                style={{ ...styles.projectImageContainer, cursor: "pointer" }}
+                onClick={() => setLightboxImage(p.image)}
+              >
                 <img src={p.image} alt={p.name} style={styles.projectImage} className="project-image" />
                 <div style={styles.projectImageOverlay} className="project-image-overlay">
                   <span style={styles.projectEmoji}>{p.emoji}</span>
@@ -531,6 +537,31 @@ function Projects() {
           );
         })}
       </div>
+
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div 
+          style={styles.lightboxOverlay}
+          onClick={() => setLightboxImage(null)}
+        >
+          <button 
+            style={styles.lightboxClose}
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxImage(null);
+            }}
+            aria-label="Close lightbox"
+          >
+            ✕
+          </button>
+          <img 
+            src={lightboxImage} 
+            alt="Project preview" 
+            style={styles.lightboxImage}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }
@@ -727,6 +758,11 @@ function FontLoader() {
       @keyframes pulse {
         0%, 100% { opacity: 1; transform: scale(1); }
         50%       { opacity: 0.5; transform: scale(0.75); }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
       }
 
       a:hover { opacity: 0.87; }
@@ -935,6 +971,43 @@ const styles = {
   projectFooter: { display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" },
   btnMoreDetails: { background: ACCENT, color: "#fff", padding: "14px 32px", borderRadius: 10, fontFamily: "'Poppins', sans-serif", fontSize: 15, fontWeight: 700, textDecoration: "none", boxShadow: "0 12px 36px rgba(255,138,61,0.22)", display: "inline-block", border: "none", cursor: "pointer" },
   projectStack: { fontFamily: "'Poppins', sans-serif", fontSize: 12, color: MUTED, fontWeight: 500 },
+
+  lightboxOverlay: {
+    position: "fixed",
+    inset: 0,
+    background: "rgba(0, 0, 0, 0.9)",
+    zIndex: 1000,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "40px",
+    animation: "fadeIn 0.2s ease"
+  },
+  lightboxClose: {
+    position: "absolute",
+    top: "20px",
+    right: "20px",
+    background: "rgba(255, 255, 255, 0.2)",
+    border: "none",
+    color: "#fff",
+    fontSize: "32px",
+    width: "50px",
+    height: "50px",
+    borderRadius: "50%",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    transition: "background 0.2s",
+    fontFamily: "sans-serif"
+  },
+  lightboxImage: {
+    maxWidth: "90vw",
+    maxHeight: "90vh",
+    objectFit: "contain",
+    borderRadius: "8px",
+    boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)"
+  },
 
   services: { background: "#fff", padding: "80px 64px 80px" },
 
