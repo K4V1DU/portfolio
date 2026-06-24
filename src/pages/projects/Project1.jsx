@@ -324,6 +324,7 @@ function Screenshots() {
                 cursor: "pointer",
                 transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                 border: "1px solid rgba(15,43,43,0.06)",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
               }}
               onClick={() => setLightboxImage(screenshot.image)}
               onMouseEnter={() => setHoveredIndex(index)}
