@@ -161,6 +161,10 @@ function Nav() {
    PROJECT HEADER
 ══════════════════════════════════════════ */
 function ProjectHeader() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <style>{`
@@ -212,7 +216,7 @@ function ProjectHeader() {
             <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 15, color: MUTED, lineHeight: 1.7, maxWidth: 800, opacity: 0.85 }}>
               {PROJECT_DATA.details}
             </p>
-            <div style={{ display: "flex", gap: 16, marginTop: 32, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 16, marginTop: 32, flexWrap: "wrap", alignItems: "center" }}>
               <a
                 href={PROJECT_DATA.live}
                 target="_blank"
@@ -241,9 +245,9 @@ function ProjectHeader() {
               >
                 Live Demo
               </a>
-            </div>
-            <div style={{ marginTop: 32, fontFamily: "'Poppins', sans-serif", fontSize: 13, color: MUTED, fontWeight: 500 }}>
-              Tech Stack: {PROJECT_DATA.stack}
+              <div style={{ fontFamily: "'Poppins', sans-serif", fontSize: 13, color: MUTED, fontWeight: 500 }}>
+                {PROJECT_DATA.stack}
+              </div>
             </div>
           </div>
         </div>
@@ -449,8 +453,8 @@ function Screenshots() {
               position: "absolute",
               top: "32px",
               right: "32px",
-              background: "rgba(255, 255, 255, 0.15)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
+              background: "#ff8a3d",
+              border: "1px solid #ff8a3d",
               color: "#fff",
               fontSize: "24px",
               width: 56,
@@ -468,11 +472,11 @@ function Screenshots() {
               setLightboxImage(null);
             }}
             onMouseEnter={(e) => {
-              e.target.style.background = "rgba(255, 255, 255, 0.25)";
+              e.target.style.background = "#ff6b1a";
               e.target.style.transform = "scale(1.1)";
             }}
             onMouseLeave={(e) => {
-              e.target.style.background = "rgba(255, 255, 255, 0.15)";
+              e.target.style.background = "#ff8a3d";
               e.target.style.transform = "scale(1)";
             }}
             aria-label="Close lightbox"

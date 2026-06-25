@@ -157,6 +157,10 @@ function Nav() {
    PROJECT HEADER
 ══════════════════════════════════════════ */
 function ProjectHeader() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <style>{`
