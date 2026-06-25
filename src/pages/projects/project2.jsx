@@ -11,7 +11,7 @@ const NAV_LINKS = ["Work", "Services", "About", "Contact"];
 ══════════════════════════════════════════ */
 const CREAM = "#ffffff";
 const DARK = "#0f2b2b";
-const ACCENT = "#ff8a3d";
+const ACCENT = "#107C10";
 const MUTED = "#6b6f66";
 const BORDER = "rgba(15,43,43,0.08)";
 
@@ -157,6 +157,10 @@ function Nav() {
    PROJECT HEADER
 ══════════════════════════════════════════ */
 function ProjectHeader() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <style>{`
@@ -184,18 +188,18 @@ function ProjectHeader() {
       <section className="project-header-section" style={{ background: "#fff", padding: "120px 96px 60px" }}>
         <div className="project-header-container" style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 64, alignItems: "flex-start" }}>
           {/* Left - Image */}
-          <div className="project-header-image" style={{ flex: "0 0 55%", position: "sticky", top: 120 }}>
-            <div style={{ borderRadius: 20, overflow: "hidden" }}>
+          <div className="project-header-image" style={{ flex: "0 0 35%", position: "sticky", top: 120 }}>
+            <div style={{ borderRadius: 20, overflow: "hidden", height: 500 }}>
               <img
                 src={PROJECT_DATA.image}
                 alt={PROJECT_DATA.name}
-                style={{ width: "100%", height: "auto", display: "block" }}
+                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
               />
             </div>
           </div>
 
           {/* Right - Details */}
-          <div className="project-header-details" style={{ flex: "1 1 45%" }}>
+          <div className="project-header-details" style={{ flex: "1 1 65%" }}>
             <div style={{ fontFamily: "'Poppins', sans-serif", fontSize: 15, color: ACCENT, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 8 }}>
               Project Details
             </div>
@@ -225,7 +229,7 @@ function ProjectHeader() {
                   fontSize: 15,
                   fontWeight: 700,
                   textDecoration: "none",
-                  boxShadow: "0 12px 36px rgba(255,138,61,0.22)",
+                  boxShadow: "0 12px 36px rgba(16,124,16,0.22)",
                   transition: "transform 0.2s",
                 }}
                 onMouseEnter={(e) => {
@@ -239,7 +243,7 @@ function ProjectHeader() {
               </a>
             </div>
             <div style={{ marginTop: 32, fontFamily: "'Poppins', sans-serif", fontSize: 13, color: MUTED, fontWeight: 500 }}>
-              Tech Stack: {PROJECT_DATA.stack}
+              {PROJECT_DATA.stack}
             </div>
           </div>
         </div>
@@ -287,7 +291,7 @@ function Screenshots() {
           <div style={{ 
             display: "inline-block", 
             padding: "8px 24px", 
-            background: "rgba(255,138,61,0.08)", 
+            background: "rgba(16,124,16,0.08)", 
             borderRadius: 30, 
             marginBottom: 16,
             fontFamily: "'Poppins', sans-serif", 
@@ -385,7 +389,7 @@ function Screenshots() {
                     width: 36, 
                     height: 36, 
                     borderRadius: "10px", 
-                    background: "linear-gradient(135deg, #ff8a3d 0%, #ff6b1a 100%)", 
+                    background: "linear-gradient(135deg, #107C10 0%, #0E4F0E 100%)", 
                     display: "flex", 
                     alignItems: "center", 
                     justifyContent: "center", 
@@ -393,7 +397,7 @@ function Screenshots() {
                     fontFamily: "'Inter', sans-serif", 
                     fontSize: 16, 
                     fontWeight: 700,
-                    boxShadow: "0 4px 12px rgba(255,138,61,0.3)"
+                    boxShadow: "0 4px 12px rgba(16,124,16,0.3)"
                   }}>
                     {index + 1}
                   </div>
@@ -445,8 +449,8 @@ function Screenshots() {
               position: "absolute",
               top: "32px",
               right: "32px",
-              background: "rgba(255, 255, 255, 0.15)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
+              background: "#107C10",
+              border: "1px solid #107C10",
               color: "#fff",
               fontSize: "24px",
               width: 56,
@@ -464,11 +468,11 @@ function Screenshots() {
               setLightboxImage(null);
             }}
             onMouseEnter={(e) => {
-              e.target.style.background = "rgba(255, 255, 255, 0.25)";
+              e.target.style.background = "#0E4F0E";
               e.target.style.transform = "scale(1.1)";
             }}
             onMouseLeave={(e) => {
-              e.target.style.background = "rgba(255, 255, 255, 0.15)";
+              e.target.style.background = "#107C10";
               e.target.style.transform = "scale(1)";
             }}
             aria-label="Close lightbox"
