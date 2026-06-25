@@ -547,9 +547,9 @@ function Projects() {
                   {index === 0 ? (
                     <Link to="/project1" style={styles.btnMoreDetails}>More Details</Link>
                   ) : index === 1 ? (
-                    <Link to="/project2" style={styles.btnMoreDetails}>More Details</Link>
+                    <Link to="/project2" style={{ ...styles.btnMoreDetails, background: "#107C10", boxShadow: "0 12px 36px rgba(16,124,16,0.22)" }}>More Details</Link>
                   ) : index === 2 ? (
-                    <Link to="/project3" style={styles.btnMoreDetails}>More Details</Link>
+                    <Link to="/project3" style={{ ...styles.btnMoreDetails, background: "#2563eb", boxShadow: "0 12px 36px rgba(37,99,235,0.22)" }}>More Details</Link>
                   ) : (
                     <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
                   )}
