@@ -192,7 +192,7 @@ function ProjectHeader() {
       <section className="project-header-section" style={{ background: "#fff", padding: "120px 96px 60px" }}>
         <div className="project-header-container" style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 64, alignItems: "flex-start" }}>
           {/* Left - Image */}
-          <div className="project-header-image" style={{ flex: "0 0 55%", position: "sticky", top: 120 }}>
+          <div className="project-header-image" style={{ flex: "0 0 45%", position: "sticky", top: 120 }}>
             <div style={{ borderRadius: 20, overflow: "hidden" }}>
               <img
                 src={PROJECT_DATA.image}
@@ -203,7 +203,7 @@ function ProjectHeader() {
           </div>
 
           {/* Right - Details */}
-          <div className="project-header-details" style={{ flex: "1 1 45%" }}>
+          <div className="project-header-details" style={{ flex: "1 1 55%" }}>
             <div style={{ fontFamily: "'Poppins', sans-serif", fontSize: 15, color: ACCENT, letterSpacing: "2px", textTransform: "uppercase", marginBottom: 8 }}>
               Project Details
             </div>
