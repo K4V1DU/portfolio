@@ -193,15 +193,15 @@ function Nav() {
           ))}
         </ul>
         <a
-          className="nav-download-btn"
-          href="/cv.pdf"
-          download
-          style={{ ...styles.downloadBtn, ...(cvHovered ? styles.downloadBtnHover : {}) }}
-          onMouseEnter={() => setCvHovered(true)}
-          onMouseLeave={() => setCvHovered(false)}
-        >
-          <span style={styles.downloadIcon}>⬇</span>Download CV
-        </a>
+           className="nav-download-btn"
+  href="/cv.pdf"
+  download="Kavidu-Purnamal-CV.pdf"
+  style={{ ...styles.downloadBtn, ...(cvHovered ? styles.downloadBtnHover : {}) }}
+  onMouseEnter={() => setCvHovered(true)}
+  onMouseLeave={() => setCvHovered(false)}
+>
+  <span style={styles.downloadIcon}>⬇</span>Download CV
+</a>
         <button
           className="hamburger-btn"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -221,7 +221,7 @@ function Nav() {
             <a key={l} href={`#${l === "About" ? "about-me" : l.toLowerCase()}`} style={styles.mobileLink} onClick={() => setMenuOpen(false)}>{l}</a>
           ))}
           <div style={{ padding: "16px 24px 8px" }}>
-            <a href="/cv.pdf" download style={styles.mobileCta} onClick={() => setMenuOpen(false)}>⬇ Download CV</a>
+            <a href="/cv.pdf" download="Kavidu-Purnamal-CV.pdf" style={styles.mobileCta} onClick={() => setMenuOpen(false)}>⬇ Download CV</a>
           </div>
         </div>
       )}
