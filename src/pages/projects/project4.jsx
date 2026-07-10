@@ -207,7 +207,7 @@ function ProjectHeader() {
       <section className="project-header-section" style={{ background: "#fff", padding: "120px 96px 60px" }}>
         <div className="project-header-container" style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 64, alignItems: "flex-start" }}>
           <div className="project-header-image" style={{ flex: "0 0 45%", position: "sticky", top: 120 }}>
-            <div style={{ borderRadius: 20, overflow: "hidden" }}>
+            <div style={{ borderRadius: 20, overflow: "hidden", boxShadow: "-18px 18px 30px rgba(0, 0, 0, 0.33)" }}>
               {PROJECT_DATA.video ? (
                 <video
                   src={PROJECT_DATA.video}
