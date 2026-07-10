@@ -25,6 +25,7 @@ const PROJECT_DATA = {
   repo: "https://github.com/K4V1DU/SnakeMultiplayer.git",
   stack: "Unity · C# · Multiplayer · Game Design · Prefabs",
   image: "/images/project665.png",
+  video: "/images/project4/gameplay.mp4",
 };
 
 const SCREENSHOTS = [
@@ -207,11 +208,23 @@ function ProjectHeader() {
         <div className="project-header-container" style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 64, alignItems: "flex-start" }}>
           <div className="project-header-image" style={{ flex: "0 0 45%", position: "sticky", top: 120 }}>
             <div style={{ borderRadius: 20, overflow: "hidden" }}>
-              <img
-                src={PROJECT_DATA.image}
-                alt={PROJECT_DATA.name}
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
+              {PROJECT_DATA.video ? (
+                <video
+                  src={PROJECT_DATA.video}
+                  poster={PROJECT_DATA.image}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
+                />
+              ) : (
+                <img
+                  src={PROJECT_DATA.image}
+                  alt={PROJECT_DATA.name}
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                />
+              )}
             </div>
           </div>
 
