@@ -543,7 +543,7 @@ function Projects() {
             >
               <div 
                 className="project-image-container" 
-                style={{ ...styles.projectImageContainer, cursor: "pointer" }}
+                style={{ ...styles.projectImageContainer, cursor: "pointer", boxShadow: p.name === "Snakes Multiplayer" ? "0 12px 36px rgba(0,0,0,0.12)" : undefined }}
                 onClick={() => setLightboxImage(p.video || p.image)}
               >
                 {p.video ? (
@@ -1034,7 +1034,7 @@ const styles = {
   projectsContainer: { display: "flex", flexDirection: "column", gap: 80, marginTop: 24 },
   projectShowcase: { display: "flex", alignItems: "stretch", gap: 48, borderRadius: 20, overflow: "hidden", transition: "transform 0.3s ease" },
   projectImageContainer: { flex: "0 0 35%", width: "35%", height: 340, borderRadius: 16, overflow: "hidden", flexShrink: 0, position: "relative" },
-  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease", borderRadius: 12, boxShadow: "0 12px 36px rgba(0,0,0,0.12)" },
+  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease", borderRadius: 12, boxShadow: "none" },
   projectImageOverlay: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(15,43,43,0.3)", backdropFilter: "blur(2px)", opacity: 0, transition: "opacity 0.3s ease" },
   projectEmoji: { fontSize: 64 },
   projectContentContainer: { flex: "1 1 65%", minWidth: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 48px" },
