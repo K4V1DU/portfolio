@@ -538,7 +538,11 @@ function Projects() {
           return (
             <div
               key={p.name + index}
-              style={{ ...styles.projectShowcase, flexDirection: isEven ? "row" : "row-reverse" }}
+              style={{
+                ...styles.projectShowcase,
+                flexDirection: isEven ? "row" : "row-reverse",
+                overflow: p.name === "Snakes Multiplayer" ? "visible" : styles.projectShowcase.overflow,
+              }}
               className="project-showcase"
             >
               <div 
@@ -546,7 +550,7 @@ function Projects() {
                 style={{
                   ...styles.projectImageContainer,
                   cursor: "pointer",
-                  boxShadow: p.name === "Snakes Multiplayer" ? "0 12px 36px rgba(0,0,0,0.12)" : undefined,
+                  boxShadow: p.name === "Snakes Multiplayer" ? "0 20px 60px rgba(0,0,0,0.18)" : undefined,
                   aspectRatio: p.name === "Snakes Multiplayer" ? "16/9" : undefined,
                   height: p.name === "Snakes Multiplayer" ? undefined : styles.projectImageContainer.height,
                   width: p.name === "Snakes Multiplayer" ? "30%" : styles.projectImageContainer.width,
