@@ -44,7 +44,18 @@ const PROJECTS = [
     stack: "React · Node.js · Spring Boot · JWT · OAuth2 · MySQL",
     image: "/images/project11.png",
   },
-
+  {
+    emoji: "🐍",
+    name: "Snakes Multiplayer",
+    tags: ["Unity", "Multiplayer", "2026"],
+    desc: "A Unity-based multiplayer snake game featuring arena battles, power-ups, and fast-paced competitive gameplay.",
+    details:
+      "Developed in Unity with networked multiplayer support, custom prefab systems, and polished game UI. The experience includes match-based snake combat, player area HUDs, and reusable food/player/tail prefab assets.",
+    live: "#",
+    repo: "#",
+    stack: "Unity · C# · Multiplayer · Prefabs",
+    image: "/images/project665.png",
+  },
 ];
 
 const EDUCATION = [
@@ -550,6 +561,8 @@ function Projects() {
                     <Link to="/project2" style={{ ...styles.btnMoreDetails, background: "#107C10", boxShadow: "0 12px 36px rgba(16,124,16,0.22)" }}>More Details</Link>
                   ) : index === 2 ? (
                     <Link to="/project3" style={{ ...styles.btnMoreDetails, background: "#2563eb", boxShadow: "0 12px 36px rgba(37,99,235,0.22)" }}>More Details</Link>
+                  ) : index === 3 ? (
+                    <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00ff00", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
                   ) : (
                     <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
                   )}
