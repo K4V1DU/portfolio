@@ -550,7 +550,7 @@ function Projects() {
                 style={{
                   ...styles.projectImageContainer,
                   cursor: "pointer",
-                  boxShadow: p.name === "Snakes Multiplayer" ? "0 20px 60px rgba(0,0,0,0.18)" : undefined,
+                  boxShadow: p.name === "Snakes Multiplayer" ? "0 10px 50px rgba(0, 0, 0, 0.58)" : undefined,
                   aspectRatio: p.name === "Snakes Multiplayer" ? "16/9" : undefined,
                   height: p.name === "Snakes Multiplayer" ? undefined : styles.projectImageContainer.height,
                   width: p.name === "Snakes Multiplayer" ? "30%" : styles.projectImageContainer.width,
