@@ -543,7 +543,15 @@ function Projects() {
             >
               <div 
                 className="project-image-container" 
-                style={{ ...styles.projectImageContainer, cursor: "pointer", boxShadow: p.name === "Snakes Multiplayer" ? "0 12px 36px rgba(0,0,0,0.12)" : undefined }}
+                style={{
+                  ...styles.projectImageContainer,
+                  cursor: "pointer",
+                  boxShadow: p.name === "Snakes Multiplayer" ? "0 12px 36px rgba(0,0,0,0.12)" : undefined,
+                  aspectRatio: p.name === "Snakes Multiplayer" ? "16/9" : undefined,
+                  height: p.name === "Snakes Multiplayer" ? undefined : styles.projectImageContainer.height,
+                  width: p.name === "Snakes Multiplayer" ? "30%" : styles.projectImageContainer.width,
+                  maxWidth: p.name === "Snakes Multiplayer" ? 420 : undefined,
+                }}
                 onClick={() => setLightboxImage(p.video || p.image)}
               >
                 {p.video ? (
@@ -554,13 +562,26 @@ function Projects() {
                     loop
                     muted
                     playsInline
-                    style={styles.projectImage}
+                    style={
+                      p.name === "Snakes Multiplayer"
+                        ? { ...styles.projectImage, objectFit: "cover", width: "100%", height: "100%" }
+                        : styles.projectImage
+                    }
                     className="project-image"
                     onPlay={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
                     onVolumeChange={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
                   />
                 ) : (
-                  <img src={p.image} alt={p.name} style={styles.projectImage} className="project-image" />
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    style={
+                      p.name === "Snakes Multiplayer"
+                        ? { ...styles.projectImage, objectFit: "cover", width: "100%", height: "100%" }
+                        : styles.projectImage
+                    }
+                    className="project-image"
+                  />
                 )}
                 <div style={styles.projectImageOverlay} className="project-image-overlay">
                   <span style={styles.projectEmoji}>{p.emoji}</span>
