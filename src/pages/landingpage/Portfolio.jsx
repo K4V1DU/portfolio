@@ -538,12 +538,24 @@ function Projects() {
           return (
             <div
               key={p.name + index}
-              style={{ ...styles.projectShowcase, flexDirection: isEven ? "row" : "row-reverse" }}
+              style={{
+                ...styles.projectShowcase,
+                flexDirection: isEven ? "row" : "row-reverse",
+                overflow: p.name === "Snakes Multiplayer" ? "visible" : styles.projectShowcase.overflow,
+              }}
               className="project-showcase"
             >
               <div 
                 className="project-image-container" 
-                style={{ ...styles.projectImageContainer, cursor: "pointer" }}
+                style={{
+                  ...styles.projectImageContainer,
+                  cursor: "pointer",
+                  boxShadow: p.name === "Snakes Multiplayer" ? "-18px 18px 30px rgba(0, 0, 0, 0.33)" : undefined,
+                  aspectRatio: p.name === "Snakes Multiplayer" ? "16/9" : undefined,
+                  height: p.name === "Snakes Multiplayer" ? undefined : styles.projectImageContainer.height,
+                  width: p.name === "Snakes Multiplayer" ? "30%" : styles.projectImageContainer.width,
+                  maxWidth: p.name === "Snakes Multiplayer" ? 420 : undefined,
+                }}
                 onClick={() => setLightboxImage(p.video || p.image)}
               >
                 {p.video ? (
@@ -554,11 +566,26 @@ function Projects() {
                     loop
                     muted
                     playsInline
-                    style={styles.projectImage}
+                    style={
+                      p.name === "Snakes Multiplayer"
+                        ? { ...styles.projectImage, objectFit: "cover", width: "100%", height: "100%" }
+                        : styles.projectImage
+                    }
                     className="project-image"
+                    onPlay={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
+                    onVolumeChange={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
                   />
                 ) : (
-                  <img src={p.image} alt={p.name} style={styles.projectImage} className="project-image" />
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    style={
+                      p.name === "Snakes Multiplayer"
+                        ? { ...styles.projectImage, objectFit: "cover", width: "100%", height: "100%" }
+                        : styles.projectImage
+                    }
+                    className="project-image"
+                  />
                 )}
                 <div style={styles.projectImageOverlay} className="project-image-overlay">
                   <span style={styles.projectEmoji}>{p.emoji}</span>
@@ -610,14 +637,18 @@ function Projects() {
           >
             ✕
           </button>
-          {lightboxImage.endsWith && lightboxImage.endsWith('.mp4') ? (
+          {typeof lightboxImage === 'string' && lightboxImage.endsWith('.mp4') ? (
             <video
               src={lightboxImage}
               controls
               autoPlay
               loop
+              muted
+              playsInline
               style={styles.lightboxImage}
               onClick={(e) => e.stopPropagation()}
+              onPlay={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
+              onVolumeChange={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
             />
           ) : (
             <img 
@@ -1028,7 +1059,7 @@ const styles = {
   projectsContainer: { display: "flex", flexDirection: "column", gap: 80, marginTop: 24 },
   projectShowcase: { display: "flex", alignItems: "stretch", gap: 48, borderRadius: 20, overflow: "hidden", transition: "transform 0.3s ease" },
   projectImageContainer: { flex: "0 0 35%", width: "35%", height: 340, borderRadius: 16, overflow: "hidden", flexShrink: 0, position: "relative" },
-  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease" },
+  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease", borderRadius: 12, boxShadow: "none" },
   projectImageOverlay: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(15,43,43,0.3)", backdropFilter: "blur(2px)", opacity: 0, transition: "opacity 0.3s ease" },
   projectEmoji: { fontSize: 64 },
   projectContentContainer: { flex: "1 1 65%", minWidth: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 48px" },
