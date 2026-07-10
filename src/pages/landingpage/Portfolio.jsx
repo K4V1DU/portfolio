@@ -26,7 +26,7 @@ const PROJECTS = [
     desc: "A mobile application UI/UX design inspired by the Xbox app — featuring a sleek game library browser, friend activity feed, achievement tracking, and a dark-themed dashboard built natively in Android Studio.",
     details:
       "Designed and prototyped entirely in Android Studio using Kotlin. Focused on delivering a console-quality feel on mobile — with smooth navigation, custom components, and an immersive dark UI that mirrors the Xbox ecosystem's visual language.",
-    live: "#",
+    live: "https://github.com/K4V1DU/SnakeMultiplayer.git",
     repo: "#",
     stack: "Kotlin · Android Studio · XML Layouts · Material Design",
     image: "/images/project3.png",
@@ -51,10 +51,11 @@ const PROJECTS = [
     desc: "A Unity-based multiplayer snake game featuring arena battles, power-ups, and fast-paced competitive gameplay.",
     details:
       "Developed in Unity with networked multiplayer support, custom prefab systems, and polished game UI. The experience includes match-based snake combat, player area HUDs, and reusable food/player/tail prefab assets.",
-    live: "#",
-    repo: "#",
+    live: "https://github.com/K4V1DU/SnakeMultiplayer.git",
+    repo: "https://github.com/K4V1DU/SnakeMultiplayer.git",
     stack: "Unity · C# · Multiplayer · Prefabs",
     image: "/images/project665.png",
+    video: "/images/project4/gameplay.mp4",
   },
 ];
 
@@ -543,9 +544,22 @@ function Projects() {
               <div 
                 className="project-image-container" 
                 style={{ ...styles.projectImageContainer, cursor: "pointer" }}
-                onClick={() => setLightboxImage(p.image)}
+                onClick={() => setLightboxImage(p.video || p.image)}
               >
-                <img src={p.image} alt={p.name} style={styles.projectImage} className="project-image" />
+                {p.video ? (
+                  <video
+                    src={p.video}
+                    poster={p.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={styles.projectImage}
+                    className="project-image"
+                  />
+                ) : (
+                  <img src={p.image} alt={p.name} style={styles.projectImage} className="project-image" />
+                )}
                 <div style={styles.projectImageOverlay} className="project-image-overlay">
                   <span style={styles.projectEmoji}>{p.emoji}</span>
                 </div>
@@ -562,7 +576,10 @@ function Projects() {
                   ) : index === 2 ? (
                     <Link to="/project3" style={{ ...styles.btnMoreDetails, background: "#2563eb", boxShadow: "0 12px 36px rgba(37,99,235,0.22)" }}>More Details</Link>
                   ) : index === 3 ? (
-                    <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00ff00", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
+                    <>
+                      <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00ff00", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
+                      <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "#00ff00", border: "2px solid #00ff00", boxShadow: "none" }}>GitHub</a>
+                    </>
                   ) : (
                     <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
                   )}
@@ -593,12 +610,23 @@ function Projects() {
           >
             ✕
           </button>
-          <img 
-            src={lightboxImage} 
-            alt="Project preview" 
-            style={styles.lightboxImage}
-            onClick={(e) => e.stopPropagation()}
-          />
+          {lightboxImage.endsWith && lightboxImage.endsWith('.mp4') ? (
+            <video
+              src={lightboxImage}
+              controls
+              autoPlay
+              loop
+              style={styles.lightboxImage}
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <img 
+              src={lightboxImage} 
+              alt="Project preview" 
+              style={styles.lightboxImage}
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
         </div>
       )}
     </section>
