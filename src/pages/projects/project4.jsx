@@ -217,6 +217,8 @@ function ProjectHeader() {
                   muted
                   playsInline
                   style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
+                  onPlay={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
+                  onVolumeChange={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
                 />
               ) : (
                 <img

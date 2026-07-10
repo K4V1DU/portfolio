@@ -556,6 +556,8 @@ function Projects() {
                     playsInline
                     style={styles.projectImage}
                     className="project-image"
+                    onPlay={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
+                    onVolumeChange={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
                   />
                 ) : (
                   <img src={p.image} alt={p.name} style={styles.projectImage} className="project-image" />
@@ -610,14 +612,18 @@ function Projects() {
           >
             ✕
           </button>
-          {lightboxImage.endsWith && lightboxImage.endsWith('.mp4') ? (
+          {typeof lightboxImage === 'string' && lightboxImage.endsWith('.mp4') ? (
             <video
               src={lightboxImage}
               controls
               autoPlay
               loop
+              muted
+              playsInline
               style={styles.lightboxImage}
               onClick={(e) => e.stopPropagation()}
+              onPlay={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
+              onVolumeChange={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
             />
           ) : (
             <img 
@@ -1028,7 +1034,7 @@ const styles = {
   projectsContainer: { display: "flex", flexDirection: "column", gap: 80, marginTop: 24 },
   projectShowcase: { display: "flex", alignItems: "stretch", gap: 48, borderRadius: 20, overflow: "hidden", transition: "transform 0.3s ease" },
   projectImageContainer: { flex: "0 0 35%", width: "35%", height: 340, borderRadius: 16, overflow: "hidden", flexShrink: 0, position: "relative" },
-  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease" },
+  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease", borderRadius: 12, boxShadow: "0 12px 36px rgba(0,0,0,0.12)" },
   projectImageOverlay: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(15,43,43,0.3)", backdropFilter: "blur(2px)", opacity: 0, transition: "opacity 0.3s ease" },
   projectEmoji: { fontSize: 64 },
   projectContentContainer: { flex: "1 1 65%", minWidth: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 48px" },
