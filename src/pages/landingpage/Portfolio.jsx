@@ -55,7 +55,20 @@ const PROJECTS = [
     repo: "https://github.com/K4V1DU/SnakeMultiplayer.git",
     stack: "Unity · C# · Multiplayer · Prefabs",
     image: "/images/project665.png",
-    video: "/images/project4/gameplay.mp4",
+    video: "/images/project4/gameplay1.mp4",
+  },
+  {
+    emoji: "🍳",
+    name: "Kitchen Chaos",
+    tags: ["Unity", "C#", "Single-Player", "2026"],
+    desc: "A fast-paced Unity cooking game with reactive recipe systems, kitchen time pressure, and satisfying food prep gameplay.",
+    details:
+      "Kitchen Chaos was built in Unity with C#, focusing on modular game components, event-driven UI updates, and dynamic recipe/inventory systems. This project sharpened my OOP, inheritance, and runtime game logic skills while delivering a polished single-player experience.",
+    live: "https://github.com/K4V1DU/Kitchenchaos.git",
+    repo: "https://github.com/K4V1DU/Kitchenchaos.git",
+    stack: "Unity · C# · OOP · Event Handling · Game Systems",
+    image: "/images/project5.png",
+    video: "/images/project5/gameplay2.mp4",
   },
 ];
 
@@ -550,11 +563,7 @@ function Projects() {
                 style={{
                   ...styles.projectImageContainer,
                   cursor: "pointer",
-                  boxShadow: p.name === "Snakes Multiplayer" ? "-18px 18px 30px rgba(0, 0, 0, 0.33)" : undefined,
-                  aspectRatio: p.name === "Snakes Multiplayer" ? "16/9" : undefined,
-                  height: p.name === "Snakes Multiplayer" ? undefined : styles.projectImageContainer.height,
-                  width: p.name === "Snakes Multiplayer" ? "30%" : styles.projectImageContainer.width,
-                  maxWidth: p.name === "Snakes Multiplayer" ? 420 : undefined,
+                  ...(p.name === "Kitchen Chaos" ? { flex: "0 0 40%", width: "40%", height: 420 } : {}),
                 }}
                 onClick={() => setLightboxImage(p.video || p.image)}
               >
@@ -580,7 +589,7 @@ function Projects() {
                     src={p.image}
                     alt={p.name}
                     style={
-                      p.name === "Snakes Multiplayer"
+                      p.name === "Snakes Multiplayer" || p.name === "Kitchen Chaos"
                         ? { ...styles.projectImage, objectFit: "cover", width: "100%", height: "100%" }
                         : styles.projectImage
                     }
@@ -604,8 +613,13 @@ function Projects() {
                     <Link to="/project3" style={{ ...styles.btnMoreDetails, background: "#2563eb", boxShadow: "0 12px 36px rgba(37,99,235,0.22)" }}>More Details</Link>
                   ) : index === 3 ? (
                     <>
-                      <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00ff00", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
-                      <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "#00ff00", border: "2px solid #00ff00", boxShadow: "none" }}>GitHub</a>
+                      <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00c200", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
+                      <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "#00c200", border: "2px solid #00c200", boxShadow: "none" }}>GitHub</a>
+                    </>
+                  ) : index === 4 ? (
+                    <>
+                      <Link to="/project5" style={{ ...styles.btnMoreDetails, background: "rgb(240, 116, 0)", boxShadow: "0 12px 36px rgba(240, 116, 0, 0.22)" }}>More Details</Link>
+                      <a href={p.repo} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "rgb(240, 116, 0)", border: "2px solid rgb(240, 116, 0)", boxShadow: "none" }}>GitHub</a>
                     </>
                   ) : (
                     <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
