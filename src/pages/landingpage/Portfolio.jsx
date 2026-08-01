@@ -54,7 +54,7 @@ const PROJECTS = [
     live: "https://github.com/K4V1DU/SnakeMultiplayer.git",
     repo: "https://github.com/K4V1DU/SnakeMultiplayer.git",
     stack: "Unity · C# · Multiplayer · Prefabs",
-    image: "/images/project665.png",
+    image: "/images/image667.png",
     video: "/images/project4/gameplay1.mp4",
   },
   {
@@ -67,7 +67,7 @@ const PROJECTS = [
     live: "https://github.com/K4V1DU/Kitchenchaos.git",
     repo: "https://github.com/K4V1DU/Kitchenchaos.git",
     stack: "Unity · C# · OOP · Event Handling · Game Systems",
-    image: "/images/project5.png",
+    image: "/images/image666.png",
     video: "/images/project5/gameplay2.mp4",
   },
 ];
