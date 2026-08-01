@@ -57,6 +57,19 @@ const PROJECTS = [
     image: "/images/project665.png",
     video: "/images/project4/gameplay1.mp4",
   },
+  {
+    emoji: "🍳",
+    name: "Kitchen Chaos",
+    tags: ["Unity", "C#", "Single-Player", "2026"],
+    desc: "A fast-paced Unity cooking game with reactive recipe systems, kitchen time pressure, and satisfying food prep gameplay.",
+    details:
+      "Kitchen Chaos was built in Unity with C#, focusing on modular game components, event-driven UI updates, and dynamic recipe/inventory systems. This project sharpened my OOP, inheritance, and runtime game logic skills while delivering a polished single-player experience.",
+    live: "#",
+    repo: "#",
+    stack: "Unity · C# · OOP · Event Handling · Game Systems",
+    image: "/images/project5.png",
+    video: "/images/project5/gameplay2.mp4",
+  },
 ];
 
 const EDUCATION = [
@@ -550,6 +563,7 @@ function Projects() {
                 style={{
                   ...styles.projectImageContainer,
                   cursor: "pointer",
+                  ...(p.name === "Kitchen Chaos" ? { flex: "0 0 40%", width: "40%", height: 420 } : {}),
                 }}
                 onClick={() => setLightboxImage(p.video || p.image)}
               >
@@ -575,7 +589,7 @@ function Projects() {
                     src={p.image}
                     alt={p.name}
                     style={
-                      p.name === "Snakes Multiplayer"
+                      p.name === "Snakes Multiplayer" || p.name === "Kitchen Chaos"
                         ? { ...styles.projectImage, objectFit: "cover", width: "100%", height: "100%" }
                         : styles.projectImage
                     }
@@ -602,6 +616,8 @@ function Projects() {
                       <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00ff00", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
                       <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "#00ff00", border: "2px solid #00ff00", boxShadow: "none" }}>GitHub</a>
                     </>
+                  ) : index === 4 ? (
+                    <Link to="/project5" style={{ ...styles.btnMoreDetails, background: "#b9d200", boxShadow: "0 12px 36px rgba(185,210,0,0.22)" }}>More Details</Link>
                   ) : (
                     <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
                   )}
