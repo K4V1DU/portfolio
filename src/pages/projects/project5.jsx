@@ -35,19 +35,29 @@ const SCREENSHOTS = [
     image: "/images/project5/image1.png",
   },
   {
-    title: "Recipe System",
-    desc: "A sequence of dishes and recipe cards managed through dynamic lists, with visual feedback for completed orders.",
+    title: "Visual Plate Prefab",
+    desc: "This setup maps ingredient ScriptableObjects to their 3D models so the plate dynamically shows toppings as they're added.",
     image: "/images/project5/image2.png",
   },
   {
-    title: "Ingredients",
-    desc: "Interactive ingredient objects and inventory elements used to assemble meals and fulfill customer orders.",
+    title: "Stove Counter Prefab",
+    desc: "This setup manages frying and burning recipe ScriptableObjects to handle cooking progress, sizzle visual effects, and cooking progress bar UI updates while frying meat.",
     image: "/images/project5/image3.png",
   },
   {
-    title: "Game UI",
-    desc: "The clean in-game UI designed to track score, time, and active recipe requirements during gameplay.",
+    title: "Moving Visuals Shader Graph",
+    desc: "This node graph offsets UV coordinates over time using a Speed vector to animate scrolling textures like directional arrows for the delivery counter.",
     image: "/images/project5/image4.png",
+  },
+  {
+    title: "Player Input Actions Asset",
+    desc: "Defines key bindings for movement , Interact , and Alternate Interact  to control the player.",
+    image: "/images/project5/image5.png",
+  },
+  {
+    title: "Game Logic Scripts",
+    desc: "Handles character movement, collision detection, and interactive counter behaviors like plate spawning, item handling, and event management.",
+    image: "/images/project5/image6.png",
   },
 ];
 
