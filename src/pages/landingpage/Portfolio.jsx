@@ -55,7 +55,7 @@ const PROJECTS = [
     repo: "https://github.com/K4V1DU/SnakeMultiplayer.git",
     stack: "Unity · C# · Multiplayer · Prefabs",
     image: "/images/project665.png",
-    video: "/images/project4/gameplay.mp4",
+    video: "/images/project4/gameplay1.mp4",
   },
 ];
 
@@ -550,11 +550,6 @@ function Projects() {
                 style={{
                   ...styles.projectImageContainer,
                   cursor: "pointer",
-                  boxShadow: p.name === "Snakes Multiplayer" ? "-18px 18px 30px rgba(0, 0, 0, 0.33)" : undefined,
-                  aspectRatio: p.name === "Snakes Multiplayer" ? "16/9" : undefined,
-                  height: p.name === "Snakes Multiplayer" ? undefined : styles.projectImageContainer.height,
-                  width: p.name === "Snakes Multiplayer" ? "30%" : styles.projectImageContainer.width,
-                  maxWidth: p.name === "Snakes Multiplayer" ? 420 : undefined,
                 }}
                 onClick={() => setLightboxImage(p.video || p.image)}
               >
