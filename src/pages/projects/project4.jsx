@@ -25,7 +25,7 @@ const PROJECT_DATA = {
   repo: "https://github.com/K4V1DU/SnakeMultiplayer.git",
   stack: "Unity · C# · Multiplayer · Game Design · Prefabs",
   image: "/images/project665.png",
-  video: "/images/project4/gameplay.mp4",
+  video: "/images/project4/gameplay1.mp4",
 };
 
 const SCREENSHOTS = [
@@ -206,8 +206,8 @@ function ProjectHeader() {
       `}</style>
       <section className="project-header-section" style={{ background: "#fff", padding: "120px 96px 60px" }}>
         <div className="project-header-container" style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 64, alignItems: "flex-start" }}>
-          <div className="project-header-image" style={{ flex: "0 0 45%", position: "sticky", top: 120 }}>
-            <div style={{ borderRadius: 20, overflow: "hidden", boxShadow: "-18px 18px 30px rgba(0, 0, 0, 0.33)" }}>
+          <div className="project-header-image" style={{ flex: "0 0 45%", position: "sticky", top: 120, background: "#fff", borderRadius: 20, overflow: "hidden" }}>
+            <div style={{ borderRadius: 20, overflow: "hidden", background: "#fff", minHeight: 340, display: "flex", alignItems: "stretch", justifyContent: "center" }}>
               {PROJECT_DATA.video ? (
                 <video
                   src={PROJECT_DATA.video}
@@ -216,7 +216,7 @@ function ProjectHeader() {
                   loop
                   muted
                   playsInline
-                  style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
+                  style={{ width: "100%", height: "100%", minHeight: 340, display: "block", objectFit: "cover", background: "#fff" }}
                   onPlay={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
                   onVolumeChange={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
                 />
