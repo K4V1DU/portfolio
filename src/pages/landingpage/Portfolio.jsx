@@ -119,7 +119,7 @@ const CONTACT_INFO = [
 ══════════════════════════════════════════ */
 const CREAM = "#ffffff";
 const DARK = "#0f2b2b";
-const ACCENT = "#ff8a3d";
+const ACCENT = "#ff7011";
 const MUTED = "#6b6f66";
 const BORDER = "rgba(15,43,43,0.08)";
 
