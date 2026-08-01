@@ -613,11 +613,11 @@ function Projects() {
                     <Link to="/project3" style={{ ...styles.btnMoreDetails, background: "#2563eb", boxShadow: "0 12px 36px rgba(37,99,235,0.22)" }}>More Details</Link>
                   ) : index === 3 ? (
                     <>
-                      <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00ff00", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
+                      <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00c200", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
                       <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "#00ff00", border: "2px solid #00ff00", boxShadow: "none" }}>GitHub</a>
                     </>
                   ) : index === 4 ? (
-                    <Link to="/project5" style={{ ...styles.btnMoreDetails, background: "#b9d200", boxShadow: "0 12px 36px rgba(185,210,0,0.22)" }}>More Details</Link>
+                    <Link to="/project5" style={{ ...styles.btnMoreDetails, background: "#f07400", boxShadow: "0 12px 36px rgba(185,210,0,0.22)" }}>More Details</Link>
                   ) : (
                     <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
                   )}

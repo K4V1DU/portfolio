@@ -11,14 +11,14 @@ const NAV_LINKS = ["Work", "Services", "About", "Contact"];
 ══════════════════════════════════════════ */
 const CREAM = "#ffffff";
 const DARK = "#0f2b2b";
-const ACCENT = "#00ff00";
+const ACCENT = "#f07400";
 const MUTED = "#6b6f66";
 const BORDER = "rgba(15,43,43,0.08)";
 
 const PROJECT_DATA = {
   name: "Kitchen Chaos",
   tags: ["Unity", "C#", "Single-Player", "2026"],
-  desc: "Kitchen Chaos is a simple, fast-paced Unity cooking game featuring reactive recipes and time-pressure kitchen prep.",
+  desc: "A fast-paced single-player cooking game built in Unity, featuring frantic kitchen challenges, recipe management, and immersive food preparation gameplay.",
   details:
     "Built in C#, I leveraged interfaces for modular kitchen interactions and event handlers for decoupled UI and audio updates, sharpening my core OOP and runtime game logic skills.",
   live: "#",
@@ -319,7 +319,7 @@ function Screenshots() {
             <div style={{
               display: "inline-block",
               padding: "8px 24px",
-              background: "rgba(0,255,0,0.12)",
+              background: "rgba(240,116,0,0.12)",
               borderRadius: 30,
               marginBottom: 16,
               fontFamily: "'Poppins', sans-serif",
@@ -409,7 +409,7 @@ function Screenshots() {
                       width: 36,
                       height: 36,
                       borderRadius: "10px",
-                      background: "#00ff00",
+                      background: "#f07400",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -417,7 +417,7 @@ function Screenshots() {
                       fontFamily: "'Inter', sans-serif",
                       fontSize: 16,
                       fontWeight: 700,
-                      boxShadow: "0 4px 12px rgba(0,255,0,0.3)",
+                      boxShadow: "0 4px 12px rgba(240,116,0,0.3)",
                     }}>
                       {index + 1}
                     </div>
@@ -468,8 +468,8 @@ function Screenshots() {
                 position: "absolute",
                 top: "32px",
                 right: "32px",
-                background: "#00ff00",
-                border: "1px solid #00ff00",
+                background: "#f07400",
+                border: "1px solid #f07400",
                 color: "#fff",
                 fontSize: "24px",
                 width: 56,
@@ -487,11 +487,11 @@ function Screenshots() {
                 setLightboxImage(null);
               }}
               onMouseEnter={(e) => {
-                e.target.style.background = "#00ff00";
+                e.target.style.background = "#f07400";
                 e.target.style.transform = "scale(1.1)";
               }}
               onMouseLeave={(e) => {
-                e.target.style.background = "#00ff00";
+                e.target.style.background = "#f07400";
                 e.target.style.transform = "scale(1)";
               }}
               aria-label="Close lightbox"
