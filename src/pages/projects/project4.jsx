@@ -11,7 +11,7 @@ const NAV_LINKS = ["Work", "Services", "About", "Contact"];
 ══════════════════════════════════════════ */
 const CREAM = "#ffffff";
 const DARK = "#0f2b2b";
-const ACCENT = "#00ff00";
+const ACCENT = "#00c200";
 const MUTED = "#6b6f66";
 const BORDER = "rgba(15,43,43,0.08)";
 
@@ -252,7 +252,7 @@ function ProjectHeader() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  background: "#00ff00",
+                  background: "#00c200",
                   color: "#fff",
                   padding: "14px 32px",
                   borderRadius: 10,
@@ -408,7 +408,7 @@ function Screenshots() {
                       width: 36,
                       height: 36,
                       borderRadius: "10px",
-                      background: "#00ff00",
+                      background: "#00c200",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
