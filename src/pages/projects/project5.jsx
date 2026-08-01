@@ -18,9 +18,9 @@ const BORDER = "rgba(15,43,43,0.08)";
 const PROJECT_DATA = {
   name: "Kitchen Chaos",
   tags: ["Unity", "C#", "Single-Player", "2026"],
-  desc: "A fast-paced single-player cooking game built in Unity, featuring frantic kitchen challenges, recipe management, and immersive food preparation gameplay.",
+  desc: "Kitchen Chaos is a simple, fast-paced Unity cooking game featuring reactive recipes and time-pressure kitchen prep.",
   details:
-    "I recently completed building Kitchen Chaos, a fast-paced single-player cooking game developed in Unity using C#. This project was a huge step forward in my game development journey — I dove deep into Object-Oriented Programming, Inheritance and Interfaces for modular game components, Event Handlers for decoupled UI updates, and Dynamic Lists for counters, recipes, and inventory management. A massive shoutout to Code Monkey for the comprehensive tutorial and the quality 3D assets and sprites used in this build.",
+    "Built in C#, I leveraged interfaces for modular kitchen interactions and event handlers for decoupled UI and audio updates, sharpening my core OOP and runtime game logic skills.",
   live: "#",
   repo: "#",
   stack: "Unity · C# · OOP · Event Handling · Game Systems",
