@@ -65,7 +65,7 @@ const PROJECTS = [
     details:
       "Kitchen Chaos was built in Unity with C#, focusing on modular game components, event-driven UI updates, and dynamic recipe/inventory systems. This project sharpened my OOP, inheritance, and runtime game logic skills while delivering a polished single-player experience.",
     live: "#",
-    repo: "#",
+    repo: "https://github.com/K4V1DU/Kitchenchaos.git",
     stack: "Unity · C# · OOP · Event Handling · Game Systems",
     image: "/images/project5.png",
     video: "/images/project5/gameplay2.mp4",
@@ -614,10 +614,13 @@ function Projects() {
                   ) : index === 3 ? (
                     <>
                       <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00c200", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
-                      <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "#00ff00", border: "2px solid #00ff00", boxShadow: "none" }}>GitHub</a>
+                      <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "#00c200", border: "2px solid #00c200", boxShadow: "none" }}>GitHub</a>
                     </>
                   ) : index === 4 ? (
-                    <Link to="/project5" style={{ ...styles.btnMoreDetails, background: "#f07400", boxShadow: "0 12px 36px rgba(185,210,0,0.22)" }}>More Details</Link>
+                    <>
+                      <Link to="/project5" style={{ ...styles.btnMoreDetails, background: "rgb(240, 116, 0)", boxShadow: "0 12px 36px rgba(240, 116, 0, 0.22)" }}>More Details</Link>
+                      <a href={p.repo} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "rgb(240, 116, 0)", border: "2px solid rgb(240, 116, 0)", boxShadow: "none" }}>GitHub</a>
+                    </>
                   ) : (
                     <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
                   )}
