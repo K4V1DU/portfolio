@@ -22,7 +22,7 @@ const PROJECT_DATA = {
   details:
     "Built in C#, I leveraged interfaces for modular kitchen interactions and event handlers for decoupled UI and audio updates, sharpening my core OOP and runtime game logic skills.",
   live: "#",
-  repo: "#",
+  repo: "https://github.com/K4V1DU/Kitchenchaos.git",
   stack: "Unity · C# · OOP · Event Handling · Game Systems",
   image: "/images/project5.png",
   video: "/images/project5/gameplay2.mp4",
@@ -233,7 +233,7 @@ function ProjectHeader() {
             </p>
             <div style={{ display: "flex", gap: 16, marginTop: 32, flexWrap: "wrap", alignItems: "center" }}>
               <a
-                href={PROJECT_DATA.live}
+                href={PROJECT_DATA.repo}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -248,27 +248,14 @@ function ProjectHeader() {
                   fontSize: 15,
                   fontWeight: 700,
                   textDecoration: "none",
+                  boxShadow: "0 12px 36px rgba(240,116,0,0.22)",
+                  transition: "transform 0.2s",
                 }}
-              >
-                Live Demo
-              </a>
-              <a
-                href={PROJECT_DATA.repo}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: "transparent",
-                  color: ACCENT,
-                  padding: "14px 32px",
-                  borderRadius: 10,
-                  fontFamily: "'Poppins', sans-serif",
-                  fontSize: 15,
-                  fontWeight: 700,
-                  textDecoration: "none",
-                  border: `2px solid ${ACCENT}`,
+                onMouseEnter={(e) => {
+                  e.target.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = "translateY(0)";
                 }}
               >
                 GitHub

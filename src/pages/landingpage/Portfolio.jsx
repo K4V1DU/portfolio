@@ -64,7 +64,7 @@ const PROJECTS = [
     desc: "A fast-paced Unity cooking game with reactive recipe systems, kitchen time pressure, and satisfying food prep gameplay.",
     details:
       "Kitchen Chaos was built in Unity with C#, focusing on modular game components, event-driven UI updates, and dynamic recipe/inventory systems. This project sharpened my OOP, inheritance, and runtime game logic skills while delivering a polished single-player experience.",
-    live: "#",
+    live: "https://github.com/K4V1DU/Kitchenchaos.git",
     repo: "https://github.com/K4V1DU/Kitchenchaos.git",
     stack: "Unity · C# · OOP · Event Handling · Game Systems",
     image: "/images/project5.png",
