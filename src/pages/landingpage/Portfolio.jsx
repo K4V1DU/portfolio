@@ -14,7 +14,7 @@ const PROJECTS = [
     details:
       "This platform revolutionizes how students and professionals find accommodation. Built with cutting-edge technology, it provides seamless browsing, secure payments, and verified landlords.",
     live: "https://boodima.lk",
-    repo: "#",
+    repo: "https://github.com/K4V1DU/boodima.git",
     stack: "MongoDB · Express · React · Node",
     image: "/images/project4.png",
     folder: "project1",
@@ -43,7 +43,7 @@ const PROJECTS = [
     details:
       "A full-stack booking system built with React, Node.js, and Spring Boot. It provides tailored workflows for both students and lecturers to request and manage physical campus assets, secured by a role-based authentication layer using JWT and OAuth2.",
     live: "#",
-    repo: "#",
+    repo: "https://github.com/K4V1DU/it3030-paf-2026-smart-campus-group50.git",
     stack: "React · Node.js · Spring Boot · JWT · OAuth2 · MySQL",
     image: "/images/project11.png",
     folder: "project3",
@@ -635,7 +635,7 @@ function Certifications() {
                 background: "#fff",
                 transition: "transform 0.25s ease, box-shadow 0.25s ease",
                 transform: hovered === i ? "translateY(-4px)" : "none",
-                boxShadow: hovered === i ? "0 14px 36px rgba(15,43,43,0.12)" : "none",
+                boxShadow: "0 14px 36px rgba(15,43,43,0.12)",
               }}
             >
               <div
@@ -1010,11 +1010,8 @@ function Projects() {
                   >
                     More Details
                   </button>
-                  {index >= 3 && (
+                  {p.repo && p.repo.startsWith("http") && (
                     <a href={p.repo} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: accents[index], border: `2px solid ${accents[index]}`, boxShadow: "none" }}>GitHub</a>
-                  )}
-                  {index === 0 && (
-                    <a href="https://boodima.lk" target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px" }}>Live Demo</a>
                   )}
                   <span style={styles.projectStack}>{p.stack}</span>
                 </div>
@@ -1102,7 +1099,7 @@ function Services() {
       tags: ["MERN", "Rapid Build", "Startup", "MVP"],
     },
   ];
-  const iconNums = [1, 6, 3, 2, 12, 13, 9, 8, 7, 15, 16, 17];
+  const iconNums = [1, 6, 3, 2, 12, 13, 9, 8, 7, 26, 25, 17];
 
   return (
     <section id="services" className="services-section" style={styles.services}>
