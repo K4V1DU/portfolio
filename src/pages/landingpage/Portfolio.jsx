@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 
 /* ══════════════════════════════════════════
    CONSTANTS
@@ -15,9 +14,11 @@ const PROJECTS = [
     details:
       "This platform revolutionizes how students and professionals find accommodation. Built with cutting-edge technology, it provides seamless browsing, secure payments, and verified landlords.",
     live: "https://boodima.lk",
-    repo: "#",
+    repo: "https://github.com/K4V1DU/boodima.git",
     stack: "MongoDB · Express · React · Node",
     image: "/images/project4.png",
+    folder: "project1",
+    shots: 7,
   },
   {
     emoji: "🎮",
@@ -30,6 +31,8 @@ const PROJECTS = [
     repo: "#",
     stack: "Kotlin · Android Studio · XML Layouts · Material Design",
     image: "/images/project3.png",
+    folder: "project2",
+    shots: 6,
   },
 
   {
@@ -40,9 +43,11 @@ const PROJECTS = [
     details:
       "A full-stack booking system built with React, Node.js, and Spring Boot. It provides tailored workflows for both students and lecturers to request and manage physical campus assets, secured by a role-based authentication layer using JWT and OAuth2.",
     live: "#",
-    repo: "#",
+    repo: "https://github.com/K4V1DU/it3030-paf-2026-smart-campus-group50.git",
     stack: "React · Node.js · Spring Boot · JWT · OAuth2 · MySQL",
     image: "/images/project11.png",
+    folder: "project3",
+    shots: 6,
   },
   {
     emoji: "🐍",
@@ -55,6 +60,8 @@ const PROJECTS = [
     repo: "https://github.com/K4V1DU/SnakeMultiplayer.git",
     stack: "Unity · C# · Multiplayer · Prefabs",
     image: "/images/image667.png",
+    folder: "project4",
+    shots: 6,
     video: "/images/project4/gameplay1.mp4",
   },
   {
@@ -68,6 +75,8 @@ const PROJECTS = [
     repo: "https://github.com/K4V1DU/Kitchenchaos.git",
     stack: "Unity · C# · OOP · Event Handling · Game Systems",
     image: "/images/image666.png",
+    folder: "project5",
+    shots: 6,
     video: "/images/project5/gameplay2.mp4",
   },
 ];
@@ -93,6 +102,33 @@ const EDUCATION = [
     institution: "MongoDB University",
     desc: "Completed the MongoDB Atlas Administrator learning path, covering cluster management, backups, replication, security, and cloud database operations.",
     certificate: "#",
+  },
+];
+
+const CERTIFICATIONS = [
+  {
+    title: "Getting Started with DevOps on AWS",
+    issuer: "AWS Training & Certification",
+    desc: "Finished a foundational AWS course focused on continuous integration/deployment workflows, automated processes, and infrastructure management.",
+    image: "/images/Cert/cert4.png",
+  },
+  {
+    title: "Python for Beginners",
+    issuer: "Centre for Open & Distance Learning (CODL), University of Moratuwa, Sri Lanka",
+    desc: "Completed an online learning programme in Python fundamentals, conducted by the Department of Computer Science & Engineering, Faculty of Engineering.",
+    image: "/images/Cert/cert2.png",
+  },
+  {
+    title: "Web Design for Beginners",
+    issuer: "Centre for Open & Distance Learning (CODL), University of Moratuwa, Sri Lanka",
+    desc: "Gained foundational skills in web design through an online programme delivered by the Department of Information Technology, Faculty of Information Technology.",
+    image: "/images/Cert/cert1.png",
+  },
+  {
+    title: "MongoDB Atlas Administrator Path",
+    issuer: "MongoDB University",
+    desc: "Successfully completed training in MongoDB Atlas administration, database management, security, monitoring, and cloud deployment.",
+    image: "/images/Cert/cert3.png",
   },
 ];
 
@@ -218,15 +254,15 @@ function Nav() {
           ))}
         </ul>
         <a
-           className="nav-download-btn"
-  href="/cv.pdf"
-  download="Kavidu-Purnamal-CV.pdf"
-  style={{ ...styles.downloadBtn, ...(cvHovered ? styles.downloadBtnHover : {}) }}
-  onMouseEnter={() => setCvHovered(true)}
-  onMouseLeave={() => setCvHovered(false)}
->
-  <span style={styles.downloadIcon}>⬇</span>Download CV
-</a>
+          className="nav-download-btn"
+          href="/cv.pdf"
+          download="Kavidu-Purnamal-CV.pdf"
+          style={{ ...styles.downloadBtn, ...(cvHovered ? styles.downloadBtnHover : {}) }}
+          onMouseEnter={() => setCvHovered(true)}
+          onMouseLeave={() => setCvHovered(false)}
+        >
+          <span style={styles.downloadIcon}>⬇</span>Download CV
+        </a>
         <button
           className="hamburger-btn"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -451,6 +487,12 @@ function AboutMe() {
                : "100px 96px",
       }}
     >
+      {/* ── Section header (same style as Projects / Certifications) ── */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", marginBottom: isMobile ? 8 : 24 }}>
+        <div style={styles.sectionEyebrow}>Who I Am</div>
+        <h2 style={styles.sectionTitle}>About Me</h2>
+      </div>
+
       <div
         style={{
           ...aboutMeStyles.inner,
@@ -481,8 +523,6 @@ function AboutMe() {
             gap: isSmall ? 6 : isMobile ? 10 : 20,
           }}
         >
-          <div style={styles.sectionEyebrow}>Who I Am</div>
-
           <h2
             style={{
               ...aboutMeStyles.heading,
@@ -536,10 +576,355 @@ function AboutMe() {
 }
 
 /* ══════════════════════════════════════════
+   CERTIFICATIONS — image left, title + description right
+══════════════════════════════════════════ */
+function Certifications() {
+  const w = useWindowWidth();
+  const isMobile = w <= 768;
+  const isTablet = w <= 1024;
+  const [selected, setSelected] = useState(null);
+  const [hovered, setHovered] = useState(null);
+
+  /* Close popup with Escape + lock page scroll while it's open */
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e) => { if (e.key === "Escape") setSelected(null); };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [selected]);
+
+  const columns = isMobile ? 1 : isTablet ? 2 : 3;
+
+  return (
+    <section
+      id="certifications"
+      style={{ background: "#fff", padding: isMobile ? "50px 20px" : "80px 96px" }}
+    >
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div style={styles.sectionEyebrow}>My Credentials</div>
+        <h2 style={styles.sectionTitle}>Certifications</h2>
+
+        {/* ── Card grid: image on top, name below ── */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+            gap: isMobile ? 20 : 32,
+            marginTop: 24,
+          }}
+        >
+          {CERTIFICATIONS.map((c, i) => (
+            <div
+              key={c.title}
+              role="button"
+              tabIndex={0}
+              aria-label={`View ${c.title} certificate`}
+              onClick={() => setSelected(c)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelected(c); } }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 16,
+                border: `1px solid ${BORDER}`,
+                borderRadius: 16,
+                padding: 16,
+                cursor: "pointer",
+                background: "#fff",
+                transition: "transform 0.25s ease, box-shadow 0.25s ease",
+                transform: hovered === i ? "translateY(-4px)" : "none",
+                boxShadow: "0 14px 36px rgba(15,43,43,0.12)",
+              }}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  aspectRatio: "4 / 3",
+                  borderRadius: 12,
+                  overflow: "hidden",
+                  background: "#f7f7f5",
+                }}
+              >
+                <img
+                  src={c.image}
+                  alt={`${c.title} certificate`}
+                  style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+                />
+              </div>
+              <h3
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: isMobile ? 17 : 19,
+                  fontWeight: 800,
+                  color: DARK,
+                  letterSpacing: "-0.3px",
+                  lineHeight: 1.3,
+                  textAlign: "center",
+                }}
+              >
+                {c.title}
+              </h3>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Popup: larger image + title + issuer + description ── */}
+      {selected && (
+        <div style={styles.lightboxOverlay} onClick={() => setSelected(null)}>
+          <button
+            style={styles.lightboxClose}
+            onClick={(e) => { e.stopPropagation(); setSelected(null); }}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "#fff",
+              borderRadius: 16,
+              width: "100%",
+              maxWidth: 1000,
+              maxHeight: "88vh",
+              overflowY: "auto",
+              display: "flex",
+              flexDirection: isMobile ? "column" : "row",
+              alignItems: isMobile ? "stretch" : "center",
+              gap: isMobile ? 16 : 32,
+              padding: isMobile ? 16 : 28,
+              boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+            }}
+          >
+            <div
+              style={{
+                flex: isMobile ? "none" : "0 0 58%",
+                minWidth: 0,
+                borderRadius: 12,
+                overflow: "hidden",
+                background: "#f7f7f5",
+              }}
+            >
+              <img
+                src={selected.image}
+                alt={`${selected.title} certificate`}
+                style={{ width: "100%", maxHeight: isMobile ? "45vh" : "72vh", objectFit: "contain", display: "block" }}
+              />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <h3
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: isMobile ? 20 : 26,
+                  fontWeight: 800,
+                  color: DARK,
+                  letterSpacing: "-0.5px",
+                  lineHeight: 1.25,
+                  marginBottom: 8,
+                }}
+              >
+                {selected.title}
+              </h3>
+              <p
+                style={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: ACCENT,
+                  marginBottom: 14,
+                }}
+              >
+                {selected.issuer}
+              </p>
+              <p
+                style={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: isMobile ? 13 : 15,
+                  color: MUTED,
+                  lineHeight: 1.8,
+                }}
+              >
+                {selected.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════
+   PROJECT DETAILS POPUP — screenshots left, text right
+══════════════════════════════════════════ */
+function ProjectDetailsModal({ project, onClose }) {
+  const w = useWindowWidth();
+  const isMobile = w <= 768;
+  const [active, setActive] = useState(0);
+  const [failed, setFailed] = useState([]);
+
+  const accent = project.color || ACCENT;
+  const all = Array.from({ length: project.shots || 0 }, (_, i) => `/images/${project.folder}/image${i + 1}.png`);
+  const shots = all.filter((src) => !failed.includes(src));
+  const list = shots.length ? shots : [project.image];
+  const current = Math.min(active, list.length - 1);
+
+  const prev = () => setActive((current - 1 + list.length) % list.length);
+  const next = () => setActive((current + 1) % list.length);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  });
+
+  const markFailed = (src) => setFailed((f) => (f.includes(src) ? f : [...f, src]));
+  const arrowStyle = (side) => ({
+    position: "absolute", top: "50%", [side]: 10, transform: "translateY(-50%)",
+    width: 38, height: 38, borderRadius: "50%", border: "none", cursor: "pointer",
+    background: "rgba(255,255,255,0.85)", color: DARK, fontSize: 20, lineHeight: 1,
+    display: "flex", alignItems: "center", justifyContent: "center",
+    boxShadow: "0 4px 14px rgba(0,0,0,0.2)",
+  });
+
+  return (
+    <div style={styles.lightboxOverlay} onClick={onClose}>
+      <button
+        style={styles.lightboxClose}
+        onClick={(e) => { e.stopPropagation(); onClose(); }}
+        aria-label="Close"
+      >
+        ✕
+      </button>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "#fff",
+          borderRadius: 16,
+          width: "100%",
+          maxWidth: 1100,
+          maxHeight: "90vh",
+          overflowY: "auto",
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: isMobile ? "stretch" : "flex-start",
+          gap: isMobile ? 16 : 32,
+          padding: isMobile ? 16 : 28,
+          boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+        }}
+      >
+        {/* ── LEFT: big image + square thumbnails ── */}
+        <div style={{ flex: isMobile ? "none" : "0 0 60%", minWidth: 0 }}>
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              aspectRatio: "16 / 10",
+              borderRadius: 12,
+              overflow: "hidden",
+              background: "#f7f7f5",
+            }}
+          >
+            <img
+              key={list[current]}
+              src={list[current]}
+              alt={`${project.name} screenshot ${current + 1}`}
+              onError={() => markFailed(list[current])}
+              style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+            />
+            {list.length > 1 && (
+              <>
+                <button style={arrowStyle("left")} onClick={prev} aria-label="Previous screenshot">‹</button>
+                <button style={arrowStyle("right")} onClick={next} aria-label="Next screenshot">›</button>
+              </>
+            )}
+          </div>
+
+          {list.length > 1 && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 }}>
+              {list.map((src, i) => (
+                <button
+                  key={src}
+                  onClick={() => setActive(i)}
+                  aria-label={`Show screenshot ${i + 1}`}
+                  style={{
+                    width: isMobile ? 48 : 60,
+                    height: isMobile ? 48 : 60,
+                    padding: 0,
+                    borderRadius: 8,
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    background: "#f7f7f5",
+                    border: i === current ? `2px solid ${accent}` : `2px solid ${BORDER}`,
+                    opacity: i === current ? 1 : 0.7,
+                    transition: "opacity 0.2s, border-color 0.2s",
+                  }}
+                >
+                  <img
+                    src={src}
+                    alt=""
+                    onError={() => markFailed(src)}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* ── RIGHT: title + description ── */}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 12, fontWeight: 600, color: accent, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: 8 }}>
+            {project.tags.join(" · ")}
+          </p>
+          <h3 style={{ fontFamily: "'Inter', sans-serif", fontSize: isMobile ? 22 : 30, fontWeight: 800, color: DARK, letterSpacing: "-0.5px", lineHeight: 1.2, marginBottom: 14 }}>
+            {project.name}
+          </h3>
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: isMobile ? 13 : 15, color: MUTED, lineHeight: 1.8, marginBottom: 12 }}>
+            {project.desc}
+          </p>
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: isMobile ? 13 : 14, color: MUTED, lineHeight: 1.8, marginBottom: 16, opacity: 0.9 }}>
+            {project.details}
+          </p>
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 12, color: DARK, fontWeight: 600, marginBottom: 20 }}>
+            {project.stack}
+          </p>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {project.name === "Boodima.lk" && (
+              <a href={project.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.btnMoreDetails, background: accent, padding: "12px 26px", fontSize: 14 }}>Live Demo</a>
+            )}
+            {project.repo && project.repo.startsWith("http") && (
+              <a href={project.repo} target="_blank" rel="noopener noreferrer" style={{ ...styles.btnMoreDetails, background: "transparent", color: accent, border: `2px solid ${accent}`, boxShadow: "none", padding: "10px 26px", fontSize: 14 }}>GitHub</a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════
    PROJECTS
 ══════════════════════════════════════════ */
 function Projects() {
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [detailsProject, setDetailsProject] = useState(null);
+  const accents = [ACCENT, "#107C10", "#2563eb", "#00c200", "rgb(240, 116, 0)"];
 
   return (
     <section id="work" className="projects-section" style={styles.projects}>
@@ -558,8 +943,8 @@ function Projects() {
               }}
               className="project-showcase"
             >
-              <div 
-                className="project-image-container" 
+              <div
+                className="project-image-container"
                 style={{
                   ...styles.projectImageContainer,
                   cursor: "pointer",
@@ -596,8 +981,25 @@ function Projects() {
                     className="project-image"
                   />
                 )}
+                {/* Hover overlay: eye icon indicates the image can be viewed by clicking */}
                 <div style={styles.projectImageOverlay} className="project-image-overlay">
-                  <span style={styles.projectEmoji}>{p.emoji}</span>
+                  <div style={styles.projectViewBox}>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke={DARK}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <span style={styles.projectViewText}>Click to view</span>
+                  </div>
                 </div>
               </div>
               <div style={styles.projectContentContainer} className="project-content-container">
@@ -605,27 +1007,15 @@ function Projects() {
                 <p style={styles.projectDesc}>{p.desc}</p>
                 <p style={styles.projectDetails}>{p.details}</p>
                 <div style={styles.projectFooter}>
-                  {index === 0 ? (
-                    <Link to="/project1" style={styles.btnMoreDetails}>More Details</Link>
-                  ) : index === 1 ? (
-                    <Link to="/project2" style={{ ...styles.btnMoreDetails, background: "#107C10", boxShadow: "0 12px 36px rgba(16,124,16,0.22)" }}>More Details</Link>
-                  ) : index === 2 ? (
-                    <Link to="/project3" style={{ ...styles.btnMoreDetails, background: "#2563eb", boxShadow: "0 12px 36px rgba(37,99,235,0.22)" }}>More Details</Link>
-                  ) : index === 3 ? (
-                    <>
-                      <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00c200", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
-                      <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "#00c200", border: "2px solid #00c200", boxShadow: "none" }}>GitHub</a>
-                    </>
-                  ) : index === 4 ? (
-                    <>
-                      <Link to="/project5" style={{ ...styles.btnMoreDetails, background: "rgb(240, 116, 0)", boxShadow: "0 12px 36px rgba(240, 116, 0, 0.22)" }}>More Details</Link>
-                      <a href={p.repo} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "rgb(240, 116, 0)", border: "2px solid rgb(240, 116, 0)", boxShadow: "none" }}>GitHub</a>
-                    </>
-                  ) : (
-                    <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
-                  )}
-                  {index === 0 && (
-                    <a href="https://boodima.lk" target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px" }}>Live Demo</a>
+                  <button
+                    type="button"
+                    onClick={() => setDetailsProject({ ...p, color: accents[index] || ACCENT })}
+                    style={{ ...styles.btnMoreDetails, background: accents[index] || ACCENT, boxShadow: "0 12px 36px rgba(0,0,0,0.15)" }}
+                  >
+                    More Details
+                  </button>
+                  {p.repo && p.repo.startsWith("http") && (
+                    <a href={p.repo} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: accents[index], border: `2px solid ${accents[index]}`, boxShadow: "none" }}>GitHub</a>
                   )}
                   <span style={styles.projectStack}>{p.stack}</span>
                 </div>
@@ -635,13 +1025,18 @@ function Projects() {
         })}
       </div>
 
+      {/* Project details popup */}
+      {detailsProject && (
+        <ProjectDetailsModal key={detailsProject.name} project={detailsProject} onClose={() => setDetailsProject(null)} />
+      )}
+
       {/* Lightbox Modal */}
       {lightboxImage && (
-        <div 
+        <div
           style={styles.lightboxOverlay}
           onClick={() => setLightboxImage(null)}
         >
-          <button 
+          <button
             style={styles.lightboxClose}
             onClick={(e) => {
               e.stopPropagation();
@@ -665,9 +1060,9 @@ function Projects() {
               onVolumeChange={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
             />
           ) : (
-            <img 
-              src={lightboxImage} 
-              alt="Project preview" 
+            <img
+              src={lightboxImage}
+              alt="Project preview"
               style={styles.lightboxImage}
               onClick={(e) => e.stopPropagation()}
             />
@@ -708,7 +1103,7 @@ function Services() {
       tags: ["MERN", "Rapid Build", "Startup", "MVP"],
     },
   ];
-  const iconNums = [1, 6, 3, 2, 12, 13, 9, 8, 7, 15, 16, 17];
+  const iconNums = [1, 6, 3, 2, 12, 13, 9, 8, 7, 26, 25, 17];
 
   return (
     <section id="services" className="services-section" style={styles.services}>
@@ -879,7 +1274,11 @@ function FontLoader() {
 
       a:hover { opacity: 0.87; }
       .contact-info-link:hover { color: ${ACCENT} !important; opacity: 1 !important; }
-      .project-showcase:hover .project-image-overlay { opacity: 1; }
+
+      /* Project image hover: blur image + show eye icon overlay */
+      .project-image-container:hover .project-image { transform: scale(1.05); }
+      .project-image-container:hover .project-image-overlay { opacity: 1 !important; }
+
       .hamburger-btn { display: none !important; }
 
       /* ════════════════════════════════════
@@ -893,7 +1292,7 @@ function FontLoader() {
 
       /* ════════════════════════════════════
          MOBILE  ≤ 768px
-         NOTE: Hero & AboutMe layout is handled via JS (useWindowWidth).
+         NOTE: Hero, AboutMe & Certifications layout is handled via JS (useWindowWidth).
                Only non-hero/aboutme sections are overridden here.
       ════════════════════════════════════ */
       @media (max-width: 768px) {
@@ -1073,9 +1472,11 @@ const styles = {
   projectsContainer: { display: "flex", flexDirection: "column", gap: 80, marginTop: 24 },
   projectShowcase: { display: "flex", alignItems: "stretch", gap: 48, borderRadius: 20, overflow: "hidden", transition: "transform 0.3s ease" },
   projectImageContainer: { flex: "0 0 35%", width: "35%", height: 340, borderRadius: 16, overflow: "hidden", flexShrink: 0, position: "relative" },
-  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease", borderRadius: 12, boxShadow: "none" },
-  projectImageOverlay: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(15,43,43,0.3)", backdropFilter: "blur(2px)", opacity: 0, transition: "opacity 0.3s ease" },
+  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease, filter 0.3s ease", borderRadius: 12, boxShadow: "none" },
+  projectImageOverlay: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "transparent", opacity: 0, transition: "opacity 0.3s ease", pointerEvents: "none" },
   projectEmoji: { fontSize: 64 },
+  projectViewBox: { display: "flex", flexDirection: "row", alignItems: "center", gap: 10, padding: "12px 22px", borderRadius: 14, background: "rgba(255,255,255,0.55)", border: "1px solid rgba(255,255,255,0.6)", boxShadow: "0 8px 24px rgba(0,0,0,0.15)" },
+  projectViewText: { fontFamily: "'Poppins', sans-serif", fontSize: 14, fontWeight: 600, color: DARK, letterSpacing: "0.3px", whiteSpace: "nowrap" },
   projectContentContainer: { flex: "1 1 65%", minWidth: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 48px" },
   projectName: { fontFamily: "'Inter', sans-serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 800, color: DARK, marginBottom: 16, letterSpacing: -1 },
   projectDesc: { fontFamily: "'Poppins', sans-serif", fontSize: 16, color: MUTED, lineHeight: 1.7, marginBottom: 12, overflowWrap: "break-word" },
@@ -1203,6 +1604,7 @@ export default function Portfolio() {
         <Hero />
         <Projects />
         <AboutMe />
+        <Certifications />
         <Services />
         <Contact />
       </main>
