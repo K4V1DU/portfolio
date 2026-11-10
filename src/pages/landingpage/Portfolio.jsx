@@ -487,6 +487,12 @@ function AboutMe() {
                : "100px 96px",
       }}
     >
+      {/* ── Section header (same style as Projects / Certifications) ── */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", marginBottom: isMobile ? 8 : 24 }}>
+        <div style={styles.sectionEyebrow}>Who I Am</div>
+        <h2 style={styles.sectionTitle}>About Me</h2>
+      </div>
+
       <div
         style={{
           ...aboutMeStyles.inner,
@@ -517,8 +523,6 @@ function AboutMe() {
             gap: isSmall ? 6 : isMobile ? 10 : 20,
           }}
         >
-          <div style={styles.sectionEyebrow}>Who I Am</div>
-
           <h2
             style={{
               ...aboutMeStyles.heading,
