@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 
 /* ══════════════════════════════════════════
    CONSTANTS
@@ -18,6 +17,8 @@ const PROJECTS = [
     repo: "#",
     stack: "MongoDB · Express · React · Node",
     image: "/images/project4.png",
+    folder: "project1",
+    shots: 7,
   },
   {
     emoji: "🎮",
@@ -30,6 +31,8 @@ const PROJECTS = [
     repo: "#",
     stack: "Kotlin · Android Studio · XML Layouts · Material Design",
     image: "/images/project3.png",
+    folder: "project2",
+    shots: 6,
   },
 
   {
@@ -43,6 +46,8 @@ const PROJECTS = [
     repo: "#",
     stack: "React · Node.js · Spring Boot · JWT · OAuth2 · MySQL",
     image: "/images/project11.png",
+    folder: "project3",
+    shots: 6,
   },
   {
     emoji: "🐍",
@@ -55,6 +60,8 @@ const PROJECTS = [
     repo: "https://github.com/K4V1DU/SnakeMultiplayer.git",
     stack: "Unity · C# · Multiplayer · Prefabs",
     image: "/images/image667.png",
+    folder: "project4",
+    shots: 6,
     video: "/images/project4/gameplay1.mp4",
   },
   {
@@ -68,6 +75,8 @@ const PROJECTS = [
     repo: "https://github.com/K4V1DU/Kitchenchaos.git",
     stack: "Unity · C# · OOP · Event Handling · Game Systems",
     image: "/images/image666.png",
+    folder: "project5",
+    shots: 6,
     video: "/images/project5/gameplay2.mp4",
   },
 ];
@@ -748,10 +757,170 @@ function Certifications() {
 }
 
 /* ══════════════════════════════════════════
+   PROJECT DETAILS POPUP — screenshots left, text right
+══════════════════════════════════════════ */
+function ProjectDetailsModal({ project, onClose }) {
+  const w = useWindowWidth();
+  const isMobile = w <= 768;
+  const [active, setActive] = useState(0);
+  const [failed, setFailed] = useState([]);
+
+  const accent = project.color || ACCENT;
+  const all = Array.from({ length: project.shots || 0 }, (_, i) => `/images/${project.folder}/image${i + 1}.png`);
+  const shots = all.filter((src) => !failed.includes(src));
+  const list = shots.length ? shots : [project.image];
+  const current = Math.min(active, list.length - 1);
+
+  const prev = () => setActive((current - 1 + list.length) % list.length);
+  const next = () => setActive((current + 1) % list.length);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  });
+
+  const markFailed = (src) => setFailed((f) => (f.includes(src) ? f : [...f, src]));
+  const arrowStyle = (side) => ({
+    position: "absolute", top: "50%", [side]: 10, transform: "translateY(-50%)",
+    width: 38, height: 38, borderRadius: "50%", border: "none", cursor: "pointer",
+    background: "rgba(255,255,255,0.85)", color: DARK, fontSize: 20, lineHeight: 1,
+    display: "flex", alignItems: "center", justifyContent: "center",
+    boxShadow: "0 4px 14px rgba(0,0,0,0.2)",
+  });
+
+  return (
+    <div style={styles.lightboxOverlay} onClick={onClose}>
+      <button
+        style={styles.lightboxClose}
+        onClick={(e) => { e.stopPropagation(); onClose(); }}
+        aria-label="Close"
+      >
+        ✕
+      </button>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "#fff",
+          borderRadius: 16,
+          width: "100%",
+          maxWidth: 1100,
+          maxHeight: "90vh",
+          overflowY: "auto",
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: isMobile ? "stretch" : "flex-start",
+          gap: isMobile ? 16 : 32,
+          padding: isMobile ? 16 : 28,
+          boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+        }}
+      >
+        {/* ── LEFT: big image + square thumbnails ── */}
+        <div style={{ flex: isMobile ? "none" : "0 0 60%", minWidth: 0 }}>
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              aspectRatio: "16 / 10",
+              borderRadius: 12,
+              overflow: "hidden",
+              background: "#f7f7f5",
+            }}
+          >
+            <img
+              key={list[current]}
+              src={list[current]}
+              alt={`${project.name} screenshot ${current + 1}`}
+              onError={() => markFailed(list[current])}
+              style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+            />
+            {list.length > 1 && (
+              <>
+                <button style={arrowStyle("left")} onClick={prev} aria-label="Previous screenshot">‹</button>
+                <button style={arrowStyle("right")} onClick={next} aria-label="Next screenshot">›</button>
+              </>
+            )}
+          </div>
+
+          {list.length > 1 && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 }}>
+              {list.map((src, i) => (
+                <button
+                  key={src}
+                  onClick={() => setActive(i)}
+                  aria-label={`Show screenshot ${i + 1}`}
+                  style={{
+                    width: isMobile ? 48 : 60,
+                    height: isMobile ? 48 : 60,
+                    padding: 0,
+                    borderRadius: 8,
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    background: "#f7f7f5",
+                    border: i === current ? `2px solid ${accent}` : `2px solid ${BORDER}`,
+                    opacity: i === current ? 1 : 0.7,
+                    transition: "opacity 0.2s, border-color 0.2s",
+                  }}
+                >
+                  <img
+                    src={src}
+                    alt=""
+                    onError={() => markFailed(src)}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* ── RIGHT: title + description ── */}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 12, fontWeight: 600, color: accent, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: 8 }}>
+            {project.tags.join(" · ")}
+          </p>
+          <h3 style={{ fontFamily: "'Inter', sans-serif", fontSize: isMobile ? 22 : 30, fontWeight: 800, color: DARK, letterSpacing: "-0.5px", lineHeight: 1.2, marginBottom: 14 }}>
+            {project.name}
+          </h3>
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: isMobile ? 13 : 15, color: MUTED, lineHeight: 1.8, marginBottom: 12 }}>
+            {project.desc}
+          </p>
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: isMobile ? 13 : 14, color: MUTED, lineHeight: 1.8, marginBottom: 16, opacity: 0.9 }}>
+            {project.details}
+          </p>
+          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 12, color: DARK, fontWeight: 600, marginBottom: 20 }}>
+            {project.stack}
+          </p>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {project.name === "Boodima.lk" && (
+              <a href={project.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.btnMoreDetails, background: accent, padding: "12px 26px", fontSize: 14 }}>Live Demo</a>
+            )}
+            {project.repo && project.repo.startsWith("http") && (
+              <a href={project.repo} target="_blank" rel="noopener noreferrer" style={{ ...styles.btnMoreDetails, background: "transparent", color: accent, border: `2px solid ${accent}`, boxShadow: "none", padding: "10px 26px", fontSize: 14 }}>GitHub</a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════
    PROJECTS
 ══════════════════════════════════════════ */
 function Projects() {
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [detailsProject, setDetailsProject] = useState(null);
+  const accents = [ACCENT, "#107C10", "#2563eb", "#00c200", "rgb(240, 116, 0)"];
 
   return (
     <section id="work" className="projects-section" style={styles.projects}>
@@ -834,24 +1003,15 @@ function Projects() {
                 <p style={styles.projectDesc}>{p.desc}</p>
                 <p style={styles.projectDetails}>{p.details}</p>
                 <div style={styles.projectFooter}>
-                  {index === 0 ? (
-                    <Link to="/project1" style={styles.btnMoreDetails}>More Details</Link>
-                  ) : index === 1 ? (
-                    <Link to="/project2" style={{ ...styles.btnMoreDetails, background: "#107C10", boxShadow: "0 12px 36px rgba(16,124,16,0.22)" }}>More Details</Link>
-                  ) : index === 2 ? (
-                    <Link to="/project3" style={{ ...styles.btnMoreDetails, background: "#2563eb", boxShadow: "0 12px 36px rgba(37,99,235,0.22)" }}>More Details</Link>
-                  ) : index === 3 ? (
-                    <>
-                      <Link to="/project4" style={{ ...styles.btnMoreDetails, background: "#00c200", boxShadow: "0 12px 36px rgba(0,255,0,0.22)" }}>More Details</Link>
-                      <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "#00c200", border: "2px solid #00c200", boxShadow: "none" }}>GitHub</a>
-                    </>
-                  ) : index === 4 ? (
-                    <>
-                      <Link to="/project5" style={{ ...styles.btnMoreDetails, background: "rgb(240, 116, 0)", boxShadow: "0 12px 36px rgba(240, 116, 0, 0.22)" }}>More Details</Link>
-                      <a href={p.repo} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: "rgb(240, 116, 0)", border: "2px solid rgb(240, 116, 0)", boxShadow: "none" }}>GitHub</a>
-                    </>
-                  ) : (
-                    <a href={p.live} style={styles.btnMoreDetails}>More Details</a>
+                  <button
+                    type="button"
+                    onClick={() => setDetailsProject({ ...p, color: accents[index] || ACCENT })}
+                    style={{ ...styles.btnMoreDetails, background: accents[index] || ACCENT, boxShadow: "0 12px 36px rgba(0,0,0,0.15)" }}
+                  >
+                    More Details
+                  </button>
+                  {index >= 3 && (
+                    <a href={p.repo} target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px", background: "transparent", color: accents[index], border: `2px solid ${accents[index]}`, boxShadow: "none" }}>GitHub</a>
                   )}
                   {index === 0 && (
                     <a href="https://boodima.lk" target="_blank" rel="noopener noreferrer" style={{ ...styles.downloadBtn, marginLeft: "12px" }}>Live Demo</a>
@@ -863,6 +1023,11 @@ function Projects() {
           );
         })}
       </div>
+
+      {/* Project details popup */}
+      {detailsProject && (
+        <ProjectDetailsModal key={detailsProject.name} project={detailsProject} onClose={() => setDetailsProject(null)} />
+      )}
 
       {/* Lightbox Modal */}
       {lightboxImage && (
