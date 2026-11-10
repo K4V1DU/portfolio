@@ -96,6 +96,33 @@ const EDUCATION = [
   },
 ];
 
+const CERTIFICATIONS = [
+  {
+    title: "Getting Started with DevOps on AWS",
+    issuer: "AWS Training & Certification",
+    desc: "Finished a foundational AWS course focused on continuous integration/deployment workflows, automated processes, and infrastructure management.",
+    image: "/images/Cert/cert4.png",
+  },
+  {
+    title: "Python for Beginners",
+    issuer: "Centre for Open & Distance Learning (CODL), University of Moratuwa, Sri Lanka",
+    desc: "Completed an online learning programme in Python fundamentals, conducted by the Department of Computer Science & Engineering, Faculty of Engineering.",
+    image: "/images/Cert/cert2.png",
+  },
+  {
+    title: "Web Design for Beginners",
+    issuer: "Centre for Open & Distance Learning (CODL), University of Moratuwa, Sri Lanka",
+    desc: "Gained foundational skills in web design through an online programme delivered by the Department of Information Technology, Faculty of Information Technology.",
+    image: "/images/Cert/cert1.png",
+  },
+  {
+    title: "MongoDB Atlas Administrator Path",
+    issuer: "MongoDB University",
+    desc: "Successfully completed training in MongoDB Atlas administration, database management, security, monitoring, and cloud deployment.",
+    image: "/images/Cert/cert3.png",
+  },
+];
+
 const CONTACT_INFO = [
   {
     icon: "/images/icon23.jpg",
@@ -218,15 +245,15 @@ function Nav() {
           ))}
         </ul>
         <a
-           className="nav-download-btn"
-  href="/cv.pdf"
-  download="Kavidu-Purnamal-CV.pdf"
-  style={{ ...styles.downloadBtn, ...(cvHovered ? styles.downloadBtnHover : {}) }}
-  onMouseEnter={() => setCvHovered(true)}
-  onMouseLeave={() => setCvHovered(false)}
->
-  <span style={styles.downloadIcon}>⬇</span>Download CV
-</a>
+          className="nav-download-btn"
+          href="/cv.pdf"
+          download="Kavidu-Purnamal-CV.pdf"
+          style={{ ...styles.downloadBtn, ...(cvHovered ? styles.downloadBtnHover : {}) }}
+          onMouseEnter={() => setCvHovered(true)}
+          onMouseLeave={() => setCvHovered(false)}
+        >
+          <span style={styles.downloadIcon}>⬇</span>Download CV
+        </a>
         <button
           className="hamburger-btn"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -536,6 +563,191 @@ function AboutMe() {
 }
 
 /* ══════════════════════════════════════════
+   CERTIFICATIONS — image left, title + description right
+══════════════════════════════════════════ */
+function Certifications() {
+  const w = useWindowWidth();
+  const isMobile = w <= 768;
+  const isTablet = w <= 1024;
+  const [selected, setSelected] = useState(null);
+  const [hovered, setHovered] = useState(null);
+
+  /* Close popup with Escape + lock page scroll while it's open */
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e) => { if (e.key === "Escape") setSelected(null); };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [selected]);
+
+  const columns = isMobile ? 1 : isTablet ? 2 : 3;
+
+  return (
+    <section
+      id="certifications"
+      style={{ background: "#fff", padding: isMobile ? "50px 20px" : "80px 96px" }}
+    >
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div style={styles.sectionEyebrow}>My Credentials</div>
+        <h2 style={styles.sectionTitle}>Certifications</h2>
+
+        {/* ── Card grid: image on top, name below ── */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+            gap: isMobile ? 20 : 32,
+            marginTop: 24,
+          }}
+        >
+          {CERTIFICATIONS.map((c, i) => (
+            <div
+              key={c.title}
+              role="button"
+              tabIndex={0}
+              aria-label={`View ${c.title} certificate`}
+              onClick={() => setSelected(c)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelected(c); } }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 16,
+                border: `1px solid ${BORDER}`,
+                borderRadius: 16,
+                padding: 16,
+                cursor: "pointer",
+                background: "#fff",
+                transition: "transform 0.25s ease, box-shadow 0.25s ease",
+                transform: hovered === i ? "translateY(-4px)" : "none",
+                boxShadow: hovered === i ? "0 14px 36px rgba(15,43,43,0.12)" : "none",
+              }}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  aspectRatio: "4 / 3",
+                  borderRadius: 12,
+                  overflow: "hidden",
+                  background: "#f7f7f5",
+                }}
+              >
+                <img
+                  src={c.image}
+                  alt={`${c.title} certificate`}
+                  style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+                />
+              </div>
+              <h3
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: isMobile ? 17 : 19,
+                  fontWeight: 800,
+                  color: DARK,
+                  letterSpacing: "-0.3px",
+                  lineHeight: 1.3,
+                  textAlign: "center",
+                }}
+              >
+                {c.title}
+              </h3>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Popup: larger image + title + issuer + description ── */}
+      {selected && (
+        <div style={styles.lightboxOverlay} onClick={() => setSelected(null)}>
+          <button
+            style={styles.lightboxClose}
+            onClick={(e) => { e.stopPropagation(); setSelected(null); }}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "#fff",
+              borderRadius: 16,
+              width: "100%",
+              maxWidth: 1000,
+              maxHeight: "88vh",
+              overflowY: "auto",
+              display: "flex",
+              flexDirection: isMobile ? "column" : "row",
+              alignItems: isMobile ? "stretch" : "center",
+              gap: isMobile ? 16 : 32,
+              padding: isMobile ? 16 : 28,
+              boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+            }}
+          >
+            <div
+              style={{
+                flex: isMobile ? "none" : "0 0 58%",
+                minWidth: 0,
+                borderRadius: 12,
+                overflow: "hidden",
+                background: "#f7f7f5",
+              }}
+            >
+              <img
+                src={selected.image}
+                alt={`${selected.title} certificate`}
+                style={{ width: "100%", maxHeight: isMobile ? "45vh" : "72vh", objectFit: "contain", display: "block" }}
+              />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <h3
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: isMobile ? 20 : 26,
+                  fontWeight: 800,
+                  color: DARK,
+                  letterSpacing: "-0.5px",
+                  lineHeight: 1.25,
+                  marginBottom: 8,
+                }}
+              >
+                {selected.title}
+              </h3>
+              <p
+                style={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: ACCENT,
+                  marginBottom: 14,
+                }}
+              >
+                {selected.issuer}
+              </p>
+              <p
+                style={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: isMobile ? 13 : 15,
+                  color: MUTED,
+                  lineHeight: 1.8,
+                }}
+              >
+                {selected.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════
    PROJECTS
 ══════════════════════════════════════════ */
 function Projects() {
@@ -558,8 +770,8 @@ function Projects() {
               }}
               className="project-showcase"
             >
-              <div 
-                className="project-image-container" 
+              <div
+                className="project-image-container"
                 style={{
                   ...styles.projectImageContainer,
                   cursor: "pointer",
@@ -596,8 +808,25 @@ function Projects() {
                     className="project-image"
                   />
                 )}
+                {/* Hover overlay: eye icon indicates the image can be viewed by clicking */}
                 <div style={styles.projectImageOverlay} className="project-image-overlay">
-                  <span style={styles.projectEmoji}>{p.emoji}</span>
+                  <div style={styles.projectViewBox}>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke={DARK}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <span style={styles.projectViewText}>Click to view</span>
+                  </div>
                 </div>
               </div>
               <div style={styles.projectContentContainer} className="project-content-container">
@@ -637,11 +866,11 @@ function Projects() {
 
       {/* Lightbox Modal */}
       {lightboxImage && (
-        <div 
+        <div
           style={styles.lightboxOverlay}
           onClick={() => setLightboxImage(null)}
         >
-          <button 
+          <button
             style={styles.lightboxClose}
             onClick={(e) => {
               e.stopPropagation();
@@ -665,9 +894,9 @@ function Projects() {
               onVolumeChange={(e) => { e.currentTarget.muted = true; e.currentTarget.volume = 0; }}
             />
           ) : (
-            <img 
-              src={lightboxImage} 
-              alt="Project preview" 
+            <img
+              src={lightboxImage}
+              alt="Project preview"
               style={styles.lightboxImage}
               onClick={(e) => e.stopPropagation()}
             />
@@ -879,7 +1108,11 @@ function FontLoader() {
 
       a:hover { opacity: 0.87; }
       .contact-info-link:hover { color: ${ACCENT} !important; opacity: 1 !important; }
-      .project-showcase:hover .project-image-overlay { opacity: 1; }
+
+      /* Project image hover: blur image + show eye icon overlay */
+      .project-image-container:hover .project-image { transform: scale(1.05); }
+      .project-image-container:hover .project-image-overlay { opacity: 1 !important; }
+
       .hamburger-btn { display: none !important; }
 
       /* ════════════════════════════════════
@@ -893,7 +1126,7 @@ function FontLoader() {
 
       /* ════════════════════════════════════
          MOBILE  ≤ 768px
-         NOTE: Hero & AboutMe layout is handled via JS (useWindowWidth).
+         NOTE: Hero, AboutMe & Certifications layout is handled via JS (useWindowWidth).
                Only non-hero/aboutme sections are overridden here.
       ════════════════════════════════════ */
       @media (max-width: 768px) {
@@ -1073,9 +1306,11 @@ const styles = {
   projectsContainer: { display: "flex", flexDirection: "column", gap: 80, marginTop: 24 },
   projectShowcase: { display: "flex", alignItems: "stretch", gap: 48, borderRadius: 20, overflow: "hidden", transition: "transform 0.3s ease" },
   projectImageContainer: { flex: "0 0 35%", width: "35%", height: 340, borderRadius: 16, overflow: "hidden", flexShrink: 0, position: "relative" },
-  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease", borderRadius: 12, boxShadow: "none" },
-  projectImageOverlay: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(15,43,43,0.3)", backdropFilter: "blur(2px)", opacity: 0, transition: "opacity 0.3s ease" },
+  projectImage: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", transition: "transform 0.3s ease, filter 0.3s ease", borderRadius: 12, boxShadow: "none" },
+  projectImageOverlay: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "transparent", opacity: 0, transition: "opacity 0.3s ease", pointerEvents: "none" },
   projectEmoji: { fontSize: 64 },
+  projectViewBox: { display: "flex", flexDirection: "row", alignItems: "center", gap: 10, padding: "12px 22px", borderRadius: 14, background: "rgba(255,255,255,0.55)", border: "1px solid rgba(255,255,255,0.6)", boxShadow: "0 8px 24px rgba(0,0,0,0.15)" },
+  projectViewText: { fontFamily: "'Poppins', sans-serif", fontSize: 14, fontWeight: 600, color: DARK, letterSpacing: "0.3px", whiteSpace: "nowrap" },
   projectContentContainer: { flex: "1 1 65%", minWidth: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 48px" },
   projectName: { fontFamily: "'Inter', sans-serif", fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 800, color: DARK, marginBottom: 16, letterSpacing: -1 },
   projectDesc: { fontFamily: "'Poppins', sans-serif", fontSize: 16, color: MUTED, lineHeight: 1.7, marginBottom: 12, overflowWrap: "break-word" },
@@ -1203,6 +1438,7 @@ export default function Portfolio() {
         <Hero />
         <Projects />
         <AboutMe />
+        <Certifications />
         <Services />
         <Contact />
       </main>
