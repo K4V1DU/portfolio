@@ -3,7 +3,16 @@ import { useState, useEffect, useRef } from "react";
 /* ══════════════════════════════════════════
    CONSTANTS
 ══════════════════════════════════════════ */
-const NAV_LINKS = ["Work", "Services", "About", "Contact"];
+const NAV_LINKS = ["Work", "About", "Certificates", "Services", "Contact"];
+
+/* Maps each nav label to its section id */
+const NAV_IDS = {
+  Work: "work",
+  About: "about-me",
+  Certificates: "certifications",
+  Services: "services",
+  Contact: "contact",
+};
 
 const PROJECTS = [
   {
@@ -32,7 +41,7 @@ const PROJECTS = [
     stack: "Kotlin · Android Studio · XML Layouts · Material Design",
     image: "/images/project3.png",
     folder: "project2",
-    shots: 6,
+    shots: 5,
   },
 
   {
@@ -78,6 +87,34 @@ const PROJECTS = [
     folder: "project5",
     shots: 6,
     video: "/images/project5/gameplay2.mp4",
+  },
+  {
+    emoji: "🚗",
+    name: "Roadside Assistance",
+    tags: ["Mobile App", "UI/UX", "2026"],
+    desc: "A 24/7 roadside assistance app that lets drivers request vehicle towing, a mechanic, fuel delivery, flat tire help, or a jump start from anywhere on the island.",
+    details:
+      "Users pick a service, choose their vehicle, and set pickup and drop locations on a live map with distance and ETA shown before confirming. The interface is built around fast, stress-free requests during an emergency.",
+    live: "#",
+    repo: "#",
+    stack: "Flutter · Dart · Firebase · Maps API",
+    image: "/images/project6.png",
+    folder: "project6",
+    shots: 12,
+  },
+  {
+    emoji: "💪",
+    name: "FitFlow",
+    tags: ["Mobile App", "Fitness", "2026"],
+    desc: "A fitness companion app combining workout tracking, a weekly goal view, and a 7-day meal plan with calorie and macro tracking.",
+    details:
+      "Users see today's workout, daily progress and macros at a glance. The Nutrition tab shows a planned meal schedule with check-offs and a Regenerate option for new plans, all in a dark, high-contrast UI.",
+    live: "#",
+    repo: "#",
+    stack: "Flutter · Dart · Firebase · REST APIs",
+    image: "/images/project7.png",
+    folder: "project7",
+    shots: 7,
   },
 ];
 
@@ -250,7 +287,7 @@ function Nav() {
         </div>
         <ul className="nav-desktop-links" style={styles.navLinks}>
           {NAV_LINKS.map((l) => (
-            <li key={l}><a href={`#${l === "About" ? "about-me" : l.toLowerCase()}`} style={styles.navLink}>{l}</a></li>
+            <li key={l}><a href={`#${NAV_IDS[l]}`} style={styles.navLink}>{l}</a></li>
           ))}
         </ul>
         <a
@@ -279,7 +316,7 @@ function Nav() {
       {menuOpen && (
         <div style={styles.mobileMenu}>
           {NAV_LINKS.map((l) => (
-            <a key={l} href={`#${l === "About" ? "about-me" : l.toLowerCase()}`} style={styles.mobileLink} onClick={() => setMenuOpen(false)}>{l}</a>
+            <a key={l} href={`#${NAV_IDS[l]}`} style={styles.mobileLink} onClick={() => setMenuOpen(false)}>{l}</a>
           ))}
           <div style={{ padding: "16px 24px 8px" }}>
             <a href="/cv.pdf" download="Kavidu-Purnamal-CV.pdf" style={styles.mobileCta} onClick={() => setMenuOpen(false)}>⬇ Download CV</a>
@@ -924,7 +961,7 @@ function ProjectDetailsModal({ project, onClose }) {
 function Projects() {
   const [lightboxImage, setLightboxImage] = useState(null);
   const [detailsProject, setDetailsProject] = useState(null);
-  const accents = [ACCENT, "#107C10", "#2563eb", "#00c200", "rgb(240, 116, 0)"];
+  const accents = [ACCENT, "#107C10", "#2563eb", "#00c200", "rgb(240, 116, 0)", "#dc2626", "#4d9a1f"];
 
   return (
     <section id="work" className="projects-section" style={styles.projects}>
@@ -1288,6 +1325,7 @@ function FontLoader() {
         .hero-left { padding: 100px 40px 60px 60px !important; }
         .services-wrapper { gap: 32px !important; }
         .services-left-col { flex: 0 0 44% !important; }
+        .nav-desktop-links { gap: 20px !important; }
       }
 
       /* ════════════════════════════════════
@@ -1380,7 +1418,7 @@ const styles = {
   logoText: { fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 26, color: DARK, letterSpacing: -1 },
   logoDot: { color: ACCENT },
   navLinks: {
-    listStyle: "none", display: "flex", gap: 32, margin: 0, padding: 0,
+    listStyle: "none", display: "flex", gap: 28, margin: 0, padding: 0,
     position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)",
   },
   navLink: { color: MUTED, textDecoration: "none", fontSize: 14, fontFamily: "'Poppins', sans-serif", fontWeight: 500, transition: "color 0.2s" },
